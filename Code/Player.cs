@@ -61,6 +61,7 @@ namespace JamTemplate
 
         }
 
+
         public void Draw(SFML.Graphics.RenderWindow rw)
         {
             rw.Draw(this.playerSprite);

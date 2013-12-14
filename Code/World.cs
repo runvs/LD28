@@ -11,6 +11,7 @@ namespace JamTemplate
         Random _randomGenerator = new Random();
 
         Player _player;
+        System.Collections.Generic.IList<Tile> _tileList;
 
         #endregion Fields
 
@@ -33,12 +34,32 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw)
         {
+            foreach (var t in _tileList)
+            {
+                t.Draw(rw);
+            }
             _player.Draw(rw);
         }
 
         private void InitGame()
         {
             _player = new Player(this, 0);
+            CreateWorld();
+        }
+
+        private void CreateWorld()
+        {
+            _tileList = new System.Collections.Generic.List<Tile>();
+            for (int i =0; i != GameProperties.WorldSizeInTiles();i++)
+            {
+                for (int j =0; j != GameProperties.WorldSizeInTiles();j++)
+                {
+                    Tile newtile = new Tile(i,j);
+                    _tileList.Add(newtile);
+                }
+            }
+
+            
         }
 
         #endregion Methods
