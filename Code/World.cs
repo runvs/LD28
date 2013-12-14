@@ -139,7 +139,13 @@ namespace JamTemplate
                 }
             }
 
-            Item newItem = new Item(ItemType.HAND, "sword", +1, new Vector2i(2, 4));
+            Item newItem = new Item(ItemType.HEAD, "sword", +1, new Vector2i(2, 4));
+            _itemList.Add(newItem);
+            newItem = new Item(ItemType.HAND, "sword", +1, new Vector2i(2, 4));
+            _itemList.Add(newItem);
+            newItem = new Item(ItemType.TORSO, "sword", +1, new Vector2i(2, 4));
+            _itemList.Add(newItem);
+            newItem = new Item(ItemType.FEET, "sword", +1, new Vector2i(2, 4));
             _itemList.Add(newItem);
 
             Enemy enemy = new Enemy(this, new Vector2i(4, 4));

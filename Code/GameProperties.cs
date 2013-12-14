@@ -25,10 +25,10 @@ namespace JamTemplate
         public static int AttackerEvadeBonus { get { return 1; } }
         public static int BlockEvadeBonus { get { return 3; } }
 
-        public static Vector2f InventoryHeadItemPosition { get { return new Vector2f(750.0f, 100.0f); } }
-        public static Vector2f InventoryHandItemPosition { get { return new Vector2f(750.0f, 150.0f); } }
-        public static Vector2f InventoryTorsoItemPosition { get { return new Vector2f(750.0f, 20.0f); } }
-        public static Vector2f InventoryFeetItemPosition { get { return new Vector2f(750.0f, 300.0f); } }
+        public static Vector2f InventoryHeadItemPosition { get { return new Vector2f(672.0f, 20.0f); } }
+        public static Vector2f InventoryHandItemPosition { get { return new Vector2f(616.0f, 58.0f); } }
+        public static Vector2f InventoryTorsoItemPosition { get { return new Vector2f(676.0f, 88.0f); } }
+        public static Vector2f InventoryFeetItemPosition { get { return new Vector2f(672.0f, 166.0f); } }
 
         static public Random _randomGenerator = new Random();
 

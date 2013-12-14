@@ -106,7 +106,7 @@ namespace JamTemplate
             }
             else if (_battleMagic && !_battleAttack && !_battleBlock)
             {
-
+                throw new System.NotImplementedException();
             }
         }
 

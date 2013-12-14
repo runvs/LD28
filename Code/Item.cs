@@ -16,7 +16,6 @@ namespace JamTemplate
         public SFML.Window.Vector2i ItemPositionInTiles { get; private set; }
         public bool Picked { get; private set; }
 
-        private Item HandItem;
         private string p1;
         private int p2;
 

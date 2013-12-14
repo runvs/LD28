@@ -10,6 +10,10 @@ namespace JamTemplate
 
         private Texture _sideBarTexture;
         private Sprite _sideBarSprite;
+
+        private Texture _overlayTexture;
+        private Sprite _overlaySprite;
+
         private Player _player;
 
         private RectangleShape _healthBar;
@@ -26,6 +30,13 @@ namespace JamTemplate
             _sideBarSprite.Scale = new Vector2f(2, 2);
 
             _sideBarSprite.Position = new Vector2f(600, 0);
+
+            _overlayTexture = new Texture("../GFX/sidebar_overlay.png");
+            _overlaySprite = new Sprite(_overlayTexture);
+            _overlaySprite.Scale = new Vector2f(2.0f, 2.0f);
+
+            _overlaySprite.Position = new Vector2f(600.0f, 450.0f);
+
 
             _healthBar = new RectangleShape(new Vector2f(100, 150));
             _healthBar.Origin = new Vector2f(0, 150);
@@ -51,6 +62,7 @@ namespace JamTemplate
 
             DrawAttributes(window);
             DrawBars(window);
+
 
 
             if (_player != null)
@@ -84,6 +96,9 @@ namespace JamTemplate
             percentage = _player.ActorAttributes.StaminaCurrent / (float)_player.ActorAttributes.StaminaMaximum;
             _staminaBar.Scale = new Vector2f(1, percentage);
             window.Draw(_staminaBar);
+
+            window.Draw(_overlaySprite);
+
         }
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
