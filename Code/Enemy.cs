@@ -20,6 +20,7 @@ namespace JamTemplate
         public Enemy(World world, Vector2i initPosition)
         {
             _world = world;
+            ActorPosition = initPosition;
 
             ActorAttributes = new Attributes();
 
@@ -40,6 +41,19 @@ namespace JamTemplate
 
             _actorSprite = new Sprite(_actorTexture);
             _actorSprite.Scale = new Vector2f(2.0f, 2.0f);
+        }
+
+        public void Draw(RenderWindow rw)
+        {
+            rw.Draw(this._actorSprite);
+        }
+
+        public void Update(float deltaT)
+        {
+            _actorSprite.Position = new Vector2f(
+                GameProperties.TileSizeInPixel * ActorPosition.X,
+                GameProperties.TileSizeInPixel * ActorPosition.Y
+            );
         }
 
         #endregion Methods

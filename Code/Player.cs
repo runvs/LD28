@@ -68,10 +68,10 @@ namespace JamTemplate
 
         private void ResetMovementAction()
         {
-            _movingRight = false;
-            _movingLeft = false;
-            _movingDown = false;
-            _movingUp = false;
+            _movingEast = false;
+            _movingWest = false;
+            _movingSouth = false;
+            _movingNorth = false;
         }
 
         public void Update(float deltaT)
@@ -92,22 +92,27 @@ namespace JamTemplate
 
         private void DoMovement()
         {
-            SFML.Window.Vector2i newPosition = ActorPosition;
-            if (_movingRight && !_movingLeft)
+            Vector2i newPosition = ActorPosition;
+
+            if (_movingEast && !_movingWest && !_movingNorth && !_movingSouth)
             {
                 newPosition.X++;
+                Direction = Direction.EAST;
             }
-            if (_movingLeft && !_movingRight)
+            else if (_movingWest && !_movingEast && !_movingNorth && !_movingSouth)
             {
                 newPosition.X--;
+                Direction = Direction.WEST;
             }
-            if (_movingUp && !_movingDown)
+            else if (_movingNorth && !_movingSouth && !_movingEast && !_movingWest)
             {
                 newPosition.Y--;
+                Direction = Direction.NORTH;
             }
-            if (_movingDown && !_movingUp)
+            else if (_movingSouth && !_movingNorth && !_movingEast && !_movingWest)
             {
                 newPosition.Y++;
+                Direction = Direction.SOUTH;
             }
 
             if (!_world.IsTileBlocked(newPosition))
@@ -153,7 +158,7 @@ namespace JamTemplate
 
         }
 
-        public void Draw(SFML.Graphics.RenderWindow rw)
+        public void Draw(RenderWindow rw)
         {
             rw.Draw(this._actorSprite);
         }
@@ -161,22 +166,22 @@ namespace JamTemplate
         private void MoveRightAction()
         {
             _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingRight = true;
+            _movingEast = true;
         }
         private void MoveLeftAction()
         {
             _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingLeft = true;
+            _movingWest = true;
         }
         private void MoveUpAction()
         {
             _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingUp = true;
+            _movingNorth = true;
         }
         private void MoveDownAction()
         {
             _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingDown = true;
+            _movingSouth = true;
         }
 
         private void PickUpItemAction()

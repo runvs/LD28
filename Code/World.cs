@@ -34,6 +34,11 @@ namespace JamTemplate
 
         public void Update(float deltaT)
         {
+            foreach (var e in _enemyList)
+            {
+                e.Update(deltaT);
+            }
+
             _player.Update(deltaT);
         }
 
@@ -46,6 +51,11 @@ namespace JamTemplate
             foreach (var i in _itemList)
             {
                 i.Draw(rw);
+            }
+
+            foreach (var e in _enemyList)
+            {
+                e.Draw(rw);
             }
 
             _player.Draw(rw);
