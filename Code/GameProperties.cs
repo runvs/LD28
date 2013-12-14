@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
+using System;
 
 namespace JamTemplate
 {
@@ -21,10 +22,15 @@ namespace JamTemplate
         public static int PlayerBaseDamage { get { return 5; } }
         public static int EnemyBaseDamage { get { return 3; } }
 
+        public static int AttackerEvadeBonus { get { return 1; } }
+        public static int BlockEvadeBonus { get { return 3; } }
+
         public static Vector2f InventoryHeadItemPosition { get { return new Vector2f(750.0f, 100.0f); } }
         public static Vector2f InventoryHandItemPosition { get { return new Vector2f(750.0f, 150.0f); } }
         public static Vector2f InventoryTorsoItemPosition { get { return new Vector2f(750.0f, 20.0f); } }
         public static Vector2f InventoryFeetItemPosition { get { return new Vector2f(750.0f, 300.0f); } }
+
+        static public Random _randomGenerator = new Random();
 
         #region Palette colors
 
@@ -46,6 +52,9 @@ namespace JamTemplate
         public static Color ColorWhite { get { return new Color(222, 238, 214); } }
 
         #endregion Palette colors
+
+        static private Font _gameFont;
+        static public Font GameFont() { if (_gameFont == null) { _gameFont = new Font("../GFX/font.ttf"); } return _gameFont; }
 
     }
 }

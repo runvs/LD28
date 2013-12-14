@@ -18,6 +18,7 @@ namespace JamTemplate
         protected bool _battleAttack;
         protected bool _battleMagic;
         protected bool _battleBlock;
+        public bool IsBlocking { get; protected set; }
 
         public bool IsDead { get; set; }
 

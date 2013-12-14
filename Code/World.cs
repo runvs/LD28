@@ -39,11 +39,20 @@ namespace JamTemplate
         {
             foreach (var e in _enemyList)
             {
-                e.Update(deltaT);
+                if (!e.IsDead)
+                {
+                    e.Update(deltaT);
+                }
             }
 
             _player.Update(deltaT);
 
+            DoCameraMovement();
+
+        }
+
+        private void DoCameraMovement()
+        {
             Vector2i newCamPos = new Vector2i(_player.ActorPosition.X - 7, _player.ActorPosition.Y - 7);
             if (newCamPos.X <= 0)
             {
@@ -64,7 +73,6 @@ namespace JamTemplate
                 newCamPos.Y = GameProperties.WorldSizeInTiles - 12;
             }
             CameraPosition = newCamPos;
-
         }
 
         public void Draw(RenderWindow rw)
@@ -79,9 +87,13 @@ namespace JamTemplate
             }
 
             _player.Draw(rw, CameraPosition);
+
             foreach (var e in _enemyList)
             {
-                e.Draw(rw, CameraPosition);
+                if (!e.IsDead)
+                {
+                    e.Draw(rw, CameraPosition);
+                }
             }
 
             _sidebar.Draw(rw);

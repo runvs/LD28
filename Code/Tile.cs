@@ -56,7 +56,14 @@ namespace JamTemplate
         {
             if (_type == TileType.Grass)
             {
-                TileTexture = new Texture("../GFX/tile_grass.png");
+                if (GameProperties._randomGenerator.NextDouble() > 0.5)
+                {
+                    TileTexture = new Texture("../GFX/tile_grass.png");
+                }
+                else
+                {
+                    TileTexture = new Texture("../GFX/tile_grass2.png");
+                }
             }
             else if (_type == TileType.Mountain)
             {

@@ -15,7 +15,6 @@ namespace JamTemplate
 
         public Score()
         {
-            font = new Font("../GFX/font.ttf");
         }
 
         public void Draw(RenderWindow rw)

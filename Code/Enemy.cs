@@ -23,7 +23,7 @@ namespace JamTemplate
             ActorPosition = initPosition;
 
             ActorAttributes = new Attributes();
-
+            ActorAttributes.ResetHealth(4);
             try
             {
                 LoadGraphics();
@@ -33,6 +33,7 @@ namespace JamTemplate
                 Console.Out.WriteLine("Error loading player Graphics.");
                 Console.Out.WriteLine(e.ToString());
             }
+
         }
 
         private void LoadGraphics()

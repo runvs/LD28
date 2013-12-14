@@ -12,7 +12,6 @@ namespace JamTemplate
         private Sprite _sideBarSprite;
         private Player _player;
 
-        private Font _font;
         private RectangleShape _healthBar;
         private RectangleShape _staminaBar;
 
@@ -27,7 +26,6 @@ namespace JamTemplate
             _sideBarSprite.Scale = new Vector2f(2, 2);
 
             _sideBarSprite.Position = new Vector2f(600, 0);
-            _font = new Font("../GFX/font.ttf");
 
             _healthBar = new RectangleShape(new Vector2f(100, 150));
             _healthBar.Origin = new Vector2f(0, 150);
@@ -90,7 +88,7 @@ namespace JamTemplate
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
-            Text text = new Text(s, _font);
+            Text text = new Text(s, GameProperties.GameFont());
             text.Position = position;
             text.Color = color;
             window.Draw(text);

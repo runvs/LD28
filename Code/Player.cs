@@ -89,15 +89,24 @@ namespace JamTemplate
                 DoBattleAction();
                 ResetBattleActions();
             }
-
-
         }
 
         protected override void DoBattleAction()
         {
+            IsBlocking = false;
             if (_battleAttack && !_battleBlock && !_battleMagic)
             {
                 PlayerAttack();
+
+            }
+            else if (_battleBlock && !_battleAttack && !_battleMagic)
+            {
+                IsBlocking = true;
+
+            }
+            else if (_battleMagic && !_battleAttack && !_battleBlock)
+            {
+
             }
         }
 
@@ -184,7 +193,24 @@ namespace JamTemplate
                 GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
             );
 
+            DrawBlockString(rw, CameraPosition);
+
             rw.Draw(this._actorSprite);
+        }
+
+        private void DrawBlockString(RenderWindow rw, Vector2i CameraPosition)
+        {
+            if (IsBlocking)
+            {
+                Text text = new Text("Block!", GameProperties.GameFont());
+                text.Scale = new Vector2f(0.8f, 0.8f);
+                text.Position = new Vector2f(
+                    GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
+                    GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f
+                );
+                text.Color = GameProperties.ColorWhite;
+                rw.Draw(text);
+            }
         }
 
         private void PickUpItemAction()
@@ -215,6 +241,7 @@ namespace JamTemplate
             _actionMap.Add(Keyboard.Key.E, PickUpItemAction);
             _actionMap.Add(Keyboard.Key.Space, AttackAction);
             _actionMap.Add(Keyboard.Key.LShift, MagicAction);
+            _actionMap.Add(Keyboard.Key.LControl, BlockAction);
 
 
         }

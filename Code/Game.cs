@@ -8,7 +8,6 @@ namespace JamTemplate
 
         #region Fields
 
-        private Font _font;
         private State _gameState;
 
         World _myWorld;
@@ -23,7 +22,6 @@ namespace JamTemplate
         {
             // Predefine game state to menu
             _gameState = State.Menu;
-            _font = new Font("../GFX/font.ttf");
         }
 
         public void GetInput()
@@ -119,19 +117,19 @@ namespace JamTemplate
             Text text = new Text();
             text.DisplayedString = "$GameTitle$";
 
-            text.Font = _font;
+            text.Font = GameProperties.GameFont();
             text.Scale = new Vector2f(2, 2);
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 150 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
             text = new Text();
             text.DisplayedString = "Start [Return]";
-            text.Font = _font;
+            text.Font = GameProperties.GameFont();
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 250 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
             text = new Text();
-            text.Font = _font;
+            text.Font = GameProperties.GameFont();
             text.DisplayedString = "W A S D & LShift";
             text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(0.75f, 0.75f);
@@ -139,7 +137,7 @@ namespace JamTemplate
             rw.Draw(text);
 
             text = new Text();
-            text.Font = _font;
+            text.Font = GameProperties.GameFont();
             text.DisplayedString = "Arrows & RCtrl";
             text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(0.75f, 0.75f);
@@ -149,7 +147,7 @@ namespace JamTemplate
 
             text = new Text();
             text.DisplayedString = "[C]redits";
-            text.Font = _font;
+            text.Font = GameProperties.GameFont();
             text.Scale = new Vector2f(0.75f, 0.75f);
             text.Position = new Vector2f(30, 550 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
@@ -160,42 +158,42 @@ namespace JamTemplate
         {
 
 
-            Text CreditsText = new Text("$GameTitle$", _font);
+            Text CreditsText = new Text("$GameTitle$", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(1.5f, 1.5f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 20);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("A Game by", _font);
+            CreditsText = new Text("A Game by", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 100);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("$DeveloperNames$", _font);
+            CreditsText = new Text("$DeveloperNames$", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(1, 1);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 135);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("Visual Studio 2012 \t C#", _font);
+            CreditsText = new Text("Visual Studio 2012 \t C#", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 170);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("aseprite \t SFML.NET 2.1", _font);
+            CreditsText = new Text("aseprite \t SFML.NET 2.1", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 200);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("Thanks to", _font);
+            CreditsText = new Text("Thanks to", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 350);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("Families & Friends for their great support", _font);
+            CreditsText = new Text("Families & Friends for their great support", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 375);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("Created $Date$", _font);
+            CreditsText = new Text("Created $Date$", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 500);
             rw.Draw(CreditsText);
