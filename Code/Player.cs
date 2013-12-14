@@ -66,10 +66,10 @@ namespace JamTemplate
 
         private void ResetMovementAction()
         {
-            _MovingRight = false ;
-            _MovingLeft = false ;
+            _MovingRight = false;
+            _MovingLeft = false;
             _MovingDown = false;
-            _MovingUp =false;
+            _MovingUp = false;
         }
 
         public void Update(float deltaT)
@@ -81,7 +81,10 @@ namespace JamTemplate
 
             DoMovement();
 
-            playerSprite.Position = new Vector2f(GameProperties.TileSizeInPixel() * PlayerPosition.X, GameProperties.TileSizeInPixel() * PlayerPosition.Y);
+            playerSprite.Position = new Vector2f(
+                GameProperties.TileSizeInPixel * PlayerPosition.X,
+                GameProperties.TileSizeInPixel * PlayerPosition.Y
+            );
         }
 
         private void DoMovement()

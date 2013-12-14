@@ -55,9 +55,9 @@ namespace JamTemplate
         {
             _tileList = new List<Tile>();
 
-            for (int i =0; i != GameProperties.WorldSizeInTiles();i++)
+            for (int i =0; i != GameProperties.WorldSizeInTiles;i++)
             {
-                for (int j =0; j != GameProperties.WorldSizeInTiles();j++)
+                for (int j =0; j != GameProperties.WorldSizeInTiles;j++)
                 {
                     Tile newtile;
                     if (_randomGenerator.NextDouble() >= 0.75)

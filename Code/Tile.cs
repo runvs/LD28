@@ -1,8 +1,4 @@
 ﻿using SFML.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace JamTemplate
 {
@@ -22,7 +18,7 @@ namespace JamTemplate
 
 
         SFML.Graphics.Texture TileTexture;
-        
+
         Sprite TileSprite;
 
         public SFML.Window.Vector2i TilePosition { get; private set; }
@@ -49,7 +45,7 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw)
         {
-            rw.Draw  (TileSprite);
+            rw.Draw(TileSprite);
         }
 
         public void LoadGraphics()
@@ -57,12 +53,15 @@ namespace JamTemplate
             TileTexture = new Texture("../GFX/tile_grass.png");
             TileSprite = new Sprite(TileTexture);
             TileSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);
-            TileSprite.Position = new SFML.Window.Vector2f(GameProperties.TileSizeInPixel() * TilePosition.X, GameProperties.TileSizeInPixel() * TilePosition.Y);
+            TileSprite.Position = new SFML.Window.Vector2f(
+                GameProperties.TileSizeInPixel * TilePosition.X,
+                GameProperties.TileSizeInPixel * TilePosition.Y
+            );
         }
 
 
         #endregion Methods
 
-        
+
     }
 }
