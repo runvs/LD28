@@ -10,6 +10,8 @@ namespace JamTemplate
 
         Random _randomGenerator = new Random();
 
+        Player _player;
+
         #endregion Fields
 
         #region Methods
@@ -21,7 +23,7 @@ namespace JamTemplate
 
         public void GetInput()
         {
-
+            _player.GetInput();
         }
 
         public void Update(float deltaT)
@@ -31,11 +33,12 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw)
         {
-
+            _player.Draw(rw);
         }
 
         private void InitGame()
         {
+            _player = new Player(this, 0);
         }
 
         #endregion Methods

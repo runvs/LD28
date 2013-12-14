@@ -30,6 +30,7 @@ namespace JamTemplate
             playerNumber = number;
 
             _actionMap = new Dictionary<Keyboard.Key, Action>();
+            SetupActionMap();
 
             try
             {
@@ -65,9 +66,37 @@ namespace JamTemplate
             rw.Draw(this.playerSprite);
         }
 
+        private void MoveRightAction()
+        {
+
+        }
+        private void MoveLeftAction()
+        {
+            
+        }
+        private void MoveUpAction()
+        {
+
+        }
+        private void MoveDownAction()
+        {
+
+        }
+
+
         private void SetupActionMap()
         {
-            // e.g. _actionMap.Add(Keyboard.Key.Escape, ResetActionMap);
+            _actionMap.Add(Keyboard.Key.Left, MoveLeftAction);
+            _actionMap.Add(Keyboard.Key.A, MoveLeftAction);
+
+            _actionMap.Add(Keyboard.Key.Right, MoveRightAction);
+            _actionMap.Add(Keyboard.Key.D, MoveRightAction);
+
+            _actionMap.Add(Keyboard.Key.Down, MoveDownAction);
+            _actionMap.Add(Keyboard.Key.S, MoveDownAction);
+
+            _actionMap.Add(Keyboard.Key.Up, MoveUpAction);
+            _actionMap.Add(Keyboard.Key.W, MoveUpAction);
         }
 
         private void MapInputToActions()
@@ -84,7 +113,11 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            //SFML.Graphics.Image playerImage = new SFML.Graphics.Image("../gfx/player.png");
+            playerTexture = new SFML.Graphics.Texture("../gfx/player.png");
+
+            playerSprite = new Sprite(playerTexture);
+            playerSprite.Scale = new Vector2f(2.0f, 2.0f);
+
         }
 
         #endregion Methods
