@@ -82,7 +82,12 @@ namespace JamTemplate
             {
                 _myWorld.Update(deltaT);
 
-                // TODO Game End Criteria
+                if (_myWorld.IsPlayerDead())
+                {
+                    _gameScore = _myWorld.EndThisRound();
+
+                    ChangeGameState(State.Score);
+                }
             }
 
         }

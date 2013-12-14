@@ -12,7 +12,7 @@ namespace JamTemplate
 
         Random _randomGenerator = new Random();
 
-        Player _player;
+        public Player _player;
         Sidebar _sidebar;
         IList<Tile> _tileList;
         IList<Item> _itemList;  // free items in the World
@@ -160,8 +160,33 @@ namespace JamTemplate
                     break;
                 }
             }
-
             return newItem;
+        }
+
+        internal Enemy GetEnemyOnTile(SFML.Window.Vector2i vector2i)
+        {
+            Enemy newEnemy = null;
+            foreach (var e in _enemyList)
+            {
+                if (e.ActorPosition.Equals(vector2i))
+                {
+                    newEnemy = e;
+                    break;
+                }
+            }
+            return newEnemy;
+        }
+
+
+        public bool IsPlayerDead()
+        {
+            return _player.IsDead;
+        }
+
+        public Score EndThisRound()
+        {
+            return new Score();
+
         }
 
         #endregion Methods

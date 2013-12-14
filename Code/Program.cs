@@ -26,7 +26,7 @@ namespace JamTemplate
 
         private static void OnMouseButtonReleased(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         #endregion Event handlers

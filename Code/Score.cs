@@ -2,7 +2,7 @@
 
 namespace JamTemplate
 {
-    class Score
+    public class Score
     {
 
         #region Fields

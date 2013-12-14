@@ -3,10 +3,22 @@ namespace JamTemplate
 {
     public class Attributes
     {
-        public int Strength { get; set; }
-        public int Intelligence { get; set; }
-        public int Agility { get; set; }
-        public int Endurance { get; set; }
+
+
+
+
+
+        // This are base values
+
+        public int Strength { get { return BaseStrength + ModifierStrength; } }
+        public int Intelligence { get { return BaseIntelligence + ModifierIntelligence; } }
+        public int Agility { get { return BaseAgility + ModifierAgility; } }
+        public int Endurance { get { return BaseEndurance + ModifierEndurance; } }
+
+        public int BaseStrength { get; set; }
+        public int BaseIntelligence { get; set; }
+        public int BaseAgility { get; set; }
+        public int BaseEndurance { get; set; }
 
         public int ModifierStrength { get; set; }
         public int ModifierIntelligence { get; set; }
@@ -21,10 +33,10 @@ namespace JamTemplate
 
         public Attributes()
         {
-            Strength = 3;
-            Intelligence = 3;
-            Agility = 3;
-            Endurance = 3;
+            BaseStrength = 3;
+            BaseIntelligence = 3;
+            BaseAgility = 3;
+            BaseEndurance = 3;
 
             ModifierAgility = 0;
             ModifierEndurance = 0;

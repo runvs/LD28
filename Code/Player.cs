@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace JamTemplate
 {
-    class Player : Actor
+    public class Player : Actor
     {
 
         #region Fields
@@ -80,42 +80,64 @@ namespace JamTemplate
             {
                 _movementTimer -= deltaT;
             }
-
             DoMovement();
-            // position the Sprite
+
+            _battleTimer -= deltaT;
+            if (_battleTimer <= 0.0f)
+            {
+                _battleTimer += GameProperties.PlayerBattleDeadZoneTimer;
+                DoBattleAction();
+                ResetBattleActions();
+            }
 
 
         }
 
-        private void DoMovement()
+        protected override void DoBattleAction()
         {
-            Vector2i newPosition = ActorPosition;
+            if (_battleAttack && !_battleBlock && !_battleMagic)
+            {
+                PlayerAttack();
+            }
+        }
 
-            if (_movingEast && !_movingWest && !_movingNorth && !_movingSouth)
+        private void PlayerAttack()
+        {
+            Vector2i attackTile = this.ActorPosition;
+            if (this.Direction == JamTemplate.Direction.EAST)
             {
-                newPosition.X++;
-                Direction = Direction.EAST;
+                attackTile.X++;
             }
-            else if (_movingWest && !_movingEast && !_movingNorth && !_movingSouth)
+            else if (this.Direction == JamTemplate.Direction.WEST)
             {
-                newPosition.X--;
-                Direction = Direction.WEST;
+                attackTile.X--;
             }
-            else if (_movingNorth && !_movingSouth && !_movingEast && !_movingWest)
+            else if (this.Direction == JamTemplate.Direction.NORTH)
             {
-                newPosition.Y--;
-                Direction = Direction.NORTH;
+                attackTile.Y--;
             }
-            else if (_movingSouth && !_movingNorth && !_movingEast && !_movingWest)
+            else if (this.Direction == JamTemplate.Direction.SOUTH)
             {
-                newPosition.Y++;
-                Direction = Direction.SOUTH;
+                attackTile.Y++;
             }
 
-            if (!_world.IsTileBlocked(newPosition))
-            {
-                ActorPosition = newPosition;
-            }
+            Enemy actor2 = _world.GetEnemyOnTile(attackTile);
+
+            BattleManager.DoBattleAction(this, actor2, BattleAction.Attack);
+
+
+
+        }
+
+
+        public override int GetBaseDamage()
+        {
+            return GameProperties.PlayerBaseDamage;
+        }
+
+        public override void Die()
+        {
+            IsDead = true;
         }
 
 
@@ -165,27 +187,6 @@ namespace JamTemplate
             rw.Draw(this._actorSprite);
         }
 
-        private void MoveRightAction()
-        {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingEast = true;
-        }
-        private void MoveLeftAction()
-        {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingWest = true;
-        }
-        private void MoveUpAction()
-        {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingNorth = true;
-        }
-        private void MoveDownAction()
-        {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _movingSouth = true;
-        }
-
         private void PickUpItemAction()
         {
             Item newItem = _world.GetItemOnTile(this.ActorPosition);
@@ -212,6 +213,10 @@ namespace JamTemplate
             _actionMap.Add(Keyboard.Key.W, MoveUpAction);
 
             _actionMap.Add(Keyboard.Key.E, PickUpItemAction);
+            _actionMap.Add(Keyboard.Key.Space, AttackAction);
+            _actionMap.Add(Keyboard.Key.LShift, MagicAction);
+
+
         }
 
         private void MapInputToActions()

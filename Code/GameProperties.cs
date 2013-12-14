@@ -13,10 +13,13 @@ namespace JamTemplate
         public static float SidebarWidth { get { return 200.0f; } }
 
         public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.15f; } }
+        public static float PlayerBattleDeadZoneTimer { get { return 0.3f; } }
+        public static float EnemyBattleDeadZoneTimer { get { return 0.75f; } }
 
         public static int BasePlayerHealth { get { return 25; } }
 
-        public static int BaseDamage { get { return 5; } }
+        public static int PlayerBaseDamage { get { return 5; } }
+        public static int EnemyBaseDamage { get { return 3; } }
 
         public static Vector2f InventoryHeadItemPosition { get { return new Vector2f(750.0f, 100.0f); } }
         public static Vector2f InventoryHandItemPosition { get { return new Vector2f(750.0f, 150.0f); } }

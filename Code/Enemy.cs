@@ -54,7 +54,51 @@ namespace JamTemplate
 
         public void Update(float deltaT)
         {
+            if (_movementTimer > 0.0f)
+            {
+                _movementTimer -= deltaT;
+            }
+            DoMovement();
 
+            _battleTimer -= deltaT;
+            if (_battleTimer <= 0.0f)
+            {
+                _battleTimer += GameProperties.EnemyBattleDeadZoneTimer;
+                EnemyAttack();
+                ResetBattleActions();
+            }
+
+
+
+
+        }
+
+        protected override void DoBattleAction()
+        {
+            if (_battleAttack && !_battleBlock && !_battleMagic)
+            {
+
+            }
+        }
+
+        private void EnemyAttack()
+        {
+            Vector2i playerPos = _world._player.ActorPosition;
+            if (Math.Abs(playerPos.X - ActorPosition.X) <= 1 && Math.Abs(playerPos.Y - ActorPosition.Y) <= 1)
+            {
+                BattleManager.DoBattleAction(this, _world._player, BattleAction.Attack);
+            }
+        }
+
+
+        public override int GetBaseDamage()
+        {
+            return GameProperties.EnemyBaseDamage;
+        }
+
+        public override void Die()
+        {
+            IsDead = true;
         }
 
         #endregion Methods
