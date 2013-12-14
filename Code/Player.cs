@@ -12,7 +12,16 @@ namespace JamTemplate
 
         public int playerNumber;
         public string PlayerName { get; private set; }
-        public SFML.Window.Vector2i PlayerPosition { get; private set; }
+        public Vector2i PlayerPosition { get; private set; }
+
+        #region Inventory
+
+        public Item HeadItem { get; private set; }
+        public Item TorsoItem { get; private set; }
+        public Item HandItem { get; private set; }
+        public Item FeetItem { get; private set; }
+
+        #endregion Inventory
 
         Dictionary<Keyboard.Key, Action> _actionMap;
 
@@ -110,6 +119,29 @@ namespace JamTemplate
             if (!_world.IsTileBlockd(newPosition))
             {
                 PlayerPosition = newPosition;
+            }
+        }
+
+        public void PickupItem(Item item)
+        {
+            switch (item.ItemType)
+            {
+                case ItemType.FEET:
+                    this.FeetItem = item;
+                    break;
+
+                case ItemType.HAND:
+                    this.HandItem = item;
+                    break;
+
+                case ItemType.HEAD:
+                    this.HeadItem = item;
+                    break;
+
+                default:
+                case ItemType.TORSO:
+                    this.TorsoItem = item;
+                    break;
             }
         }
 
