@@ -10,14 +10,14 @@ namespace JamTemplate
 
         static Random _randomGenerator = new Random();
 
-        static public int RollTheDie()
+        static public int Roll()
         {
             return _randomGenerator.Next(1, 7);
         }
 
         static public bool IsHit(int border)
         {
-            if (RollTheDie() >= border)
+            if (Roll() >= border)
             {
                 return true;
             }
@@ -26,7 +26,7 @@ namespace JamTemplate
 
         static public int AttributeProbe(int attribute)
         {
-            int roll = RollTheDie();
+            int roll = Roll();
             if (roll > attribute)
             {
                 return 0;

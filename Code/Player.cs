@@ -83,10 +83,7 @@ namespace JamTemplate
 
             DoMovement();
             // position the Sprite
-            _actorSprite.Position = new Vector2f(
-                GameProperties.TileSizeInPixel * ActorPosition.X,
-                GameProperties.TileSizeInPixel * ActorPosition.Y
-            );
+
 
         }
 
@@ -158,8 +155,13 @@ namespace JamTemplate
 
         }
 
-        public void Draw(RenderWindow rw)
+        public void Draw(RenderWindow rw, Vector2i CameraPosition)
         {
+            _actorSprite.Position = new Vector2f(
+                GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
+                GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
+            );
+
             rw.Draw(this._actorSprite);
         }
 

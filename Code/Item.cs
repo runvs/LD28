@@ -78,11 +78,18 @@ namespace JamTemplate
             ItemSprite = new SFML.Graphics.Sprite(ItemTexture);
             ItemSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);
 
-            ItemSprite.Position = new SFML.Window.Vector2f(GameProperties.TileSizeInPixel * ItemPositionInTiles.X, GameProperties.TileSizeInPixel * ItemPositionInTiles.Y);
+
         }
 
-        public void Draw(SFML.Graphics.RenderWindow rw)
+        public void Draw(SFML.Graphics.RenderWindow rw, SFML.Window.Vector2i CameraPosition)
         {
+            if (!Picked)
+            {
+                ItemSprite.Position = new SFML.Window.Vector2f(
+                    GameProperties.TileSizeInPixel * (ItemPositionInTiles.X - CameraPosition.X),
+                    GameProperties.TileSizeInPixel * (ItemPositionInTiles.Y - CameraPosition.Y)
+                    );
+            }
             rw.Draw(ItemSprite);
         }
 

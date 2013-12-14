@@ -9,7 +9,7 @@
 
         public static float SidebarWidth { get { return 200.0f; } }
 
-        public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.25f; } }
+        public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.15f; } }
 
         public static int BasePlayerHealth { get { return 25; } }
 

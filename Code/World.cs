@@ -18,12 +18,15 @@ namespace JamTemplate
         IList<Item> _itemList;  // free items in the World
         IList<Enemy> _enemyList; // currently active enemies
 
+        public SFML.Window.Vector2i CameraPosition { get; private set; }
+
         #endregion Fields
 
         #region Methods
 
         public World()
         {
+
             InitGame();
         }
 
@@ -40,25 +43,47 @@ namespace JamTemplate
             }
 
             _player.Update(deltaT);
+
+            Vector2i newCamPos = new Vector2i(_player.ActorPosition.X - 7, _player.ActorPosition.Y - 7);
+            if (newCamPos.X <= 0)
+            {
+                newCamPos.X = 0;
+            }
+            if (newCamPos.Y <= 0)
+            {
+                newCamPos.Y = 0;
+            }
+
+            if (newCamPos.X >= GameProperties.WorldSizeInTiles - 12)
+            {
+                newCamPos.X = GameProperties.WorldSizeInTiles - 12;
+            }
+
+            if (newCamPos.Y >= GameProperties.WorldSizeInTiles - 12)
+            {
+                newCamPos.Y = GameProperties.WorldSizeInTiles - 12;
+            }
+            CameraPosition = newCamPos;
+
         }
 
         public void Draw(RenderWindow rw)
         {
             foreach (var t in _tileList)
             {
-                t.Draw(rw);
+                t.Draw(rw, CameraPosition);
             }
             foreach (var i in _itemList)
             {
-                i.Draw(rw);
+                i.Draw(rw, CameraPosition);
             }
 
+            _player.Draw(rw, CameraPosition);
             foreach (var e in _enemyList)
             {
-                e.Draw(rw);
+                e.Draw(rw, CameraPosition);
             }
 
-            _player.Draw(rw);
             _sidebar.Draw(rw);
         }
 
@@ -75,6 +100,7 @@ namespace JamTemplate
         private void CreateWorld()
         {
             _tileList = new List<Tile>();
+            CameraPosition = new Vector2i(0, 0);
 
             for (int i = 0; i != GameProperties.WorldSizeInTiles; i++)
             {
@@ -83,7 +109,15 @@ namespace JamTemplate
                     Tile newtile;
                     if (_randomGenerator.NextDouble() >= 0.75)
                     {
-                        newtile = new Tile(i, j, Tile.TileType.Water);
+                        if (_randomGenerator.NextDouble() >= 0.5)
+                        {
+
+                            newtile = new Tile(i, j, Tile.TileType.Water);
+                        }
+                        else
+                        {
+                            newtile = new Tile(i, j, Tile.TileType.Mountain);
+                        }
                     }
                     else
                     {

@@ -43,8 +43,12 @@ namespace JamTemplate
 
         }
 
-        public void Draw(RenderWindow rw)
+        public void Draw(RenderWindow rw, SFML.Window.Vector2i CameraPosition)
         {
+            TileSprite.Position = new SFML.Window.Vector2f(
+               GameProperties.TileSizeInPixel * (TilePosition.X - CameraPosition.X),
+               GameProperties.TileSizeInPixel * (TilePosition.Y - CameraPosition.Y)
+           );
             rw.Draw(TileSprite);
         }
 
@@ -56,7 +60,7 @@ namespace JamTemplate
             }
             else if (_type == TileType.Mountain)
             {
-                TileTexture = new Texture("../GFX/tile_grass.png");
+                TileTexture = new Texture("../GFX/tile_mountains.png");
             }
             if (_type == TileType.Water)
             {
@@ -64,15 +68,11 @@ namespace JamTemplate
             }
             TileSprite = new Sprite(TileTexture);
             TileSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);
-            TileSprite.Position = new SFML.Window.Vector2f(
-                GameProperties.TileSizeInPixel * TilePosition.X,
-                GameProperties.TileSizeInPixel * TilePosition.Y
-            );
+
         }
 
 
         #endregion Methods
-
 
     }
 }

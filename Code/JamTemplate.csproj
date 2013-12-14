@@ -60,6 +60,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RollTheDie.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Sidebar.cs" />
     <Compile Include="Tile.cs" />
