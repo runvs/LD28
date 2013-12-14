@@ -34,6 +34,12 @@ namespace JamTemplate
         public void Draw(RenderWindow window)
         {
             window.Draw(_sideBarSprite);
+
+            if (_player != null)
+            {
+
+            }
+
         }
 
         #endregion Methods

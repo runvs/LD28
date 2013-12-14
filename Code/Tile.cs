@@ -50,7 +50,18 @@ namespace JamTemplate
 
         public void LoadGraphics()
         {
-            TileTexture = new Texture("../GFX/tile_grass.png");
+            if (_type == TileType.Grass)
+            {
+                TileTexture = new Texture("../GFX/tile_grass.png");
+            }
+            else if (_type == TileType.Mountain)
+            {
+                TileTexture = new Texture("../GFX/tile_grass.png");
+            }
+            if (_type == TileType.Water)
+            {
+                TileTexture = new Texture("../GFX/tile_water.png");
+            }
             TileSprite = new Sprite(TileTexture);
             TileSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);
             TileSprite.Position = new SFML.Window.Vector2f(

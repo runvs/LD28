@@ -35,6 +35,8 @@ namespace JamTemplate
         bool _MovingDown;
         bool _MovingUp;
 
+        public Attributes PlayerAttributes { get; private set; }
+
         #endregion Fields
 
         #region Methods
@@ -46,6 +48,7 @@ namespace JamTemplate
 
             _actionMap = new Dictionary<Keyboard.Key, Action>();
             SetupActionMap();
+            PlayerAttributes = new Attributes();
 
             try
             {
@@ -56,6 +59,9 @@ namespace JamTemplate
                 System.Console.Out.WriteLine("Error loading player Graphics.");
                 System.Console.Out.WriteLine(e.ToString());
             }
+
+            PickupItem(new Item(ItemType.HAND, "sword", +1, new Vector2i(0, 0)));
+
         }
 
         private void SetPlayerNumberDependendProperties()
@@ -89,11 +95,9 @@ namespace JamTemplate
             }
 
             DoMovement();
+            // position the Sprite
+            playerSprite.Position = new Vector2f(GameProperties.TileSizeInPixel * PlayerPosition.X, GameProperties.TileSizeInPixel * PlayerPosition.Y);
 
-            playerSprite.Position = new Vector2f(
-                GameProperties.TileSizeInPixel * PlayerPosition.X,
-                GameProperties.TileSizeInPixel * PlayerPosition.Y
-            );
         }
 
         private void DoMovement()
@@ -122,6 +126,7 @@ namespace JamTemplate
             }
         }
 
+
         public void PickupItem(Item item)
         {
             switch (item.ItemType)
@@ -143,6 +148,19 @@ namespace JamTemplate
                     this.TorsoItem = item;
                     break;
             }
+            item.PickUp();
+            ReCalculateModifiers();
+
+        }
+
+        private void ReCalculateModifiers()
+        {
+            PlayerAttributes.ResetModifiers();
+            PlayerAttributes.CalculateModifiersForItem(HeadItem);
+            PlayerAttributes.CalculateModifiersForItem(TorsoItem);
+            PlayerAttributes.CalculateModifiersForItem(FeetItem);
+            PlayerAttributes.CalculateModifiersForItem(HandItem);
+
         }
 
         public void Draw(SFML.Graphics.RenderWindow rw)

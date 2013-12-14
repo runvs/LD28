@@ -14,6 +14,7 @@ namespace JamTemplate
         Player _player;
         Sidebar _sidebar;
         IList<Tile> _tileList;
+        IList<Item> _itemList;  // free items in the World
 
         #endregion Fields
 
@@ -32,6 +33,8 @@ namespace JamTemplate
         public void Update(float deltaT)
         {
             _player.Update(deltaT);
+
+
         }
 
         public void Draw(RenderWindow rw)
@@ -40,6 +43,11 @@ namespace JamTemplate
             {
                 t.Draw(rw);
             }
+            foreach (var i in _itemList)
+            {
+                i.Draw(rw);
+            }
+
             _player.Draw(rw);
             _sidebar.Draw(rw);
         }
@@ -48,6 +56,7 @@ namespace JamTemplate
         {
             _player = new Player(this, 0);
             _sidebar = new Sidebar(_player);
+            _itemList = new List<Item>();
             CreateWorld();
         }
 
@@ -62,7 +71,7 @@ namespace JamTemplate
                     Tile newtile;
                     if (_randomGenerator.NextDouble() >= 0.75)
                     {
-                        newtile = new Tile(i, j, Tile.TileType.Mountain);
+                        newtile = new Tile(i, j, Tile.TileType.Water);
                     }
                     else
                     {
