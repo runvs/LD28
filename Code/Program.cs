@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SFML.Graphics;
+using SFML.Window;
+using System;
 
 namespace JamTemplate
 {
     class Program
     {
+        #region Event handlers
+
         static void OnClose(object sender, EventArgs e)
         {
             // Close the window when OnClose event is received
@@ -24,16 +24,17 @@ namespace JamTemplate
             }
         }
 
+        #endregion Event handlers
 
         static void Main(string[] args)
         {
-            SFML.Graphics.RenderWindow applicationWindow = new SFML.Graphics.RenderWindow(new SFML.Window.VideoMode(800, 600, 32), "Jam Template");
+            var applicationWindow = new RenderWindow(new VideoMode(800, 600, 32), "$WindowTitle$");
 
             applicationWindow.SetFramerateLimit(60);
 
-            // fuddle with resizing the images later on
+            // fiddle with resizing the images later on
             applicationWindow.Closed += new EventHandler(OnClose);
-            applicationWindow.KeyPressed += new EventHandler<SFML.Window.KeyEventArgs>(OnKeyPress);
+            applicationWindow.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPress);
 
             Game myGame = new Game();
 
@@ -41,7 +42,7 @@ namespace JamTemplate
 
             int startTime = Environment.TickCount;
             int endTime = startTime;
-            float time = 16.7f;
+            float time = 16.7f; // 60 fps -> 16.7 ms per frame
 
             while (applicationWindow.IsOpen())
             {

@@ -1,18 +1,35 @@
-﻿using System;
+﻿using SFML.Graphics;
+using SFML.Window;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JamTemplate
 {
     class Player
     {
 
+        #region Fields
+
+        public int playerNumber;
+        public string PlayerName { get; private set; }
+
+        Dictionary<Keyboard.Key, Action> _actionMap;
+
+        private Texture playerTexture;
+        private Sprite playerSprite;
+        private float movementTimer = 0.0f; // time between two successive movement commands
+        private World myWorld;
+
+        #endregion Fields
+
+        #region Methods
+
         public Player(World world, int number)
         {
             myWorld = world;
             playerNumber = number;
+
+            _actionMap = new Dictionary<Keyboard.Key, Action>();
 
             try
             {
@@ -30,13 +47,8 @@ namespace JamTemplate
             PlayerName = "Player" + playerNumber.ToString();
         }
 
-
-
-        public string PlayerName { get; private set; }
-
         public void GetInput()
         {
-            ResetActionMap();
             if (movementTimer <= 0.0f)
             {
                 MapInputToActions();
@@ -53,50 +65,29 @@ namespace JamTemplate
             rw.Draw(this.playerSprite);
         }
 
-        private void ResetActionMap()
+        private void SetupActionMap()
         {
-
+            // e.g. _actionMap.Add(Keyboard.Key.Escape, ResetActionMap);
         }
-
-       
 
         private void MapInputToActions()
         {
-            //if (SFML.Window.Keyboard.IsKeyPressed(MoveLeftKey()))
-            //{
-            //    MoveLeftAction();
-            //}
-            //else if (SFML.Window.Keyboard.IsKeyPressed(MoveRightKey()))
-            //{
-            //    MoveRightAction();
-            //}
-            //else if (SFML.Window.Keyboard.IsKeyPressed(MoveDownKey()))
-            //{
-            //    MoveDownAction();
-            //}
-            //else if (SFML.Window.Keyboard.IsKeyPressed(MoveUpKey()))
-            //{
-            //    MoveUpAction();
-            //}
-
-            //if (SFML.Window.Keyboard.IsKeyPressed(BombKey()))
-            //{
-            //    PlaceBombAction();
-            //}
+            foreach (var kvp in _actionMap)
+            {
+                if (Keyboard.IsKeyPressed(kvp.Key))
+                {
+                    // Execute the saved callback
+                    kvp.Value();
+                }
+            }
         }
-
-
-        private SFML.Graphics.Texture playerTexture;
-        private SFML.Graphics.Sprite playerSprite;
 
         private void LoadGraphics()
         {
             //SFML.Graphics.Image playerImage = new SFML.Graphics.Image("../gfx/player.png");
         }
 
-        private float movementTimer = 0.0f; // time til two successive Movement commands
-        
-        private World myWorld;
-        public int playerNumber;
+        #endregion Methods
+
     }
 }

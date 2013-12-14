@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SFML.Graphics;
+using System;
 
 namespace JamTemplate
 {
     class World
     {
+
+        #region Fields
+
+        Random _randomGenerator = new Random();
+
+        #endregion Fields
+
+        #region Methods
+
         public World()
         {
             InitGame();
@@ -15,31 +21,24 @@ namespace JamTemplate
 
         public void GetInput()
         {
-          
+
         }
 
         public void Update(float deltaT)
         {
-           
+
         }
 
-     
-
-
-
-        public void Draw(SFML.Graphics.RenderWindow rw)
+        public void Draw(RenderWindow rw)
         {
-          
-        }
 
+        }
 
         private void InitGame()
         {
         }
 
-        System.Random myRandomGenerator = new System.Random();
+        #endregion Methods
 
     }
-
-
 }
