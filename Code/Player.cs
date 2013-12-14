@@ -212,7 +212,6 @@ namespace JamTemplate
             _actionMap.Add(Keyboard.Key.W, MoveUpAction);
 
             _actionMap.Add(Keyboard.Key.E, PickUpItemAction);
-
         }
 
         private void MapInputToActions()

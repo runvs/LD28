@@ -128,7 +128,7 @@ namespace JamTemplate
             text = new Text();
             text.Font = _font;
             text.DisplayedString = "W A S D & LShift";
-            text.Color = Color.White;
+            text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(0.75f, 0.75f);
             text.Position = new Vector2f(530 - text.GetGlobalBounds().Width / 2.0f, 340 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
@@ -136,7 +136,7 @@ namespace JamTemplate
             text = new Text();
             text.Font = _font;
             text.DisplayedString = "Arrows & RCtrl";
-            text.Color = Color.White;
+            text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(0.75f, 0.75f);
             text.Position = new Vector2f(180 - text.GetGlobalBounds().Width / 2.0f, 340 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);

@@ -16,6 +16,9 @@ namespace JamTemplate
         public int HealthMaximum { get; set; }
         public int HealthCurrent { get; set; }
 
+        public int StaminaMaximum { get; set; }
+        public int StaminaCurrent { get; set; }
+
         public Attributes()
         {
             Strength = 3;
@@ -27,6 +30,12 @@ namespace JamTemplate
             ModifierEndurance = 0;
             ModifierStrength = 0;
             ModifierIntelligence = 0;
+
+            HealthCurrent = 17;
+            HealthMaximum = 20;
+
+            StaminaCurrent = 17;
+            StaminaMaximum = 40;
         }
 
         public void ResetModifiers()

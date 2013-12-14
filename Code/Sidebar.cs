@@ -12,7 +12,9 @@ namespace JamTemplate
         private Sprite _sideBarSprite;
         private Player _player;
 
-        private Font font;
+        private Font _font;
+        private RectangleShape _healthBar;
+        private RectangleShape _staminaBar;
 
         #endregion Fields
 
@@ -25,12 +27,23 @@ namespace JamTemplate
             _sideBarSprite.Scale = new Vector2f(2, 2);
 
             _sideBarSprite.Position = new Vector2f(600, 0);
-            font = new Font("../GFX/font.ttf");
+            _font = new Font("../GFX/font.ttf");
+
+            _healthBar = new RectangleShape(new Vector2f(100, 150));
+            _healthBar.Origin = new Vector2f(0, 150);
+            _healthBar.Position = new Vector2f(602, 598);
+            _healthBar.FillColor = GameProperties.ColorLightRed;
+
+            _staminaBar = new RectangleShape(new Vector2f(94, 150));
+            _staminaBar.Origin = new Vector2f(0, 150);
+            _staminaBar.Position = new Vector2f(704, 598);
+            _staminaBar.FillColor = GameProperties.ColorBlue;
         }
 
         public Sidebar(Player p)
         {
             _player = p;
+
             LoadGraphics();
         }
 
@@ -39,6 +52,7 @@ namespace JamTemplate
             window.Draw(_sideBarSprite);
 
             DrawAttributes(window);
+            DrawBars(window);
 
 
             if (_player != null)
@@ -63,68 +77,53 @@ namespace JamTemplate
 
         }
 
+        private void DrawBars(RenderWindow window)
+        {
+            var percentage = _player.ActorAttributes.HealthCurrent / (float)_player.ActorAttributes.HealthMaximum;
+            _healthBar.Scale = new Vector2f(1, percentage);
+            window.Draw(_healthBar);
+
+            percentage = _player.ActorAttributes.StaminaCurrent / (float)_player.ActorAttributes.StaminaMaximum;
+            _staminaBar.Scale = new Vector2f(1, percentage);
+            window.Draw(_staminaBar);
+        }
+
+        private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
+        {
+            Text text = new Text(s, _font);
+            text.Position = position;
+            text.Color = color;
+            window.Draw(text);
+        }
+
         private void DrawAttributes(RenderWindow window)
         {
-            SFML.Graphics.Text text = new Text("", font);
-            text.DisplayedString = "STR " + _player.ActorAttributes.Strength.ToString();
-            text.Position = new Vector2f(630.0f, 250);
-            text.Color = new Color(222, 238, 214);
-            window.Draw(text);
+            DrawText("STR " + _player.ActorAttributes.Strength, new Vector2f(630.0f, 250), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierStrength != 0)
             {
-                text = new Text("", font);
-                text.DisplayedString = "+ " + _player.ActorAttributes.ModifierStrength.ToString();
-                text.Position = new Vector2f(730.0f, 250);
-                text.Color = new Color(222, 238, 214);
-                window.Draw(text);
+                DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorWhite, window);
             }
 
-
-            text = new Text("", font);
-            text.DisplayedString = "AGI " + _player.ActorAttributes.Agility.ToString();
-            text.Position = new Vector2f(630.0f, 300);
-            text.Color = new Color(222, 238, 214);
-            window.Draw(text);
+            DrawText("AGI " + _player.ActorAttributes.Agility, new Vector2f(630.0f, 300), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierAgility != 0)
             {
-                text = new Text("", font);
-                text.DisplayedString = "+ " + _player.ActorAttributes.ModifierAgility.ToString();
-                text.Position = new Vector2f(730.0f, 300);
-                text.Color = new Color(222, 238, 214);
-                window.Draw(text);
+                DrawText("+ " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorWhite, window);
             }
 
-
-            text = new Text("", font);
-            text.DisplayedString = "INT " + _player.ActorAttributes.Intelligence.ToString();
-            text.Position = new Vector2f(630.0f, 350);
-            text.Color = new Color(222, 238, 214);
-            window.Draw(text);
+            DrawText("INT " + _player.ActorAttributes.Intelligence, new Vector2f(630.0f, 350), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierIntelligence != 0)
             {
-                text = new Text("", font);
-                text.DisplayedString = "+ " + _player.ActorAttributes.ModifierIntelligence.ToString();
-                text.Position = new Vector2f(730.0f, 350);
-                text.Color = new Color(222, 238, 214);
-                window.Draw(text);
+                DrawText("+ " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorWhite, window);
             }
 
-            text = new Text("", font);
-            text.DisplayedString = "END " + _player.ActorAttributes.Endurance.ToString();
-            text.Position = new Vector2f(630.0f, 400);
-            text.Color = new Color(222, 238, 214);
-            window.Draw(text);
+            DrawText("END " + _player.ActorAttributes.Endurance, new Vector2f(630.0f, 400), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierEndurance != 0)
             {
-                text = new Text("", font);
-                text.DisplayedString = "+ " + _player.ActorAttributes.ModifierEndurance.ToString();
-                text.Position = new Vector2f(730.0f, 400);
-                text.Color = new Color(222, 238, 214);
-                window.Draw(text);
+                DrawText("+ " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorWhite, window);
             }
 
         }
