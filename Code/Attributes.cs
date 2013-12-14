@@ -13,6 +13,9 @@ namespace JamTemplate
         public int ModifierAgility { get; set; }
         public int ModifierEndurance { get; set; }
 
+        public int HealthMaximum { get; set; }
+        public int HealthCurrent { get; set; }
+
         public Attributes()
         {
             Strength = 3;
