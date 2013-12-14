@@ -24,11 +24,6 @@ namespace JamTemplate
             }
         }
 
-        private static void OnMouseButtonReleased(object sender, MouseButtonEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
         #endregion Event handlers
 
         static void Main(string[] args)
@@ -40,7 +35,6 @@ namespace JamTemplate
             // fiddle with resizing the images later on
             applicationWindow.Closed += new EventHandler(OnClose);
             applicationWindow.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPress);
-            applicationWindow.MouseButtonReleased += new EventHandler<MouseButtonEventArgs>(OnMouseButtonReleased);
 
             Game myGame = new Game();
 
