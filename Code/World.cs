@@ -1,10 +1,11 @@
 ﻿using SFML.Graphics;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 
 namespace JamTemplate
 {
-    class World
+    public class World
     {
 
         #region Fields
@@ -15,6 +16,7 @@ namespace JamTemplate
         Sidebar _sidebar;
         IList<Tile> _tileList;
         IList<Item> _itemList;  // free items in the World
+        IList<Enemy> _enemyList; // currently active enemies
 
         #endregion Fields
 
@@ -55,6 +57,8 @@ namespace JamTemplate
             _player = new Player(this, 0);
             _sidebar = new Sidebar(_player);
             _itemList = new List<Item>();
+            _enemyList = new List<Enemy>();
+
             CreateWorld();
         }
 
@@ -79,12 +83,14 @@ namespace JamTemplate
                 }
             }
 
-            Item newItem = new Item(ItemType.HAND, "sword", +1, new SFML.Window.Vector2i(2, 4));
+            Item newItem = new Item(ItemType.HAND, "sword", +1, new Vector2i(2, 4));
             _itemList.Add(newItem);
 
+            Enemy enemy = new Enemy(this, new Vector2i(4, 4));
+            _enemyList.Add(enemy);
         }
 
-        internal bool IsTileBlockd(SFML.Window.Vector2i testPosition)
+        internal bool IsTileBlocked(SFML.Window.Vector2i testPosition)
         {
             bool ret = true;
             foreach (var t in _tileList)
@@ -115,10 +121,6 @@ namespace JamTemplate
         }
 
         #endregion Methods
-
-
-
-
 
     }
 }

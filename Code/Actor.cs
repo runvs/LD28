@@ -1,4 +1,6 @@
-﻿
+﻿using SFML.Graphics;
+using SFML.Window;
+
 namespace JamTemplate
 {
     public abstract class Actor
@@ -11,6 +13,10 @@ namespace JamTemplate
         protected bool _movingDown;
         protected bool _movingUp;
 
-        public Attributes PlayerAttributes { get; protected set; }
+        protected Texture _actorTexture;
+        protected Sprite _actorSprite;
+
+        public Attributes ActorAttributes { get; protected set; }
+        public Vector2i ActorPosition { get; protected set; }
     }
 }

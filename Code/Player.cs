@@ -12,7 +12,6 @@ namespace JamTemplate
 
         public int PlayerNumber { get; set; }
         public string PlayerName { get; private set; }
-        public Vector2i PlayerPosition { get; private set; }
 
         #region Inventory
 
@@ -25,9 +24,6 @@ namespace JamTemplate
 
         Dictionary<Keyboard.Key, Action> _actionMap;
 
-        private Texture _playerTexture;
-        private Sprite _playerSprite;
-
         #endregion Fields
 
         #region Methods
@@ -39,7 +35,7 @@ namespace JamTemplate
 
             _actionMap = new Dictionary<Keyboard.Key, Action>();
             SetupActionMap();
-            PlayerAttributes = new Attributes();
+            ActorAttributes = new Attributes();
 
             try
             {
@@ -87,13 +83,16 @@ namespace JamTemplate
 
             DoMovement();
             // position the Sprite
-            _playerSprite.Position = new Vector2f(GameProperties.TileSizeInPixel * PlayerPosition.X, GameProperties.TileSizeInPixel * PlayerPosition.Y);
+            _actorSprite.Position = new Vector2f(
+                GameProperties.TileSizeInPixel * ActorPosition.X,
+                GameProperties.TileSizeInPixel * ActorPosition.Y
+            );
 
         }
 
         private void DoMovement()
         {
-            SFML.Window.Vector2i newPosition = PlayerPosition;
+            SFML.Window.Vector2i newPosition = ActorPosition;
             if (_movingRight && !_movingLeft)
             {
                 newPosition.X++;
@@ -111,9 +110,9 @@ namespace JamTemplate
                 newPosition.Y++;
             }
 
-            if (!_world.IsTileBlockd(newPosition))
+            if (!_world.IsTileBlocked(newPosition))
             {
-                PlayerPosition = newPosition;
+                ActorPosition = newPosition;
             }
         }
 
@@ -146,17 +145,17 @@ namespace JamTemplate
 
         private void ReCalculateModifiers()
         {
-            PlayerAttributes.ResetModifiers();
-            PlayerAttributes.CalculateModifiersForItem(HeadItem);
-            PlayerAttributes.CalculateModifiersForItem(TorsoItem);
-            PlayerAttributes.CalculateModifiersForItem(FeetItem);
-            PlayerAttributes.CalculateModifiersForItem(HandItem);
+            ActorAttributes.ResetModifiers();
+            ActorAttributes.CalculateModifiersForItem(HeadItem);
+            ActorAttributes.CalculateModifiersForItem(TorsoItem);
+            ActorAttributes.CalculateModifiersForItem(FeetItem);
+            ActorAttributes.CalculateModifiersForItem(HandItem);
 
         }
 
         public void Draw(SFML.Graphics.RenderWindow rw)
         {
-            rw.Draw(this._playerSprite);
+            rw.Draw(this._actorSprite);
         }
 
         private void MoveRightAction()
@@ -182,7 +181,7 @@ namespace JamTemplate
 
         private void PickUpItemAction()
         {
-            Item newItem = _world.GetItemOnTile(this.PlayerPosition);
+            Item newItem = _world.GetItemOnTile(this.ActorPosition);
             if (newItem != null)
             {
                 System.Console.Out.WriteLine("Picking Up Item: " + newItem.Name);
@@ -223,10 +222,10 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            _playerTexture = new SFML.Graphics.Texture("../gfx/player.png");
+            _actorTexture = new SFML.Graphics.Texture("../gfx/player.png");
 
-            _playerSprite = new Sprite(_playerTexture);
-            _playerSprite.Scale = new Vector2f(2.0f, 2.0f);
+            _actorSprite = new Sprite(_actorTexture);
+            _actorSprite.Scale = new Vector2f(2.0f, 2.0f);
 
         }
 

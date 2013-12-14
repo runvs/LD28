@@ -1,7 +1,7 @@
 ﻿
 namespace JamTemplate
 {
-    class Attributes
+    public class Attributes
     {
         public int Strength { get; set; }
         public int Intelligence { get; set; }
