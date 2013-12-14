@@ -8,8 +8,10 @@ namespace JamTemplate
 
         #region Fields
 
-        public Texture SideBarTexture { get; private set; }
-        public Sprite SideBarSprite { get; private set; }
+        private Texture _sideBarTexture;
+        private Sprite _sideBarSprite;
+        private Player _player;
+
 
         #endregion Fields
 
@@ -17,21 +19,22 @@ namespace JamTemplate
 
         public void LoadGraphics()
         {
-            SideBarTexture = new Texture("../GFX/sidebar_background.png");
-            SideBarSprite = new Sprite(SideBarTexture);
-            SideBarSprite.Scale = new Vector2f(2, 2);
+            _sideBarTexture = new Texture("../GFX/sidebar_background.png");
+            _sideBarSprite = new Sprite(_sideBarTexture);
+            _sideBarSprite.Scale = new Vector2f(2, 2);
 
-            SideBarSprite.Position = new Vector2f(600, 0);
+            _sideBarSprite.Position = new Vector2f(600, 0);
         }
 
-        public Sidebar()
+        public Sidebar(Player p)
         {
+            _player = p;
             LoadGraphics();
         }
 
         public void Draw(RenderWindow window)
         {
-            window.Draw(SideBarSprite);
+            window.Draw(_sideBarSprite);
         }
 
         #endregion Methods

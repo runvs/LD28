@@ -47,7 +47,7 @@ namespace JamTemplate
         private void InitGame()
         {
             _player = new Player(this, 0);
-            _sidebar = new Sidebar();
+            _sidebar = new Sidebar(_player);
             CreateWorld();
         }
 
@@ -55,9 +55,9 @@ namespace JamTemplate
         {
             _tileList = new List<Tile>();
 
-            for (int i =0; i != GameProperties.WorldSizeInTiles;i++)
+            for (int i = 0; i != GameProperties.WorldSizeInTiles; i++)
             {
-                for (int j =0; j != GameProperties.WorldSizeInTiles;j++)
+                for (int j = 0; j != GameProperties.WorldSizeInTiles; j++)
                 {
                     Tile newtile;
                     if (_randomGenerator.NextDouble() >= 0.75)
@@ -75,7 +75,7 @@ namespace JamTemplate
 
         internal bool IsTileBlockd(SFML.Window.Vector2i testPosition)
         {
-            bool ret=true;
+            bool ret = true;
             foreach (var t in _tileList)
             {
                 if (t.TilePosition.Equals(testPosition))
