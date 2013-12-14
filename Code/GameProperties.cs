@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace JamTemplate
+﻿namespace JamTemplate
 {
     class GameProperties
     {
 
-        public static int WorldSizeInTiles()
-        {
-            return 30;
-        }
+        public static int WorldSizeInTiles { get { return 30; } }
 
-        public static float TileSizeInPixel()
-        {
-            return 50.0f;
-        }
+        public static float TileSizeInPixel { get { return 50.0f; } }
+
+        public static float SidebarWidth { get { return 200.0f; } }
     }
 }

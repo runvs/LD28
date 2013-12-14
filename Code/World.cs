@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace JamTemplate
 {
@@ -11,7 +12,8 @@ namespace JamTemplate
         Random _randomGenerator = new Random();
 
         Player _player;
-        System.Collections.Generic.IList<Tile> _tileList;
+        Sidebar _sidebar;
+        IList<Tile> _tileList;
 
         #endregion Fields
 
@@ -39,17 +41,20 @@ namespace JamTemplate
                 t.Draw(rw);
             }
             _player.Draw(rw);
+            _sidebar.Draw(rw);
         }
 
         private void InitGame()
         {
             _player = new Player(this, 0);
+            _sidebar = new Sidebar();
             CreateWorld();
         }
 
         private void CreateWorld()
         {
-            _tileList = new System.Collections.Generic.List<Tile>();
+            _tileList = new List<Tile>();
+
             for (int i =0; i != GameProperties.WorldSizeInTiles();i++)
             {
                 for (int j =0; j != GameProperties.WorldSizeInTiles();j++)
