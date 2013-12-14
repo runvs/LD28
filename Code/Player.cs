@@ -12,13 +12,19 @@ namespace JamTemplate
 
         public int playerNumber;
         public string PlayerName { get; private set; }
+        public SFML.Window.Vector2i PlayerPosition { get; private set; }
 
         Dictionary<Keyboard.Key, Action> _actionMap;
 
         private Texture playerTexture;
         private Sprite playerSprite;
         private float movementTimer = 0.0f; // time between two successive movement commands
-        private World myWorld;
+        private World _world;
+
+        bool _MovingRight;
+        bool _MovingLeft;
+        bool _MovingDown;
+        bool _MovingUp;
 
         #endregion Fields
 
@@ -26,7 +32,7 @@ namespace JamTemplate
 
         public Player(World world, int number)
         {
-            myWorld = world;
+            _world = world;
             playerNumber = number;
 
             _actionMap = new Dictionary<Keyboard.Key, Action>();
@@ -50,17 +56,59 @@ namespace JamTemplate
 
         public void GetInput()
         {
+            ResetMovementAction();
+
             if (movementTimer <= 0.0f)
             {
                 MapInputToActions();
             }
         }
 
-        public void Update(float deltaT)
+        private void ResetMovementAction()
         {
-
+            _MovingRight = false ;
+            _MovingLeft = false ;
+            _MovingDown = false;
+            _MovingUp =false;
         }
 
+        public void Update(float deltaT)
+        {
+            if (movementTimer > 0.0f)
+            {
+                movementTimer -= deltaT;
+            }
+
+            DoMovement();
+
+            playerSprite.Position = new Vector2f(GameProperties.TileSizeInPixel() * PlayerPosition.X, GameProperties.TileSizeInPixel() * PlayerPosition.Y);
+        }
+
+        private void DoMovement()
+        {
+            SFML.Window.Vector2i newPosition = PlayerPosition;
+            if (_MovingRight && !_MovingLeft)
+            {
+                newPosition.X++;
+            }
+            if (_MovingLeft && !_MovingRight)
+            {
+                newPosition.X--;
+            }
+            if (_MovingUp && !_MovingDown)
+            {
+                newPosition.Y--;
+            }
+            if (_MovingDown && !_MovingUp)
+            {
+                newPosition.Y++;
+            }
+
+            if (!_world.IsTileBlockd(newPosition))
+            {
+                PlayerPosition = newPosition;
+            }
+        }
 
         public void Draw(SFML.Graphics.RenderWindow rw)
         {
@@ -69,19 +117,23 @@ namespace JamTemplate
 
         private void MoveRightAction()
         {
-
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            _MovingRight = true;
         }
         private void MoveLeftAction()
         {
-            
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            _MovingLeft = true;
         }
         private void MoveUpAction()
         {
-
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            _MovingUp = true;
         }
         private void MoveDownAction()
         {
-
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            _MovingDown = true;
         }
 
 

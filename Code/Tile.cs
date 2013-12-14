@@ -8,23 +8,43 @@ namespace JamTemplate
 {
     class Tile
     {
+
+        #region Enums
+        public enum TileType
+        {
+            Grass,
+            Water,
+            Mountain
+        }
+        #endregion Enums
+
         #region Fields
-        
-        
+
+
         SFML.Graphics.Texture TileTexture;
         
         Sprite TileSprite;
 
         public SFML.Window.Vector2i TilePosition { get; private set; }
+        public bool IsTileBlockd { get; private set; }
+        private TileType _type;
 
         #endregion Fields
 
         #region Methods
 
-        public Tile(int posX, int posY)
+        public Tile(int posX, int posY, TileType tt)
         {
+            _type = tt;
             TilePosition = new SFML.Window.Vector2i(posX, posY);
             LoadGraphics();
+            IsTileBlockd = false;
+
+            if (_type == TileType.Mountain || _type == TileType.Water)
+            {
+                IsTileBlockd = true;
+            }
+
         }
 
         public void Draw(RenderWindow rw)

@@ -31,7 +31,7 @@ namespace JamTemplate
 
         public void Update(float deltaT)
         {
-
+            _player.Update(deltaT);
         }
 
         public void Draw(RenderWindow rw)
@@ -59,15 +59,38 @@ namespace JamTemplate
             {
                 for (int j =0; j != GameProperties.WorldSizeInTiles();j++)
                 {
-                    Tile newtile = new Tile(i,j);
+                    Tile newtile;
+                    if (_randomGenerator.NextDouble() >= 0.75)
+                    {
+                        newtile = new Tile(i, j, Tile.TileType.Mountain);
+                    }
+                    else
+                    {
+                        newtile = new Tile(i, j, Tile.TileType.Grass);
+                    }
                     _tileList.Add(newtile);
                 }
             }
+        }
 
-            
+        internal bool IsTileBlockd(SFML.Window.Vector2i testPosition)
+        {
+            bool ret=true;
+            foreach (var t in _tileList)
+            {
+                if (t.TilePosition.Equals(testPosition))
+                {
+                    ret = t.IsTileBlockd;
+                    break;
+                }
+            }
+
+            return ret;
         }
 
         #endregion Methods
+
+
 
     }
 }
