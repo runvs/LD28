@@ -60,7 +60,7 @@ namespace JamTemplate
                 System.Console.Out.WriteLine(e.ToString());
             }
 
-            PickupItem(new Item(ItemType.HAND, "sword", +1, new Vector2i(0, 0)));
+            //PickupItem(new Item(ItemType.HAND, "sword", +1, new Vector2i(0, 0)));
 
         }
 
@@ -189,6 +189,16 @@ namespace JamTemplate
             _MovingDown = true;
         }
 
+        private void PickUpItemAction()
+        {
+            Item newItem = _world.GetItemOnTile(this.PlayerPosition);
+            if (newItem != null)
+            {
+                System.Console.Out.WriteLine("Picking Up Item: " + newItem.Name);
+                PickupItem(newItem);
+            }
+        }
+
 
         private void SetupActionMap()
         {
@@ -203,6 +213,9 @@ namespace JamTemplate
 
             _actionMap.Add(Keyboard.Key.Up, MoveUpAction);
             _actionMap.Add(Keyboard.Key.W, MoveUpAction);
+
+            _actionMap.Add(Keyboard.Key.E, PickUpItemAction);
+
         }
 
         private void MapInputToActions()

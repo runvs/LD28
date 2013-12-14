@@ -37,7 +37,22 @@ namespace JamTemplate
 
             if (_player != null)
             {
-
+                if (_player.HandItem != null)
+                {
+                    _player.HandItem.Draw(window);
+                }
+                if (_player.HeadItem != null)
+                {
+                    _player.HeadItem.Draw(window);
+                }
+                if (_player.FeetItem != null)
+                {
+                    _player.FeetItem.Draw(window);
+                }
+                if (_player.TorsoItem != null)
+                {
+                    _player.TorsoItem.Draw(window);
+                }
             }
 
         }

@@ -33,8 +33,6 @@ namespace JamTemplate
         public void Update(float deltaT)
         {
             _player.Update(deltaT);
-
-
         }
 
         public void Draw(RenderWindow rw)
@@ -80,6 +78,10 @@ namespace JamTemplate
                     _tileList.Add(newtile);
                 }
             }
+
+            Item newItem = new Item(ItemType.HAND, "sword", +1, new SFML.Window.Vector2i(2, 4));
+            _itemList.Add(newItem);
+
         }
 
         internal bool IsTileBlockd(SFML.Window.Vector2i testPosition)
@@ -97,7 +99,24 @@ namespace JamTemplate
             return ret;
         }
 
+        internal Item GetItemOnTile(SFML.Window.Vector2i vector2i)
+        {
+            Item newItem = null;
+            foreach (var i in _itemList)
+            {
+                if (i.ItemPositionInTiles.Equals(vector2i) && i.Picked == false)
+                {
+                    newItem = i;
+                    break;
+                }
+            }
+
+            return newItem;
+        }
+
         #endregion Methods
+
+
 
 
 

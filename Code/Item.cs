@@ -52,6 +52,7 @@ namespace JamTemplate
         public void PickUp()
         {
             Picked = true;
+            ItemPositionInTiles = new SFML.Window.Vector2i(-500, -500);
             if (ItemType == JamTemplate.ItemType.FEET)
             {
                 ItemSprite.Position = GameProperties.InventoryFeetItemPosition;
