@@ -13,6 +13,8 @@
 
         public static int BasePlayerHealth { get { return 25; } }
 
+        public static int BaseDamage { get { return 5; } }
+
         public static SFML.Window.Vector2f InventoryHeadItemPosition { get { return new SFML.Window.Vector2f(750.0f, 100.0f); } }
         public static SFML.Window.Vector2f InventoryHandItemPosition { get { return new SFML.Window.Vector2f(750.0f, 150.0f); } }
         public static SFML.Window.Vector2f InventoryTorsoItemPosition { get { return new SFML.Window.Vector2f(750.0f, 20.0f); } }

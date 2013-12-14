@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace JamTemplate
 {
-    class Player
+    class Player : Actor
     {
 
         #region Fields
 
-        public int playerNumber;
+        public int PlayerNumber { get; set; }
         public string PlayerName { get; private set; }
         public Vector2i PlayerPosition { get; private set; }
 
@@ -25,17 +25,8 @@ namespace JamTemplate
 
         Dictionary<Keyboard.Key, Action> _actionMap;
 
-        private Texture playerTexture;
-        private Sprite playerSprite;
-        private float movementTimer = 0.0f; // time between two successive movement commands
-        private World _world;
-
-        bool _MovingRight;
-        bool _MovingLeft;
-        bool _MovingDown;
-        bool _MovingUp;
-
-        public Attributes PlayerAttributes { get; private set; }
+        private Texture _playerTexture;
+        private Sprite _playerSprite;
 
         #endregion Fields
 
@@ -44,7 +35,7 @@ namespace JamTemplate
         public Player(World world, int number)
         {
             _world = world;
-            playerNumber = number;
+            PlayerNumber = number;
 
             _actionMap = new Dictionary<Keyboard.Key, Action>();
             SetupActionMap();
@@ -56,8 +47,8 @@ namespace JamTemplate
             }
             catch (SFML.LoadingFailedException e)
             {
-                System.Console.Out.WriteLine("Error loading player Graphics.");
-                System.Console.Out.WriteLine(e.ToString());
+                Console.Out.WriteLine("Error loading player Graphics.");
+                Console.Out.WriteLine(e.ToString());
             }
 
             //PickupItem(new Item(ItemType.HAND, "sword", +1, new Vector2i(0, 0)));
@@ -66,14 +57,14 @@ namespace JamTemplate
 
         private void SetPlayerNumberDependendProperties()
         {
-            PlayerName = "Player" + playerNumber.ToString();
+            PlayerName = "Player" + PlayerNumber;
         }
 
         public void GetInput()
         {
             ResetMovementAction();
 
-            if (movementTimer <= 0.0f)
+            if (_movementTimer <= 0.0f)
             {
                 MapInputToActions();
             }
@@ -81,41 +72,41 @@ namespace JamTemplate
 
         private void ResetMovementAction()
         {
-            _MovingRight = false;
-            _MovingLeft = false;
-            _MovingDown = false;
-            _MovingUp = false;
+            _movingRight = false;
+            _movingLeft = false;
+            _movingDown = false;
+            _movingUp = false;
         }
 
         public void Update(float deltaT)
         {
-            if (movementTimer > 0.0f)
+            if (_movementTimer > 0.0f)
             {
-                movementTimer -= deltaT;
+                _movementTimer -= deltaT;
             }
 
             DoMovement();
             // position the Sprite
-            playerSprite.Position = new Vector2f(GameProperties.TileSizeInPixel * PlayerPosition.X, GameProperties.TileSizeInPixel * PlayerPosition.Y);
+            _playerSprite.Position = new Vector2f(GameProperties.TileSizeInPixel * PlayerPosition.X, GameProperties.TileSizeInPixel * PlayerPosition.Y);
 
         }
 
         private void DoMovement()
         {
             SFML.Window.Vector2i newPosition = PlayerPosition;
-            if (_MovingRight && !_MovingLeft)
+            if (_movingRight && !_movingLeft)
             {
                 newPosition.X++;
             }
-            if (_MovingLeft && !_MovingRight)
+            if (_movingLeft && !_movingRight)
             {
                 newPosition.X--;
             }
-            if (_MovingUp && !_MovingDown)
+            if (_movingUp && !_movingDown)
             {
                 newPosition.Y--;
             }
-            if (_MovingDown && !_MovingUp)
+            if (_movingDown && !_movingUp)
             {
                 newPosition.Y++;
             }
@@ -165,28 +156,28 @@ namespace JamTemplate
 
         public void Draw(SFML.Graphics.RenderWindow rw)
         {
-            rw.Draw(this.playerSprite);
+            rw.Draw(this._playerSprite);
         }
 
         private void MoveRightAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _MovingRight = true;
+            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movingRight = true;
         }
         private void MoveLeftAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _MovingLeft = true;
+            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movingLeft = true;
         }
         private void MoveUpAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _MovingUp = true;
+            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movingUp = true;
         }
         private void MoveDownAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
-            _MovingDown = true;
+            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movingDown = true;
         }
 
         private void PickUpItemAction()
@@ -232,10 +223,10 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            playerTexture = new SFML.Graphics.Texture("../gfx/player.png");
+            _playerTexture = new SFML.Graphics.Texture("../gfx/player.png");
 
-            playerSprite = new Sprite(playerTexture);
-            playerSprite.Scale = new Vector2f(2.0f, 2.0f);
+            _playerSprite = new Sprite(_playerTexture);
+            _playerSprite.Scale = new Vector2f(2.0f, 2.0f);
 
         }
 
