@@ -12,7 +12,6 @@ namespace JamTemplate
         private Sprite _sideBarSprite;
         private Player _player;
 
-
         #endregion Fields
 
         #region Methods

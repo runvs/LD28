@@ -12,7 +12,7 @@ namespace JamTemplate
         private State _gameState;
 
         World _myWorld;
-        Score _gameStats;
+        Score _gameScore;
         float _timeTilNextInput = 0.0f;
 
         #endregion Fields
@@ -104,7 +104,7 @@ namespace JamTemplate
             }
             else if (_gameState == State.Score)
             {
-                _gameStats.Draw(rw);
+                _gameScore.Draw(rw);
             }
         }
 

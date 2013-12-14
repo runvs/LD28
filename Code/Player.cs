@@ -152,22 +152,22 @@ namespace JamTemplate
 
         private void MoveRightAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
             _MovingRight = true;
         }
         private void MoveLeftAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
             _MovingLeft = true;
         }
         private void MoveUpAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
             _MovingUp = true;
         }
         private void MoveDownAction()
         {
-            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds();
+            movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
             _MovingDown = true;
         }
 
