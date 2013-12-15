@@ -7,7 +7,7 @@ namespace JamTemplate
     class GameProperties
     {
 
-        public static int WorldSizeInTiles { get { return 50; } }
+        public static int WorldSizeInTiles { get { return 20; } }
 
         public static int TeachersOnWorld { get { return 5; } }
 
@@ -18,6 +18,9 @@ namespace JamTemplate
 
         public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.15f; } }
         public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.8f; } }
+
+        public static int IncreaseAttributeExperienceCost { get { return 3; } }
+        public static int BuyItemGoldCost { get { return 1; } }
 
 
         public static float PlayerBattleDeadZoneTimer { get { return 0.3f; } }

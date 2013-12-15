@@ -57,6 +57,9 @@ namespace JamTemplate
             {
                 if (h.IsActive)
                 {
+                    h.Update(deltaT);
+
+
                     Vector2i housePos = h.PositionInTiles;
                     Vector2i playerPos = _player.ActorPosition;
                     Vector2i difference = housePos - playerPos;
@@ -107,12 +110,14 @@ namespace JamTemplate
             {
                 i.Draw(rw, CameraPosition);
             }
+
+
+            _player.Draw(rw, CameraPosition);
+
             foreach (var h in _houseList)
             {
                 h.Draw(rw, CameraPosition);
             }
-
-            _player.Draw(rw, CameraPosition);
 
             foreach (var e in _enemyList)
             {
@@ -177,7 +182,7 @@ namespace JamTemplate
             for (int i = 0; i != GameProperties.TeachersOnWorld; ++i)
             {
 
-                NomadsHouse house = new NomadsHouse(_randomGenerator.Next(GameProperties.WorldSizeInTiles), _randomGenerator.Next(GameProperties.WorldSizeInTiles));
+                NomadsHouse house = new NomadsHouse(_randomGenerator.Next(GameProperties.WorldSizeInTiles), _randomGenerator.Next(GameProperties.WorldSizeInTiles), this);
                 _houseList.Add(house);
             }
 
