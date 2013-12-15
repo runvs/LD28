@@ -21,8 +21,6 @@ namespace JamTemplate
 
         #endregion Fields
 
-
-
         #region Methods
 
 

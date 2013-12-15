@@ -36,7 +36,7 @@ namespace JamTemplate
         public static Vector2f InventoryTorsoItemPosition { get { return new Vector2f(676.0f, 88.0f); } }
         public static Vector2f InventoryFeetItemPosition { get { return new Vector2f(672.0f, 166.0f); } }
 
-        static public Random _randomGenerator = new Random();
+        static public Random RandomGenerator = new Random();
 
         #region Palette colors
 

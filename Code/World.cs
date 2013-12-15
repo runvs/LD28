@@ -166,14 +166,10 @@ namespace JamTemplate
                 }
             }
 
-            Item newItem = new Item(ItemType.HEAD, "sword", +1, new Vector2i(2, 4));
-            _itemList.Add(newItem);
-            newItem = new Item(ItemType.HAND, "sword", +1, new Vector2i(2, 4));
-            _itemList.Add(newItem);
-            newItem = new Item(ItemType.TORSO, "sword", +1, new Vector2i(2, 4));
-            _itemList.Add(newItem);
-            newItem = new Item(ItemType.FEET, "sword", +1, new Vector2i(2, 4));
-            _itemList.Add(newItem);
+            _itemList.Add(ItemFactory.GetHeadItem(new Vector2i(2, 4)));
+            _itemList.Add(ItemFactory.GetTorsoItem(new Vector2i(3, 4)));
+            _itemList.Add(ItemFactory.GetFeetItem(new Vector2i(4, 4)));
+            _itemList.Add(ItemFactory.GetHandItem(new Vector2i(5, 4)));
 
             Enemy enemy = new Enemy(this, new Vector2i(4, 4));
             _enemyList.Add(enemy);

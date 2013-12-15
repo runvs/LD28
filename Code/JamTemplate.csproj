@@ -58,6 +58,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameProperties.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemFactory.cs" />
     <Compile Include="NomadsHouse.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -70,6 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Items.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

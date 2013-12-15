@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <affixes>
+    <prefixes>
+      <prefix value="+3">Holy</prefix>
+      <prefix value="+3">Godly</prefix>
+      <prefix value="+2">Glorious</prefix>
+      <prefix value="+2">Sharp</prefix>
+      <prefix value="+1">Shiny</prefix>
+      <prefix value="+1">Polished</prefix>
+      <prefix value="-1">Cracked</prefix>
+      <prefix value="-2">Ruined</prefix>
+      <prefix value="-3">Useless</prefix>
+      <prefix value="0"></prefix>
+      <prefix value="0"></prefix>
+      <prefix value="0"></prefix>
+      <prefix value="0"></prefix>
+    </prefixes>
+    <suffixes>
+      <suffix value="+3">of Usefulness</suffix>
+      <suffix value="+3">of Radiance</suffix>
+      <suffix value="+2">of Carnage</suffix>
+      <suffix value="+2">of Slaughter</suffix>
+      <suffix value="+1">of Quality</suffix>
+      <suffix value="+1">of Craftmanship</suffix>
+      <suffix value="-1">of Coarseness</suffix>
+      <suffix value="-2">of Ruggedness</suffix>
+      <suffix value="-3">of Scabbiness</suffix>
+      <suffix value="0"></suffix>
+      <suffix value="0"></suffix>
+      <suffix value="0"></suffix>
+      <suffix value="0"></suffix>
+    </suffixes>
+  </affixes>
+  <baseTypes>
+    <baseType itemType="HAND">Axe</baseType>
+    <baseType itemType="HAND">Sword</baseType>
+    <baseType itemType="HAND">Hammer</baseType>
+    <baseType itemType="TORSO">Breast Plate</baseType>
+    <baseType itemType="TORSO">Robe</baseType>
+    <baseType itemType="TORSO">Leather Armor</baseType>
+    <baseType itemType="FEET">Chain Boots</baseType>
+    <baseType itemType="FEET">Boots</baseType>
+    <baseType itemType="FEET">Greaves</baseType>
+    <baseType itemType="HEAD">Shako</baseType>
+    <baseType itemType="HEAD">Helmet</baseType>
+    <baseType itemType="HEAD">Armet</baseType>
+  </baseTypes>
+</items>
