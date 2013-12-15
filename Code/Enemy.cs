@@ -58,7 +58,36 @@ namespace JamTemplate
                 GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
                 GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
             );
+
+            DrawHealthBar(rw, CameraPosition);
+
             rw.Draw(this._actorSprite);
+        }
+
+        private void DrawHealthBar(RenderWindow rw, Vector2i CameraPosition)
+        {
+            if (_hasSeenPlayer)
+            {
+                var outline = new RectangleShape(new Vector2f(GameProperties.TileSizeInPixel, 10));
+                outline.Position = new Vector2f(
+                    GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
+                    GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f
+                );
+                outline.FillColor = Color.Transparent;
+                outline.OutlineColor = GameProperties.ColorDarkGrey;
+                outline.OutlineThickness = 1;
+                rw.Draw(outline);
+
+                var fill = new RectangleShape(new Vector2f(GameProperties.TileSizeInPixel, 10));
+                var percentage = ActorAttributes.HealthCurrent / ActorAttributes.HealthMaximum * 1.0f;
+                fill.Position = new Vector2f(
+                    GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
+                    GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f
+                );
+                fill.FillColor = GameProperties.ColorLightRed;
+                fill.Scale = new Vector2f(percentage, 1);
+                rw.Draw(fill);
+            }
         }
 
         public override float GetMovementTimerDeadZone()
