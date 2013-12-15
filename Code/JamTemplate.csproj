@@ -57,8 +57,10 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameProperties.cs" />
+    <Compile Include="IGameObject.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemFactory.cs" />
+    <Compile Include="MapParser.cs" />
     <Compile Include="NomadsHouse.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -72,7 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="map.tmx" />
+    <None Include="map.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Items.xml">

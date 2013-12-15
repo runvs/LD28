@@ -2,7 +2,7 @@
 
 namespace JamTemplate
 {
-    class Tile
+    public class Tile
     {
 
         #region Enums

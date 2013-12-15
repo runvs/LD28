@@ -4,7 +4,7 @@ using System;
 
 namespace JamTemplate
 {
-    public class NomadsHouse
+    public class NomadsHouse : IGameObject
     {
 
         #region Fields
@@ -32,12 +32,12 @@ namespace JamTemplate
 
         #region Methods
 
-        public NomadsHouse(int p1, int p2, World world)
+        public NomadsHouse(int posX, int posY, World world)
         {
 
             _world = world;
             _buttonTimer = 0.0f;
-            PositionInTiles = new Vector2i(p1, p2);
+            PositionInTiles = new Vector2i(posX, posY);
             IsActive = false;
             if (GameProperties.RandomGenerator.NextDouble() >= 0.5)
             {

@@ -246,37 +246,10 @@ namespace JamTemplate
 
         private void CreateWorld()
         {
-            _tileList = new List<Tile>();
-            CameraPosition = new Vector2i(0, 0);
+            var parser = new MapParser("map.tmx", this);
 
-            for (int i = 0; i != GameProperties.WorldSizeInTiles; i++)
-            {
-                for (int j = 0; j != GameProperties.WorldSizeInTiles; j++)
-                {
-                    Tile newtile;
-                    if (_randomGenerator.NextDouble() >= 0.85)
-                    {
-                        double ran = _randomGenerator.NextDouble();
-                        if (ran <= 0.33)
-                        {
-                            newtile = new Tile(i, j, Tile.TileType.Water);
-                        }
-                        else if (ran <= 0.66)
-                        {
-                            newtile = new Tile(i, j, Tile.TileType.Forest);
-                        }
-                        else
-                        {
-                            newtile = new Tile(i, j, Tile.TileType.Mountain);
-                        }
-                    }
-                    else
-                    {
-                        newtile = new Tile(i, j, Tile.TileType.Grass);
-                    }
-                    _tileList.Add(newtile);
-                }
-            }
+            _tileList = parser.TerrainLayer;
+            CameraPosition = new Vector2i(0, 0);
 
             _itemList.Add(ItemFactory.GetHeadItem(new Vector2i(2, 4)));
             _itemList.Add(ItemFactory.GetTorsoItem(new Vector2i(3, 4)));
@@ -286,12 +259,15 @@ namespace JamTemplate
             Enemy enemy = new Enemy(this, new Vector2i(4, 4));
             _enemyList.Add(enemy);
 
-            for (int i = 0; i != GameProperties.TeachersOnWorld; ++i)
+            foreach (var item in parser.ObjectLayer)
             {
-
-                NomadsHouse house = new NomadsHouse(_randomGenerator.Next(GameProperties.WorldSizeInTiles), _randomGenerator.Next(GameProperties.WorldSizeInTiles), this);
-                _houseList.Add(house);
+                if (item is NomadsHouse)
+                {
+                    _houseList.Add(item as NomadsHouse);
+                }
             }
+
+            //_houseList = parser.ObjectLayer;
 
         }
 

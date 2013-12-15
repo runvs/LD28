@@ -7,12 +7,8 @@ namespace JamTemplate
     class GameProperties
     {
 
-        public static int WorldSizeInTiles { get { return 20; } }
-
-        public static int TeachersOnWorld { get { return 5; } }
-
-
         public static float TileSizeInPixel { get { return 50.0f; } }
+        public static int WorldSizeInTiles { get; set; }
 
         public static float SidebarWidth { get { return 200.0f; } }
 
