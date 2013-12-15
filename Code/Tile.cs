@@ -10,7 +10,8 @@ namespace JamTemplate
         {
             Grass,
             Water,
-            Mountain
+            Mountain,
+            Forest
         }
         #endregion Enums
 
@@ -72,6 +73,10 @@ namespace JamTemplate
             if (_type == TileType.Water)
             {
                 TileTexture = new Texture("../GFX/tile_water.png");
+            }
+            if (_type == TileType.Forest)
+            {
+                TileTexture = new Texture("../GFX/tile_forest.png");
             }
             TileSprite = new Sprite(TileTexture);
             TileSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);

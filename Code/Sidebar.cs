@@ -113,16 +113,16 @@ namespace JamTemplate
 
         private void DrawGold(RenderWindow rw)
         {
-            DrawText("GOLD " + _player.Gold, new Vector2f(630, 220), GameProperties.ColorBeige, rw);
+            DrawText("GOLD " + _player.Gold, new Vector2f(630, 217), GameProperties.ColorBeige, rw);
         }
 
         private void DrawAttributes(RenderWindow window)
         {
-            DrawText("STR " + _player.ActorAttributes.Strength, new Vector2f(630.0f, 270), GameProperties.ColorWhite, window);
+            DrawText("STR " + _player.ActorAttributes.Strength, new Vector2f(630.0f, 250), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierStrength != 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 270), GameProperties.ColorWhite, window);
+                DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorWhite, window);
             }
 
             DrawText("AGI " + _player.ActorAttributes.Agility, new Vector2f(630.0f, 300), GameProperties.ColorWhite, window);

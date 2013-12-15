@@ -109,7 +109,11 @@ namespace JamTemplate
             }
             else if (_battleBlock && !_battleAttack && !_battleMagic)
             {
-                IsBlocking = true;
+                if (ActorAttributes.StaminaCurrent >= GameProperties.BlockStaminaCost)
+                {
+                    IsBlocking = true;
+                    ActorAttributes.StaminaCurrent -= GameProperties.BlockStaminaCost;
+                }
 
             }
             else if (_battleMagic && !_battleAttack && !_battleBlock)

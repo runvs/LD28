@@ -27,7 +27,7 @@ namespace JamTemplate
             ActorPosition = initPosition;
 
             ActorAttributes = new Attributes();
-            ActorAttributes.ResetHealth(4);
+            ActorAttributes.ResetHealth(8);
 
             DropGold = 2;
             DropExperience = 5;
@@ -79,7 +79,7 @@ namespace JamTemplate
                 rw.Draw(outline);
 
                 var fill = new RectangleShape(new Vector2f(GameProperties.TileSizeInPixel, 10));
-                var percentage = ActorAttributes.HealthCurrent / ActorAttributes.HealthMaximum * 1.0f;
+                float percentage = (float)ActorAttributes.HealthCurrent / (float)ActorAttributes.HealthMaximum;
                 fill.Position = new Vector2f(
                     GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
                     GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f

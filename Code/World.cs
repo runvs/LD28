@@ -90,7 +90,6 @@ namespace JamTemplate
                     {
                         h.Update(deltaT);
 
-
                         Vector2i housePos = h.PositionInTiles;
                         Vector2i playerPos = _player.ActorPosition;
                         Vector2i difference = housePos - playerPos;
@@ -110,7 +109,7 @@ namespace JamTemplate
 
         private void DoCameraMovement()
         {
-            Vector2i newCamPos = new Vector2i(_player.ActorPosition.X - 7, _player.ActorPosition.Y - 7);
+            Vector2i newCamPos = new Vector2i(_player.ActorPosition.X - 6, _player.ActorPosition.Y - 6);
             if (newCamPos.X <= 0)
             {
                 newCamPos.X = 0;
@@ -198,12 +197,16 @@ namespace JamTemplate
                 for (int j = 0; j != GameProperties.WorldSizeInTiles; j++)
                 {
                     Tile newtile;
-                    if (_randomGenerator.NextDouble() >= 0.75)
+                    if (_randomGenerator.NextDouble() >= 0.85)
                     {
-                        if (_randomGenerator.NextDouble() >= 0.5)
+                        double ran = _randomGenerator.NextDouble();
+                        if (ran <= 0.33)
                         {
-
                             newtile = new Tile(i, j, Tile.TileType.Water);
+                        }
+                        else if (ran <= 0.66)
+                        {
+                            newtile = new Tile(i, j, Tile.TileType.Forest);
                         }
                         else
                         {

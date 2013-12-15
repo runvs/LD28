@@ -22,7 +22,7 @@ namespace JamTemplate
         {
             _logMessages = new List<String>();
 
-            _logMessages.Add("I need to find the city");
+            CreateQuestlogMessages();
             try
             {
                 LoadGraphics();
@@ -34,6 +34,22 @@ namespace JamTemplate
             }
         }
 
+        private void CreateQuestlogMessages()
+        {
+            _logMessages.Add("You move out to seek the headless goblin's head. ");
+            _logMessages.Add("");
+            _logMessages.Add("You move out to seek gold and glory. What will await you? (get 20 gold!)");
+            _logMessages.Add("You move out to seek gold and glory. What will await you? (get 20 gold!)");
+
+        }
+
+        public void CompleteCurrentQuest()
+        {
+            if (_logMessages.Count > 0)
+            {
+                _logMessages.RemoveAt(0);
+            }
+        }
 
         public void Draw(RenderWindow rw)
         {
@@ -47,15 +63,18 @@ namespace JamTemplate
 
         private void DrawCurrentQuestString(RenderWindow rw)
         {
-            DrawText(_logMessages.ElementAt(0), new Vector2f(250, 220), GameProperties.ColorWhite, rw);
+            if (_logMessages.Count > 0)
+            {
+                DrawText(_logMessages.ElementAt(0), new Vector2f(250, 220), GameProperties.ColorWhite, rw);
+            }
         }
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
-            if (s.Length >= 17)
+            if (s.Length >= 18)
             {
-                String s1 = s.Substring(0, 9);
-                String s2 = s.Substring(10);
+                String s1 = s.Substring(0, 17);
+                String s2 = s.Substring(17);
                 DrawText(s1, position, color, window);
                 position.Y += 20;
                 DrawText(s2, position, color, window);

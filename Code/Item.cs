@@ -79,7 +79,30 @@ namespace JamTemplate
             {
                 ItemTexture = new SFML.Graphics.Texture("../GFX/item_axe.png");
             }
-
+            else if (Name.Contains("hammer"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_hammer.png");
+            }
+            else if (Name.Contains("hammer"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_hammer.png");
+            }
+            else if (Name.Contains("helmet"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_helmet.png");
+            }
+            else if (Name.Contains("boots"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_boots.png");
+            }
+            else if (Name.Contains("greaves"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_greaves.png");
+            }
+            else if (Name.Contains("breastplate"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_breastplate.png");
+            }
 
             ItemSprite = new SFML.Graphics.Sprite(ItemTexture);
             ItemSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);
