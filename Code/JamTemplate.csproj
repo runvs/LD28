@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="map.tmx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Items.xml">
