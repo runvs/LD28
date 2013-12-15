@@ -281,7 +281,7 @@ namespace JamTemplate
             _itemList.Add(ItemFactory.GetFeetItem(new Vector2i(4, 4)));
             _itemList.Add(ItemFactory.GetHandItem(new Vector2i(5, 4)));
 
-            Enemy enemy = new Enemy(this, new Vector2i(4, 4));
+            Enemy enemy = new Enemy(this, new Vector2i(4, 4), EnemyStrength.HARD);
             _enemyList.Add(enemy);
 
             foreach (var item in parser.ObjectLayer)
@@ -291,8 +291,6 @@ namespace JamTemplate
                     _houseList.Add(item as NomadsHouse);
                 }
             }
-
-            //_houseList = parser.ObjectLayer;
 
         }
 

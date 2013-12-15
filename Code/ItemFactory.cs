@@ -1,4 +1,5 @@
 ﻿using SFML.Window;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -10,6 +11,19 @@ namespace JamTemplate
         private static List<Affix> _prefixList;
         private static List<Affix> _suffixList;
         private static List<BaseType> _baseTypeList;
+
+        public static Item GetRandomItem(Vector2i position, EnemyStrength strength)
+        {
+            if (_baseTypeList == null)
+            {
+                LoadXml();
+            }
+
+            var values = Enum.GetValues(typeof(ItemType));
+            var itemType = (ItemType)values.GetValue(GameProperties.RandomGenerator.Next(values.Length));
+
+            return GetItem(itemType, position, strength);
+        }
 
         public static Item GetHandItem(Vector2i position)
         {
@@ -51,44 +65,52 @@ namespace JamTemplate
             return GetItem(ItemType.FEET, position);
         }
 
-        private static Item GetItem(ItemType type, Vector2i position)
+        private static Item GetItem(ItemType type, Vector2i position, EnemyStrength strength = EnemyStrength.HARD)
         {
             var baseTypes = _baseTypeList.Where(x => x.ItemType == type);
             var baseType = baseTypes.ElementAt(GameProperties.RandomGenerator.Next(baseTypes.Count()));
             var modifiers = new Dictionary<AttributeType, int>();
+            var normalStrengthPrefix = GameProperties.RandomGenerator.NextDouble() > 0.5d;
 
             string prefixDesc = "", suffixDesc = "";
 
-            // Determine if we generate a prefix
-            if (GameProperties.RandomGenerator.NextDouble() >= 0.5d)
+            if (strength == EnemyStrength.HARD || (strength == EnemyStrength.NORMAL && normalStrengthPrefix))
             {
-                var prefix = _prefixList.ElementAt(GameProperties.RandomGenerator.Next(_prefixList.Count));
+                // Determine if we generate a prefix
+                if (GameProperties.RandomGenerator.NextDouble() >= 0.5d)
+                {
+                    var prefix = _prefixList.ElementAt(GameProperties.RandomGenerator.Next(_prefixList.Count));
 
-                if (modifiers.ContainsKey(prefix.AttributeType))
-                {
-                    modifiers[prefix.AttributeType] += prefix.Modifier;
+                    if (modifiers.ContainsKey(prefix.AttributeType))
+                    {
+                        modifiers[prefix.AttributeType] += prefix.Modifier;
+                    }
+                    else
+                    {
+                        modifiers.Add(prefix.AttributeType, prefix.Modifier);
+                    }
+                    prefixDesc = prefix.Description;
                 }
-                else
-                {
-                    modifiers.Add(prefix.AttributeType, prefix.Modifier);
-                }
-                prefixDesc = prefix.Description;
             }
 
-            // Determine if we generate a suffix
-            if (GameProperties.RandomGenerator.NextDouble() >= 0.5d)
-            {
-                var suffix = _suffixList.ElementAt(GameProperties.RandomGenerator.Next(_suffixList.Count));
 
-                if (modifiers.ContainsKey(suffix.AttributeType))
+            if (strength == EnemyStrength.HARD || (strength == EnemyStrength.NORMAL && !normalStrengthPrefix))
+            {
+                // Determine if we generate a suffix
+                if (GameProperties.RandomGenerator.NextDouble() >= 0.5d)
                 {
-                    modifiers[suffix.AttributeType] += suffix.Modifier;
+                    var suffix = _suffixList.ElementAt(GameProperties.RandomGenerator.Next(_suffixList.Count));
+
+                    if (modifiers.ContainsKey(suffix.AttributeType))
+                    {
+                        modifiers[suffix.AttributeType] += suffix.Modifier;
+                    }
+                    else
+                    {
+                        modifiers.Add(suffix.AttributeType, suffix.Modifier);
+                    }
+                    suffixDesc = suffix.Description;
                 }
-                else
-                {
-                    modifiers.Add(suffix.AttributeType, suffix.Modifier);
-                }
-                suffixDesc = suffix.Description;
             }
 
             var itemName = string.Format(

@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using SFML.Audio;
+using SFML.Graphics;
 using SFML.Window;
 
 namespace JamTemplate
@@ -13,7 +14,7 @@ namespace JamTemplate
         World _myWorld;
         Score _gameScore;
         float _timeTilNextInput = 0.0f;
-        SFML.Audio.Music _mainTheme;
+        Music _mainTheme;
 
         #endregion Fields
 
@@ -23,7 +24,7 @@ namespace JamTemplate
         {
             // Predefine game state to menu
             _gameState = State.Menu;
-            _mainTheme = new SFML.Audio.Music("../SFX/LD28_Theme.ogg");
+            _mainTheme = new Music("../SFX/LD28_Theme.ogg");
             _mainTheme.Loop = true;
             _mainTheme.Play();
         }

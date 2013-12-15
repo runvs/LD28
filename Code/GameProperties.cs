@@ -16,7 +16,7 @@ namespace JamTemplate
         public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.8f; } }
 
         public static int IncreaseAttributeExperienceCost { get { return 3; } }
-        public static int BuyItemGoldCost { get { return -1; } }
+        public static int BuyItemGoldCost { get { return 2; } }
 
         public static int PlayerBaseHealth { get { return 20; } }
 
@@ -80,5 +80,11 @@ namespace JamTemplate
         static public float IntroDisplayTime { get { return 10.0f; } }
         #endregion Sequence Timers
 
+        public static int EnemyEasyGold { get { return 2; } }
+        public static int EnemyEasyExperience { get { return 5; } }
+        public static int EnemyNormalGold { get { return 4; } }
+        public static int EnemyNormalExperience { get { return 10; } }
+        public static int EnemyHardGold { get { return 8; } }
+        public static int EnemyHardExperience { get { return 15; } }
     }
 }

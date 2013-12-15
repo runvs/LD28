@@ -16,21 +16,38 @@ namespace JamTemplate
         public int DropExperience { get; private set; }
 
         private bool _hasSeenPlayer = false;
+        private EnemyStrength _strength;
 
         #endregion Fields
 
         #region Methods
 
-        public Enemy(World world, Vector2i initPosition)
+        public Enemy(World world, Vector2i initPosition, EnemyStrength strength)
         {
             _world = world;
             ActorPosition = initPosition;
 
             ActorAttributes = new Attributes();
             ActorAttributes.ResetHealth(8);
+            _strength = strength;
 
-            DropGold = 2;
-            DropExperience = 5;
+            if (_strength == EnemyStrength.EASY)
+            {
+                DropGold = GameProperties.EnemyEasyGold;
+                DropExperience = GameProperties.EnemyEasyExperience;
+            }
+            else if (_strength == EnemyStrength.NORMAL)
+            {
+                DropGold = GameProperties.EnemyNormalGold;
+                DropExperience = GameProperties.EnemyNormalExperience;
+            }
+            else if (_strength == EnemyStrength.HARD)
+            {
+                DropGold = GameProperties.EnemyHardGold;
+                DropExperience = GameProperties.EnemyHardExperience;
+            }
+
+            DropItem = ItemFactory.GetRandomItem(initPosition, _strength);
 
             try
             {
@@ -201,5 +218,10 @@ namespace JamTemplate
         }
 
         #endregion Methods
+    }
+
+    public enum EnemyStrength
+    {
+        EASY, NORMAL, HARD
     }
 }
