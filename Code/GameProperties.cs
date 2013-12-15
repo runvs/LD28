@@ -42,6 +42,7 @@ namespace JamTemplate
         public static int BlockEvadeBonus { get { return 3; } }
 
         public static float SpellMoveMentTime { get { return 0.1f; } }
+        public static float SpellFrameTime { get { return 0.09f; } }
 
 
         public static Vector2f InventoryHeadItemPosition { get { return new Vector2f(672.0f, 20.0f); } }

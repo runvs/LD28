@@ -12,7 +12,11 @@ namespace JamTemplate
         public Vector2i PositionInTiles { get; private set; }
         public Direction Direction { get; private set; }
 
-        private Texture _spellTexture;
+        private Texture _spellTexture1;
+        private Texture _spellTexture2;
+        private int _spellFrameNumber;
+        private float _spellFrameTimer;
+
         private Sprite _spellSprite;
 
         private World _world;
@@ -24,6 +28,8 @@ namespace JamTemplate
 
         public Spell(World world, Actor caster, Vector2i position, Direction dir)
         {
+            _spellFrameNumber = 0;
+            _spellFrameTimer = 0.0f;
             _world = world;
             _caster = caster;
             _movementTimer = GameProperties.SpellMoveMentTime;
@@ -44,13 +50,40 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            _spellTexture = new Texture("../GFX/spell_bolt.png");
-            _spellSprite = new Sprite(_spellTexture);
+            _spellTexture1 = new Texture("../GFX/spell_bolt.png");
+            _spellSprite = new Sprite(_spellTexture1);
             _spellSprite.Scale = new Vector2f(2.0f, 2.0f);
+
+            _spellTexture2 = new Texture("../GFX/spell_bolt2.png");
         }
+
+        private void SwitchSpellFrames()
+        {
+            if (_spellFrameNumber == 0)
+            {
+                _spellFrameNumber = 1;
+            }
+            else
+            {
+                _spellFrameNumber = 0;
+            }
+        }
+
+
 
         public void Draw(RenderWindow rw, Vector2i CameraPosition)
         {
+            if (_spellFrameNumber == 0)
+            {
+                _spellSprite = new Sprite(_spellTexture1);
+                _spellSprite.Scale = new Vector2f(2.0f, 2.0f);
+            }
+            else if (_spellFrameNumber == 1)
+            {
+                _spellSprite = new Sprite(_spellTexture2);
+                _spellSprite.Scale = new Vector2f(2.0f, 2.0f);
+            }
+
             _spellSprite.Position = new Vector2f(
                GameProperties.TileSizeInPixel * (PositionInTiles.X - CameraPosition.X),
                GameProperties.TileSizeInPixel * (PositionInTiles.Y - CameraPosition.Y)
@@ -65,6 +98,12 @@ namespace JamTemplate
             {
                 _movementTimer += GameProperties.SpellMoveMentTime;
                 ProceedSpellPosition();
+            }
+            _spellFrameTimer -= deltaT;
+            if (_spellFrameTimer <= 0.0f)
+            {
+                _spellFrameTimer += GameProperties.SpellFrameTime;
+                SwitchSpellFrames();
             }
         }
 
@@ -83,7 +122,6 @@ namespace JamTemplate
             if (_world.IsTileBlocked(PositionInTiles))
             {
                 EndSpell();
-
             }
         }
 
