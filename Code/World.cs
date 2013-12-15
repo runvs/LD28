@@ -17,6 +17,7 @@ namespace JamTemplate
         IList<Tile> _tileList;
         IList<Item> _itemList;  // free items in the World
         IList<Enemy> _enemyList; // currently active enemies
+        IList<NomadsHouse> _houseList;
 
         public SFML.Window.Vector2i CameraPosition { get; private set; }
 
@@ -33,6 +34,11 @@ namespace JamTemplate
         public void GetInput()
         {
             _player.GetInput();
+
+            foreach (var h in _houseList)
+            {
+                h.GetInput();
+            }
         }
 
         public void Update(float deltaT)
@@ -46,6 +52,22 @@ namespace JamTemplate
             }
 
             _player.Update(deltaT);
+
+            foreach (var h in _houseList)
+            {
+                if (h.IsActive)
+                {
+                    Vector2i housePos = h.PositionInTiles;
+                    Vector2i playerPos = _player.ActorPosition;
+                    Vector2i difference = housePos - playerPos;
+
+                    if (Math.Abs(difference.X) + Math.Abs(difference.Y) >= 1)
+                    {
+                        h.IsActive = false;
+                    }
+                }
+            }
+
 
             DoCameraMovement();
 
@@ -85,6 +107,10 @@ namespace JamTemplate
             {
                 i.Draw(rw, CameraPosition);
             }
+            foreach (var h in _houseList)
+            {
+                h.Draw(rw, CameraPosition);
+            }
 
             _player.Draw(rw, CameraPosition);
 
@@ -105,6 +131,7 @@ namespace JamTemplate
             _sidebar = new Sidebar(_player);
             _itemList = new List<Item>();
             _enemyList = new List<Enemy>();
+            _houseList = new List<NomadsHouse>();
 
             CreateWorld();
         }
@@ -150,6 +177,14 @@ namespace JamTemplate
 
             Enemy enemy = new Enemy(this, new Vector2i(4, 4));
             _enemyList.Add(enemy);
+
+            for (int i = 0; i != GameProperties.TeachersOnWorld; ++i)
+            {
+
+                NomadsHouse house = new NomadsHouse(_randomGenerator.Next(GameProperties.WorldSizeInTiles), _randomGenerator.Next(GameProperties.WorldSizeInTiles));
+                _houseList.Add(house);
+            }
+
         }
 
         internal bool IsTileBlocked(SFML.Window.Vector2i testPosition)
@@ -193,6 +228,20 @@ namespace JamTemplate
                 }
             }
             return newEnemy;
+        }
+
+        internal NomadsHouse GetHouseOnTile(SFML.Window.Vector2i vector2i)
+        {
+            NomadsHouse newHouse = null;
+            foreach (var h in _houseList)
+            {
+                if (h.PositionInTiles.Equals(vector2i))
+                {
+                    newHouse = h;
+                    break;
+                }
+            }
+            return newHouse;
         }
 
 

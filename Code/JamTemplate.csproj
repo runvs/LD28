@@ -58,6 +58,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameProperties.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="NomadsHouse.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,12 +13,17 @@ namespace JamTemplate
         public int PlayerNumber { get; set; }
         public string PlayerName { get; private set; }
 
+
+
         #region Inventory
 
         public Item HeadItem { get; private set; }
         public Item TorsoItem { get; private set; }
         public Item HandItem { get; private set; }
         public Item FeetItem { get; private set; }
+
+        public int Gold { get; set; }
+
 
         #endregion Inventory
 
@@ -68,6 +73,7 @@ namespace JamTemplate
 
         public override float GetMovementTimerDeadZone()
         {
+
             return GameProperties.PlayerMovementDeadZoneTimeInSeconds;
         }
 
@@ -218,7 +224,16 @@ namespace JamTemplate
             {
                 System.Console.Out.WriteLine("Picking Up Item: " + newItem.Name);
                 PickupItem(newItem);
+                return;
             }
+
+            NomadsHouse house = _world.GetHouseOnTile(this.ActorPosition);
+            if (house != null)
+            {
+                house.IsActive = true;
+            }
+
+
         }
 
 
@@ -237,6 +252,7 @@ namespace JamTemplate
             _actionMap.Add(Keyboard.Key.W, MoveUpAction);
 
             _actionMap.Add(Keyboard.Key.E, PickUpItemAction);
+
             _actionMap.Add(Keyboard.Key.Space, AttackAction);
             _actionMap.Add(Keyboard.Key.LShift, MagicAction);
             _actionMap.Add(Keyboard.Key.LControl, BlockAction);

@@ -31,6 +31,9 @@ namespace JamTemplate
         public int StaminaMaximum { get; set; }
         public int StaminaCurrent { get; set; }
 
+        public int Experience { get; set; }
+
+
         public void ResetHealth(int newHealthVal)
         {
             HealthCurrent = HealthMaximum = newHealthVal;

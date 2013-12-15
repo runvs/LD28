@@ -12,6 +12,8 @@ namespace JamTemplate
         public string PlayerName { get; private set; }
 
         public Item DropItem { get; private set; }
+        public int DropGold { get; private set; }
+        public int DropExperience { get; private set; }
 
         private bool _hasSeenPlayer = false;
 
@@ -26,6 +28,10 @@ namespace JamTemplate
 
             ActorAttributes = new Attributes();
             ActorAttributes.ResetHealth(4);
+
+            DropGold = 2;
+            DropExperience = 5;
+
             try
             {
                 LoadGraphics();
@@ -112,7 +118,7 @@ namespace JamTemplate
                     }
                     else
                     {
-                        // dont move
+                        // do nothing here
                     }
                 }
             }
@@ -129,8 +135,12 @@ namespace JamTemplate
         private void EnemyAttack()
         {
             Vector2i playerPos = _world._player.ActorPosition;
-            if (Math.Abs((playerPos.X - ActorPosition.X) + (playerPos.Y - ActorPosition.Y)) <= 1)
+            //System.Console.Out.WriteLine(playerPos.ToString() + "\t" + ActorPosition.ToString());
+            Vector2i difference = playerPos - ActorPosition;
+
+            if (Math.Abs(difference.X) + Math.Abs(difference.Y) <= 1)
             {
+                _hasSeenPlayer = true;
                 BattleManager.DoBattleAction(this, _world._player, BattleAction.Attack);
             }
         }
@@ -144,6 +154,9 @@ namespace JamTemplate
         public override void Die()
         {
             IsDead = true;
+            _world._player.Gold += this.DropGold;
+            _world._player.ActorAttributes.Experience += this.DropExperience;
+            ActorPosition = new Vector2i(-500, -500);
         }
 
         #endregion Methods
