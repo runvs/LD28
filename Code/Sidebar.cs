@@ -118,32 +118,48 @@ namespace JamTemplate
 
         private void DrawAttributes(RenderWindow window)
         {
-            DrawText("STR " + _player.ActorAttributes.Strength, new Vector2f(630.0f, 250), GameProperties.ColorWhite, window);
+            DrawText("STR " + _player.ActorAttributes.BaseStrength, new Vector2f(630.0f, 250), GameProperties.ColorWhite, window);
 
-            if (_player.ActorAttributes.ModifierStrength != 0)
+            if (_player.ActorAttributes.ModifierStrength > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorWhite, window);
+                DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorDarkGreen, window);
+            }
+            else if (_player.ActorAttributes.ModifierStrength < 0)
+            {
+                DrawText(" " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorLightRed, window);
             }
 
-            DrawText("AGI " + _player.ActorAttributes.Agility, new Vector2f(630.0f, 300), GameProperties.ColorWhite, window);
+            DrawText("AGI " + _player.ActorAttributes.BaseAgility, new Vector2f(630.0f, 300), GameProperties.ColorWhite, window);
 
-            if (_player.ActorAttributes.ModifierAgility != 0)
+            if (_player.ActorAttributes.ModifierAgility > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorWhite, window);
+                DrawText("+ " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorDarkGreen, window);
+            }
+            else if (_player.ActorAttributes.ModifierAgility < 0)
+            {
+                DrawText(" " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorLightRed, window);
             }
 
-            DrawText("INT " + _player.ActorAttributes.Intelligence, new Vector2f(630.0f, 350), GameProperties.ColorWhite, window);
+            DrawText("INT " + _player.ActorAttributes.BaseIntelligence, new Vector2f(630.0f, 350), GameProperties.ColorWhite, window);
 
-            if (_player.ActorAttributes.ModifierIntelligence != 0)
+            if (_player.ActorAttributes.ModifierIntelligence > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorWhite, window);
+                DrawText("+ " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorDarkGreen, window);
+            }
+            else if (_player.ActorAttributes.ModifierIntelligence < 0)
+            {
+                DrawText(" " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorLightRed, window);
             }
 
-            DrawText("END " + _player.ActorAttributes.Endurance, new Vector2f(630.0f, 400), GameProperties.ColorWhite, window);
+            DrawText("END " + _player.ActorAttributes.BaseEndurance, new Vector2f(630.0f, 400), GameProperties.ColorWhite, window);
 
-            if (_player.ActorAttributes.ModifierEndurance != 0)
+            if (_player.ActorAttributes.ModifierEndurance > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorWhite, window);
+                DrawText("+ " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorDarkGreen, window);
+            }
+            else if (_player.ActorAttributes.ModifierEndurance < 0)
+            {
+                DrawText(" " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorLightRed, window);
             }
 
         }

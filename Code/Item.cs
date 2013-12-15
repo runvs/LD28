@@ -16,7 +16,7 @@ namespace JamTemplate
 
         Texture ItemTexture;
         Sprite ItemSprite;
-        public Vector2i ItemPositionInTiles { get; private set; }
+        public Vector2i ItemPositionInTiles { get; set; }
         public bool Picked { get; private set; }
 
         private string _texturePath;

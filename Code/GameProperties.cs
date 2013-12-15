@@ -22,12 +22,16 @@ namespace JamTemplate
         public static int IncreaseAttributeExperienceCost { get { return 3; } }
         public static int BuyItemGoldCost { get { return -1; } }
 
+        public static float PlayerBaseStaminaRegenFrequency { get { return 0.8f; } }
+        public static float PlayerBaseHealthRegenFrequency { get { return 5.5f; } }
         public static int BlockStaminaCost { get { return 4; } }
+        public static int AttackStaminaCost { get { return 3; } }
 
         public static float PlayerBattleDeadZoneTimer { get { return 0.3f; } }
         public static float EnemyBattleDeadZoneTimer { get { return 0.75f; } }
 
         public static int BasePlayerHealth { get { return 25; } }
+
 
         public static int PlayerBaseDamage { get { return 5; } }
         public static int EnemyBaseDamage { get { return 3; } }

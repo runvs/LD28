@@ -183,8 +183,16 @@ namespace JamTemplate
         public override void Die()
         {
             IsDead = true;
+
             _world._player.Gold += this.DropGold;
             _world._player.ActorAttributes.Experience += this.DropExperience;
+
+            if (DropItem != null)
+            {
+                DropItem.ItemPositionInTiles = ActorPosition;
+                _world.AddItem(DropItem);
+            }
+
             ActorPosition = new Vector2i(-500, -500);
         }
 

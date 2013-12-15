@@ -23,6 +23,11 @@ namespace JamTemplate
         Texture _introTexture;
         Sprite _introSprite;
 
+        Texture _itemTooltipTexture;
+        Sprite _itemTooltipSprite;
+        private bool _displayItemToolTip;
+        private Item _tooltipItem;
+
 
         public SFML.Window.Vector2i CameraPosition { get; private set; }
 
@@ -33,6 +38,7 @@ namespace JamTemplate
 
         public World()
         {
+            _displayItemToolTip = false;
             InitGame();
             LoadGraphics();
         }
@@ -44,6 +50,20 @@ namespace JamTemplate
             _introSprite.Scale = new Vector2f(2.0f, 2.0f);
             _introSprite.Position = new Vector2f(0.0f, 0.0f);
 
+
+            _itemTooltipTexture = new Texture("../GFX/overlay_log.png");
+            _itemTooltipSprite = new Sprite(_itemTooltipTexture);
+            _itemTooltipSprite.Scale = new Vector2f(3.0f, 1.0f);
+            _itemTooltipSprite.Position = new Vector2f(300.0f, 500.0f);
+
+        }
+
+        public void AddItem(Item it)
+        {
+            if (it != null)
+            {
+                _itemList.Add(it);
+            }
         }
 
         public void GetInput()
@@ -99,6 +119,17 @@ namespace JamTemplate
                             h.IsActive = false;
                         }
                     }
+                }
+                _tooltipItem = null;
+                foreach (var i in _itemList)
+                {
+                    if (_player.ActorPosition.Equals(i.ItemPositionInTiles))
+                    {
+                        _displayItemToolTip = true;
+                        _tooltipItem = i;
+                        break;
+                    }
+
                 }
 
 
@@ -162,7 +193,7 @@ namespace JamTemplate
                 }
 
 
-
+                DrawItemToolTip(rw);
                 _sidebar.Draw(rw);
             }
             else
@@ -172,6 +203,32 @@ namespace JamTemplate
                     rw.Draw(_introSprite);
                 }
             }
+        }
+
+        private void DrawItemToolTip(RenderWindow rw)
+        {
+            if (_displayItemToolTip && _tooltipItem != null)
+            {
+                rw.Draw(_itemTooltipSprite);
+
+                Text _tooltipText = new Text(_tooltipItem.Name, GameProperties.GameFont());
+                _tooltipText.Position = new Vector2f(340, 510);
+                _tooltipText.Scale = new Vector2f(0.5f, 0.55f);
+                rw.Draw(_tooltipText);
+
+                int i = 0;
+                foreach (var kvp in _tooltipItem.Modifiers)
+                {
+                    _tooltipText = new Text(Attributes.GetAttributeNameFromEnum(kvp.Key) + " " + kvp.Value.ToString(), GameProperties.GameFont());
+                    _tooltipText.Position = new Vector2f(340, 530 + i * 15);
+                    _tooltipText.Scale = new Vector2f(0.6f, 0.6f);
+                    rw.Draw(_tooltipText);
+                    i++;
+
+
+                }
+            }
+
         }
 
         private void InitGame()

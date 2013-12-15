@@ -27,9 +27,11 @@ namespace JamTemplate
 
         public int HealthMaximum { get; set; }
         public int HealthCurrent { get; set; }
+        public float HealthRegenfreuency { get; set; }
 
         public int StaminaMaximum { get; set; }
         public int StaminaCurrent { get; set; }
+        public float StaminaRegenfreuency { get; set; }
 
         public int Experience { get; set; }
 
@@ -39,6 +41,23 @@ namespace JamTemplate
             HealthCurrent = HealthMaximum = newHealthVal;
         }
 
+        public void AddToCurrentHealth(int value)
+        {
+            HealthCurrent += value;
+            if (HealthCurrent >= HealthMaximum)
+            {
+                HealthCurrent = HealthMaximum;
+            }
+        }
+
+        public void AddToCurrentStamina(int value)
+        {
+            StaminaCurrent += value;
+            if (StaminaCurrent >= StaminaMaximum)
+            {
+                StaminaCurrent = StaminaMaximum;
+            }
+        }
 
         public Attributes()
         {
@@ -57,6 +76,8 @@ namespace JamTemplate
 
             StaminaCurrent = 17;
             StaminaMaximum = 40;
+            HealthRegenfreuency = 0.0f;
+            StaminaRegenfreuency = 0.0f;
         }
 
         public void ResetModifiers()
@@ -65,6 +86,27 @@ namespace JamTemplate
             ModifierEndurance = 0;
             ModifierStrength = 0;
             ModifierIntelligence = 0;
+        }
+
+        public static string GetAttributeNameFromEnum(AttributeType at)
+        {
+            if (at == AttributeType.AGILITY)
+            {
+                return "Agility";
+            }
+            else if (at == AttributeType.ENDURANCE)
+            {
+                return "Endurance";
+            }
+            else if (at == AttributeType.INTELLIGENCE)
+            {
+                return "Intelligence";
+            }
+            else if (at == AttributeType.STRENGTH)
+            {
+                return "Strength";
+            }
+            return "";
         }
 
         public void CalculateModifiersForItem(Item item)

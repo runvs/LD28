@@ -16,6 +16,9 @@ namespace JamTemplate
         public QuestLog _log;
         private float _timerLog;
 
+        private float _HealthRegenTimer;
+        private float _StaminaRegenTimer;
+
 
         #region Inventory
 
@@ -45,6 +48,12 @@ namespace JamTemplate
             ActorAttributes = new Attributes();
             _log = new QuestLog();
             _timerLog = 0.0f;
+            _HealthRegenTimer = 0.0f;
+            _StaminaRegenTimer = 0.0f;
+
+            ActorAttributes.StaminaRegenfreuency = GameProperties.PlayerBaseStaminaRegenFrequency;
+            ActorAttributes.HealthRegenfreuency = GameProperties.PlayerBaseHealthRegenFrequency;
+
 
             try
             {
@@ -97,6 +106,22 @@ namespace JamTemplate
             {
                 _timerLog -= deltaT;
             }
+
+            _HealthRegenTimer -= deltaT;
+            if (_HealthRegenTimer < 0.0f && ActorAttributes.HealthRegenfreuency > 0)
+            {
+                _HealthRegenTimer += ActorAttributes.HealthRegenfreuency;
+                ActorAttributes.AddToCurrentHealth(1);
+            }
+
+            _StaminaRegenTimer -= deltaT;
+            if (_StaminaRegenTimer < 0.0f && ActorAttributes.StaminaRegenfreuency > 0)
+            {
+                _StaminaRegenTimer += ActorAttributes.StaminaRegenfreuency;
+                ActorAttributes.AddToCurrentStamina(1);
+            }
+            System.Console.Out.WriteLine(_StaminaRegenTimer);
+
         }
 
         protected override void DoBattleAction()
@@ -124,6 +149,8 @@ namespace JamTemplate
 
         private void PlayerAttack()
         {
+            ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
+
             Vector2i attackTile = this.ActorPosition;
             if (this.Direction == JamTemplate.Direction.EAST)
             {
