@@ -1,9 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace JamTemplate
 {
@@ -175,19 +172,19 @@ namespace JamTemplate
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
-                                _world._player.PickupItem(item1);
+                                _world._player.PickupItem(item2);
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
-                                _world._player.PickupItem(item1);
+                                _world._player.PickupItem(item3);
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.P))
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
-                                _world._player.PickupItem(item1);
+                                _world._player.PickupItem(item4);
                             }
                         }
 

@@ -71,21 +71,24 @@ namespace JamTemplate
         {
             if (item != null)
             {
-                if (item.ItemType == ItemType.FEET)
+                foreach (var kvp in item.Modifiers)
                 {
-                    ModifierAgility += item.ItemModifier;
-                }
-                else if (item.ItemType == ItemType.HAND)
-                {
-                    ModifierStrength += item.ItemModifier;
-                }
-                if (item.ItemType == ItemType.HEAD)
-                {
-                    ModifierIntelligence += item.ItemModifier;
-                }
-                if (item.ItemType == ItemType.TORSO)
-                {
-                    ModifierStrength += item.ItemModifier;
+                    if (kvp.Key == AttributeType.AGILITY)
+                    {
+                        ModifierAgility += kvp.Value;
+                    }
+                    else if (kvp.Key == AttributeType.ENDURANCE)
+                    {
+                        ModifierEndurance += kvp.Value;
+                    }
+                    else if (kvp.Key == AttributeType.INTELLIGENCE)
+                    {
+                        ModifierIntelligence += kvp.Value;
+                    }
+                    else if (kvp.Key == AttributeType.STRENGTH)
+                    {
+                        ModifierStrength += kvp.Value;
+                    }
                 }
             }
         }

@@ -1,5 +1,4 @@
 ﻿using SFML.Window;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -55,18 +54,52 @@ namespace JamTemplate
         private static Item GetItem(ItemType type, Vector2i position)
         {
             var baseTypes = _baseTypeList.Where(x => x.ItemType == type);
-            var baseType = baseTypes.ElementAt(GameProperties.RandomGenerator.Next(baseTypes.Count())).Name;
-            var prefix = _prefixList.ElementAt(GameProperties.RandomGenerator.Next(_prefixList.Count));
-            var suffix = _suffixList.ElementAt(GameProperties.RandomGenerator.Next(_suffixList.Count));
+            var baseType = baseTypes.ElementAt(GameProperties.RandomGenerator.Next(baseTypes.Count()));
+            var modifiers = new Dictionary<AttributeType, int>();
+
+            string prefixDesc = "", suffixDesc = "";
+
+            // Determine if we generate a prefix
+            if (GameProperties.RandomGenerator.NextDouble() >= 0.5d)
+            {
+                var prefix = _prefixList.ElementAt(GameProperties.RandomGenerator.Next(_prefixList.Count));
+
+                if (modifiers.ContainsKey(prefix.AttributeType))
+                {
+                    modifiers[prefix.AttributeType] += prefix.Modifier;
+                }
+                else
+                {
+                    modifiers.Add(prefix.AttributeType, prefix.Modifier);
+                }
+                prefixDesc = prefix.Description;
+            }
+
+            // Determine if we generate a suffix
+            if (GameProperties.RandomGenerator.NextDouble() >= 0.5d)
+            {
+                var suffix = _suffixList.ElementAt(GameProperties.RandomGenerator.Next(_suffixList.Count));
+
+                if (modifiers.ContainsKey(suffix.AttributeType))
+                {
+                    modifiers[suffix.AttributeType] += suffix.Modifier;
+                }
+                else
+                {
+                    modifiers.Add(suffix.AttributeType, suffix.Modifier);
+                }
+                suffixDesc = suffix.Description;
+            }
 
             var itemName = string.Format(
                 "{0} {1} {2}",
-                prefix.Description,
-                baseType,
-                suffix.Description
+                prefixDesc,
+                baseType.Name,
+                suffixDesc
             ).Trim();
 
-            return new Item(type, itemName, prefix.Modifier + suffix.Modifier, position);
+
+            return new Item(type, itemName, modifiers, position, baseType.FilePath);
         }
 
         private static void LoadXml()
@@ -77,26 +110,15 @@ namespace JamTemplate
 
             var doc = XDocument.Load("Items.xml");
 
-            foreach (var prefix in doc.Root.Elements("affixes").Elements("prefixes").Elements())
-            {
-                int modifier = int.Parse(prefix.FirstAttribute.Value);
-                var description = prefix.Value;
-
-                _prefixList.Add(new Affix(modifier, description));
-            }
-
-            foreach (var suffix in doc.Root.Elements("affixes").Elements("suffixes").Elements())
-            {
-                int modifier = int.Parse(suffix.FirstAttribute.Value);
-                var description = suffix.Value;
-
-                _suffixList.Add(new Affix(modifier, description));
-            }
+            ParseAffixes("prefixes", doc, ref _prefixList);
+            ParseAffixes("suffixes", doc, ref _suffixList);
 
             foreach (var baseType in doc.Root.Elements("baseTypes").Elements())
             {
+                var attributes = baseType.Attributes();
+
                 ItemType itemType;
-                switch (baseType.FirstAttribute.Value)
+                switch (attributes.Where(x => x.Name == "itemType").First().Value)
                 {
                     case "HEAD":
                         itemType = ItemType.HEAD;
@@ -113,7 +135,44 @@ namespace JamTemplate
                         break;
                 }
 
-                _baseTypeList.Add(new BaseType(baseType.Value, itemType));
+                var filePath = attributes.Where(x => x.Name == "file").First().Value;
+
+                _baseTypeList.Add(new BaseType(baseType.Value, itemType, filePath));
+            }
+        }
+
+        private static void ParseAffixes(string path, XDocument doc, ref List<Affix> list)
+        {
+            foreach (var affix in doc.Root.Elements("affixes").Elements(path).Elements())
+            {
+                var attributes = affix.Attributes();
+                int modifier = int.Parse(attributes.Where(x => x.Name == "modifier").First().Value);
+                var description = affix.Value;
+                string attributeTypeStr = attributes.Where(x => x.Name == "attribute").First().Value;
+                AttributeType attributeType;
+
+                switch (attributeTypeStr)
+                {
+                    case "STR":
+                        attributeType = AttributeType.STRENGTH;
+                        break;
+
+                    case "AGI":
+                        attributeType = AttributeType.AGILITY;
+                        break;
+
+                    case "INT":
+                        attributeType = AttributeType.INTELLIGENCE;
+                        break;
+
+                    default:
+                    case "END":
+                        attributeType = AttributeType.ENDURANCE;
+                        break;
+                }
+
+
+                list.Add(new Affix(modifier, description, attributeType));
             }
         }
 
@@ -121,23 +180,27 @@ namespace JamTemplate
         {
             public int Modifier { get; set; }
             public string Description { get; set; }
+            public AttributeType AttributeType { get; set; }
 
-            public Affix(int modifier, string description)
+            public Affix(int modifier, string description, AttributeType attributeType)
             {
                 Modifier = modifier;
                 Description = description;
+                AttributeType = attributeType;
             }
         }
 
         private class BaseType
         {
             public string Name { get; set; }
+            public string FilePath { get; set; }
             public ItemType ItemType { get; set; }
 
-            public BaseType(string name, ItemType itemType)
+            public BaseType(string name, ItemType itemType, string filePath)
             {
                 Name = name;
                 ItemType = itemType;
+                FilePath = filePath;
             }
         }
     }

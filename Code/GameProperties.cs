@@ -20,7 +20,7 @@ namespace JamTemplate
         public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.8f; } }
 
         public static int IncreaseAttributeExperienceCost { get { return 3; } }
-        public static int BuyItemGoldCost { get { return 1; } }
+        public static int BuyItemGoldCost { get { return -1; } }
 
         public static int BlockStaminaCost { get { return 4; } }
 

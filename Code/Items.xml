@@ -2,48 +2,41 @@
 <items>
   <affixes>
     <prefixes>
-      <prefix value="+3">Holy</prefix>
-      <prefix value="+3">Godly</prefix>
-      <prefix value="+2">Glorious</prefix>
-      <prefix value="+2">Sharp</prefix>
-      <prefix value="+1">Shiny</prefix>
-      <prefix value="+1">Polished</prefix>
-      <prefix value="-1">Cracked</prefix>
-      <prefix value="-2">Ruined</prefix>
-      <prefix value="-3">Useless</prefix>
-      <prefix value="0"></prefix>
-      <prefix value="0"></prefix>
-      <prefix value="0"></prefix>
-      <prefix value="0"></prefix>
+      <prefix attribute="INT" modifier="+3">Holy</prefix>
+      <prefix attribute="STR" modifier="+3">Godly</prefix>
+      <prefix attribute="AGI" modifier="+2">Glorious</prefix>
+      <prefix attribute="INT" modifier="+2">Sharp</prefix>
+      <prefix attribute="STR" modifier="+1">Shiny</prefix>
+      <prefix attribute="AGI" modifier="+1">Polished</prefix>
+      <prefix attribute="STR" modifier="0">Unaltered</prefix>
+      <prefix attribute="INT" modifier="-1">Cracked</prefix>
+      <prefix attribute="STR" modifier="-2">Ruined</prefix>
+      <prefix attribute="AGI" modifier="-3">Useless</prefix>
     </prefixes>
     <suffixes>
-      <suffix value="+3">of Usefulness</suffix>
-      <suffix value="+3">of Radiance</suffix>
-      <suffix value="+2">of Carnage</suffix>
-      <suffix value="+2">of Slaughter</suffix>
-      <suffix value="+1">of Quality</suffix>
-      <suffix value="+1">of Craftmanship</suffix>
-      <suffix value="-1">of Coarseness</suffix>
-      <suffix value="-2">of Ruggedness</suffix>
-      <suffix value="-3">of Scabbiness</suffix>
-      <suffix value="0"></suffix>
-      <suffix value="0"></suffix>
-      <suffix value="0"></suffix>
-      <suffix value="0"></suffix>
+      <suffix attribute="AGI" modifier="+3">of Usefulness</suffix>
+      <suffix attribute="STR" modifier="+3">of Radiance</suffix>
+      <suffix attribute="INT" modifier="+2">of Carnage</suffix>
+      <suffix attribute="AGI" modifier="+2">of Slaughter</suffix>
+      <suffix attribute="STR" modifier="+1">of Quality</suffix>
+      <suffix attribute="INT" modifier="+1">of Craftmanship</suffix>
+      <suffix attribute="AGI" modifier="-1">of Coarseness</suffix>
+      <suffix attribute="STR" modifier="-2">of Ruggedness</suffix>
+      <suffix attribute="INT" modifier="-3">of Scabbiness</suffix>
     </suffixes>
   </affixes>
   <baseTypes>
-    <baseType itemType="HAND">Axe</baseType>
-    <baseType itemType="HAND">Sword</baseType>
-    <baseType itemType="HAND">Hammer</baseType>
-    <baseType itemType="TORSO">Breast Plate</baseType>
-    <baseType itemType="TORSO">Robe</baseType>
-    <baseType itemType="TORSO">Leather Armor</baseType>
-    <baseType itemType="FEET">Chain Boots</baseType>
-    <baseType itemType="FEET">Boots</baseType>
-    <baseType itemType="FEET">Greaves</baseType>
-    <baseType itemType="HEAD">Shako</baseType>
-    <baseType itemType="HEAD">Helmet</baseType>
-    <baseType itemType="HEAD">Armet</baseType>
+    <baseType itemType="HAND" file="../GFX/item_axe.png">Axe</baseType>
+    <baseType itemType="HAND" file="../GFX/item_sword.png">Sword</baseType>
+    <baseType itemType="HAND" file="../GFX/item_hammer.png">Hammer</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_breastplate.png">Breast Plate</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_generic.png">Robe</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_generic.png">Leather Armor</baseType>
+    <baseType itemType="FEET" file="../GFX/item_generic.png">Chain Boots</baseType>
+    <baseType itemType="FEET" file="../GFX/item_boots.png">Boots</baseType>
+    <baseType itemType="FEET" file="../GFX/item_greaves.png">Greaves</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_generic.png">Shako</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_helmet.png">Helmet</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_generic.png">Armet</baseType>
   </baseTypes>
 </items>
