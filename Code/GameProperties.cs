@@ -14,6 +14,9 @@ namespace JamTemplate
         public static float SidebarWidth { get { return 200.0f; } }
 
         public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.15f; } }
+        public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.8f; } }
+
+
         public static float PlayerBattleDeadZoneTimer { get { return 0.3f; } }
         public static float EnemyBattleDeadZoneTimer { get { return 0.75f; } }
 

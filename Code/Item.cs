@@ -73,7 +73,16 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            ItemTexture = new SFML.Graphics.Texture("../GFX/item_sword.png");
+            if (Name.Contains("sword"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_sword.png");
+            }
+            else if (Name.Contains("axe"))
+            {
+                ItemTexture = new SFML.Graphics.Texture("../GFX/item_axe.png");
+            }
+
+
             ItemSprite = new SFML.Graphics.Sprite(ItemTexture);
             ItemSprite.Scale = new SFML.Window.Vector2f(2.0f, 2.0f);
 

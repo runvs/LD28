@@ -13,6 +13,8 @@ namespace JamTemplate
 
         public Item DropItem { get; private set; }
 
+        private bool _hasSeenPlayer = false;
+
         #endregion Fields
 
         #region Methods
@@ -53,13 +55,22 @@ namespace JamTemplate
             rw.Draw(this._actorSprite);
         }
 
+        public override float GetMovementTimerDeadZone()
+        {
+            return GameProperties.EnemyMovementDeadZoneTimeInSeconds;
+        }
+
         public void Update(float deltaT)
         {
+
+            DoAIOperations();
+
             if (_movementTimer > 0.0f)
             {
                 _movementTimer -= deltaT;
             }
             DoMovement();
+            //System.Console.Out.WriteLine(ActorPosition.ToString());
 
             _battleTimer -= deltaT;
             if (_battleTimer <= 0.0f)
@@ -74,6 +85,39 @@ namespace JamTemplate
 
         }
 
+        private void DoAIOperations()
+        {
+            if (!_hasSeenPlayer)
+            {
+                // do a random walk
+                if (_movementTimer <= 0.0f)
+                {
+
+                    int roll = RollTheDie.Roll();
+                    if (roll == 1)
+                    {
+                        MoveRightAction();
+                    }
+                    if (roll == 2)
+                    {
+                        MoveLeftAction();
+                    }
+                    if (roll == 3)
+                    {
+                        MoveUpAction();
+                    }
+                    if (roll == 4)
+                    {
+                        MoveDownAction();
+                    }
+                    else
+                    {
+                        // dont move
+                    }
+                }
+            }
+        }
+
         protected override void DoBattleAction()
         {
             if (_battleAttack && !_battleBlock && !_battleMagic)
@@ -85,7 +129,7 @@ namespace JamTemplate
         private void EnemyAttack()
         {
             Vector2i playerPos = _world._player.ActorPosition;
-            if (Math.Abs(playerPos.X - ActorPosition.X) <= 1 && Math.Abs(playerPos.Y - ActorPosition.Y) <= 1)
+            if (Math.Abs((playerPos.X - ActorPosition.X) + (playerPos.Y - ActorPosition.Y)) <= 1)
             {
                 BattleManager.DoBattleAction(this, _world._player, BattleAction.Attack);
             }

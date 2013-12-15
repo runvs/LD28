@@ -61,6 +61,15 @@ namespace JamTemplate
             {
                 ActorPosition = newPosition;
             }
+            ResetMovementAction();
+        }
+
+        private void ResetMovementAction()
+        {
+            _movingEast = false;
+            _movingWest = false;
+            _movingSouth = false;
+            _movingNorth = false;
         }
 
         protected abstract void DoBattleAction();
@@ -68,22 +77,22 @@ namespace JamTemplate
 
         protected void MoveRightAction()
         {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movementTimer += GetMovementTimerDeadZone();
             _movingEast = true;
         }
         protected void MoveLeftAction()
         {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movementTimer += GetMovementTimerDeadZone();
             _movingWest = true;
         }
         protected void MoveUpAction()
         {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movementTimer += GetMovementTimerDeadZone();
             _movingNorth = true;
         }
         protected void MoveDownAction()
         {
-            _movementTimer += GameProperties.PlayerMovementDeadZoneTimeInSeconds;
+            _movementTimer += GetMovementTimerDeadZone();
             _movingSouth = true;
         }
 
@@ -114,6 +123,8 @@ namespace JamTemplate
 
         }
         public abstract int GetBaseDamage();
+        public abstract float GetMovementTimerDeadZone();
+
         public void TakeDamage(int damage)
         {
             ActorAttributes.HealthCurrent -= damage;

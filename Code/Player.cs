@@ -58,7 +58,7 @@ namespace JamTemplate
 
         public void GetInput()
         {
-            ResetMovementAction();
+            //ResetMovementAction();
 
             if (_movementTimer <= 0.0f)
             {
@@ -66,13 +66,11 @@ namespace JamTemplate
             }
         }
 
-        private void ResetMovementAction()
+        public override float GetMovementTimerDeadZone()
         {
-            _movingEast = false;
-            _movingWest = false;
-            _movingSouth = false;
-            _movingNorth = false;
+            return GameProperties.PlayerMovementDeadZoneTimeInSeconds;
         }
+
 
         public void Update(float deltaT)
         {
