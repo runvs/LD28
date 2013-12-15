@@ -53,6 +53,7 @@ namespace JamTemplate
 
             ActorAttributes.StaminaRegenfreuency = GameProperties.PlayerBaseStaminaRegenFrequency;
             ActorAttributes.HealthRegenfreuency = GameProperties.PlayerBaseHealthRegenFrequency;
+            ActorAttributes.ResetHealth(GameProperties.PlayerBaseHealth);
 
 
             try
@@ -120,8 +121,6 @@ namespace JamTemplate
                 _StaminaRegenTimer += ActorAttributes.StaminaRegenfreuency;
                 ActorAttributes.AddToCurrentStamina(1);
             }
-            System.Console.Out.WriteLine(_StaminaRegenTimer);
-
         }
 
         protected override void DoBattleAction()
@@ -143,36 +142,57 @@ namespace JamTemplate
             }
             else if (_battleMagic && !_battleAttack && !_battleBlock)
             {
-                throw new System.NotImplementedException();
+                PlayerMagic();
             }
+        }
+
+        private void PlayerMagic()
+        {
+            if (ActorAttributes.StaminaCurrent >= GameProperties.MagicStaminaCost)
+            {
+
+                ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
+                Vector2i SpellStartTile = this.ActorPosition;
+                if (this.Direction == JamTemplate.Direction.EAST)
+                {
+                    SpellStartTile.X++;
+                }
+                else if (this.Direction == JamTemplate.Direction.WEST)
+                {
+                    SpellStartTile.X--;
+                }
+                else if (this.Direction == JamTemplate.Direction.NORTH)
+                {
+                    SpellStartTile.Y--;
+                }
+                else if (this.Direction == JamTemplate.Direction.SOUTH)
+                {
+                    SpellStartTile.Y++;
+                }
+
+                if (!_world.IsTileBlocked(SpellStartTile))
+                {
+                    Spell newSpell = new Spell(_world, this, SpellStartTile, this.Direction);
+                    _world.AddSpell(newSpell);
+                }
+            }
+
+
         }
 
         private void PlayerAttack()
         {
-            ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
 
-            Vector2i attackTile = this.ActorPosition;
-            if (this.Direction == JamTemplate.Direction.EAST)
+            if (ActorAttributes.StaminaCurrent >= GameProperties.AttackStaminaCost)
             {
-                attackTile.X++;
-            }
-            else if (this.Direction == JamTemplate.Direction.WEST)
-            {
-                attackTile.X--;
-            }
-            else if (this.Direction == JamTemplate.Direction.NORTH)
-            {
-                attackTile.Y--;
-            }
-            else if (this.Direction == JamTemplate.Direction.SOUTH)
-            {
-                attackTile.Y++;
-            }
 
-            Enemy actor2 = _world.GetEnemyOnTile(attackTile);
+                ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
+                Vector2i attackTile = this.ActorPosition + Actor.GetVectorFromDirection(this.Direction);
 
-            BattleManager.DoBattleAction(this, actor2, BattleAction.Attack);
+                Enemy actor2 = _world.GetEnemyOnTile(attackTile);
 
+                BattleManager.DoBattleAction(this, actor2, BattleAction.Attack);
+            }
 
 
         }
@@ -181,6 +201,11 @@ namespace JamTemplate
         public override int GetBaseDamage()
         {
             return GameProperties.PlayerBaseDamage;
+        }
+
+        public override int GetMagicBaseDamage()
+        {
+            return GameProperties.PlayerMagicBaseDamage;
         }
 
         public override void Die()

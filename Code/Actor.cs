@@ -124,6 +124,8 @@ namespace JamTemplate
         }
         public abstract int GetBaseDamage();
         public abstract float GetMovementTimerDeadZone();
+        public abstract int GetMagicBaseDamage();
+
 
         public void TakeDamage(int damage)
         {
@@ -140,6 +142,32 @@ namespace JamTemplate
                 Die();
             }
         }
+
+        public static Vector2i GetVectorFromDirection(Direction dir)
+        {
+            Vector2i ret = new Vector2i();
+
+            if (dir == Direction.NORTH)
+            {
+                ret.Y--;
+            }
+            else if (dir == Direction.SOUTH)
+            {
+                ret.Y++;
+            }
+            if (dir == Direction.WEST)
+            {
+                ret.X--;
+            }
+            else if (dir == Direction.EAST)
+            {
+                ret.X++;
+            }
+
+            return ret;
+        }
+
+
     }
 
     public enum Direction

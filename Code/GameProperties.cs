@@ -18,10 +18,14 @@ namespace JamTemplate
         public static int IncreaseAttributeExperienceCost { get { return 3; } }
         public static int BuyItemGoldCost { get { return -1; } }
 
+        public static int PlayerBaseHealth { get { return 20; } }
+
         public static float PlayerBaseStaminaRegenFrequency { get { return 0.8f; } }
         public static float PlayerBaseHealthRegenFrequency { get { return 5.5f; } }
+
         public static int BlockStaminaCost { get { return 4; } }
         public static int AttackStaminaCost { get { return 3; } }
+        public static int MagicStaminaCost { get { return 5; } }
 
         public static float PlayerBattleDeadZoneTimer { get { return 0.3f; } }
         public static float EnemyBattleDeadZoneTimer { get { return 0.75f; } }
@@ -32,8 +36,13 @@ namespace JamTemplate
         public static int PlayerBaseDamage { get { return 5; } }
         public static int EnemyBaseDamage { get { return 3; } }
 
+        public static int PlayerMagicBaseDamage { get { return 6; } }
+
         public static int AttackerEvadeBonus { get { return 1; } }
         public static int BlockEvadeBonus { get { return 3; } }
+
+        public static float SpellMoveMentTime { get { return 0.1f; } }
+
 
         public static Vector2f InventoryHeadItemPosition { get { return new Vector2f(672.0f, 20.0f); } }
         public static Vector2f InventoryHandItemPosition { get { return new Vector2f(616.0f, 58.0f); } }
@@ -64,11 +73,12 @@ namespace JamTemplate
         #endregion Palette colors
 
         static private Font _gameFont;
+
         static public Font GameFont() { if (_gameFont == null) { _gameFont = new Font("../GFX/font.ttf"); } return _gameFont; }
 
-        #region Timers
+        #region Sequence Timers
         static public float IntroDisplayTime { get { return 10.0f; } }
-        #endregion
+        #endregion Sequence Timers
 
     }
 }

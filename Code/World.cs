@@ -18,6 +18,7 @@ namespace JamTemplate
         IList<Item> _itemList;  // free items in the World
         IList<Enemy> _enemyList; // currently active enemies
         IList<NomadsHouse> _houseList;
+        IList<Spell> _spellList;
 
         private float _showIntroTimer;
         Texture _introTexture;
@@ -63,6 +64,14 @@ namespace JamTemplate
             if (it != null)
             {
                 _itemList.Add(it);
+            }
+        }
+
+        public void AddSpell(Spell spell)
+        {
+            if (spell != null)
+            {
+                _spellList.Add(spell);
             }
         }
 
@@ -132,6 +141,14 @@ namespace JamTemplate
 
                 }
 
+                foreach (var s in _spellList)
+                {
+                    if (!s.IsSpellOver)
+                    {
+                        s.Update(deltaT);
+                    }
+                }
+
 
                 DoCameraMovement();
             }
@@ -192,6 +209,13 @@ namespace JamTemplate
                     h.Draw(rw, CameraPosition);
                 }
 
+                foreach (var s in _spellList)
+                {
+                    if (!s.IsSpellOver)
+                    {
+                        s.Draw(rw, CameraPosition);
+                    }
+                }
 
                 DrawItemToolTip(rw);
                 _sidebar.Draw(rw);
@@ -238,6 +262,7 @@ namespace JamTemplate
             _itemList = new List<Item>();
             _enemyList = new List<Enemy>();
             _houseList = new List<NomadsHouse>();
+            _spellList = new List<Spell>();
 
             _showIntroTimer = GameProperties.IntroDisplayTime;
 

@@ -179,6 +179,10 @@ namespace JamTemplate
         {
             return GameProperties.EnemyBaseDamage;
         }
+        public override int GetMagicBaseDamage()
+        {
+            return GameProperties.PlayerMagicBaseDamage - 1;
+        }
 
         public override void Die()
         {

@@ -16,28 +16,42 @@ namespace JamTemplate
                 {
                     DoAttackCalculation(actor1, actor2);
                 }
-                if (action == BattleAction.Block)
+                else if (action == BattleAction.Block)
                 {
 
                 }
-
+                else if (action == BattleAction.Magic)
+                {
+                    DoMagicCalculation(actor1, actor2);
+                }
 
             }
         }
 
+        private static void DoMagicCalculation(Actor actor1, Actor actor2)
+        {
+            if (!DoesMagicEvade(actor1, actor2))
+            {
+                int baseDamage = actor1.GetMagicBaseDamage() + RollTheDie.AttributeProbe(actor1.ActorAttributes.Intelligence);
+
+                // magic damage is reduced by intelligence
+                int reducedDamage = CalculateDamageWithArmor(baseDamage, actor2.ActorAttributes.Intelligence);
+                actor2.TakeDamage(reducedDamage);
+            }
+        }
+
+
+
         private static void DoAttackCalculation(Actor actor1, Actor actor2)
         {
-            System.Console.Out.WriteLine("Doing an Attack");
             // check if the hit is successfull
             if (!DoesEvade(actor1, actor2))
             {
-                System.Console.Out.WriteLine("Hit");
                 int baseDamage = actor1.GetBaseDamage() + RollTheDie.AttributeProbe(actor1.ActorAttributes.Strength);
-                System.Console.Out.WriteLine("Base Damage " + baseDamage);
 
-                int reducedDamage = CalculateDamageWithArmor(baseDamage, 99);
+                // physical damage is reduced by Endurance
+                int reducedDamage = CalculateDamageWithArmor(baseDamage, actor2.ActorAttributes.Endurance);
                 actor2.TakeDamage(reducedDamage);
-                System.Console.Out.WriteLine("Reduced Damage " + baseDamage);
             }
             else
             {
@@ -59,12 +73,29 @@ namespace JamTemplate
                 return false;
             }
             return true;
-
         }
+
+
+        private static bool DoesMagicEvade(Actor actor1, Actor actor2)
+        {
+            int AttackerHits = RollTheDie.AttributeProbe(actor1.ActorAttributes.Intelligence);
+            int DefenderHits = RollTheDie.AttributeProbe(actor2.ActorAttributes.Agility);
+            if (actor2.IsBlocking)
+            {
+                DefenderHits += GameProperties.BlockEvadeBonus;
+            }
+            if (AttackerHits >= DefenderHits - GameProperties.AttackerEvadeBonus)
+            {
+                return false;
+            }
+            return true;
+        }
+
 
         static private int CalculateDamageWithArmor(int baseDamage, int Strength)
         {
             int modifier = RollTheDie.AttributeProbe(Strength);
+            System.Console.Out.WriteLine("reduction " + modifier);
             int finalDamage = baseDamage - modifier;
             if (finalDamage <= 0)
             {

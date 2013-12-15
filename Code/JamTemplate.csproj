@@ -69,6 +69,7 @@
     <Compile Include="RollTheDie.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Sidebar.cs" />
+    <Compile Include="Spell.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
