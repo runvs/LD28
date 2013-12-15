@@ -19,60 +19,92 @@ namespace JamTemplate
         IList<Enemy> _enemyList; // currently active enemies
         IList<NomadsHouse> _houseList;
 
+        private float _showIntroTimer;
+        Texture _introTexture;
+        Sprite _introSprite;
+
+
         public SFML.Window.Vector2i CameraPosition { get; private set; }
 
         #endregion Fields
+
 
         #region Methods
 
         public World()
         {
-
             InitGame();
+            LoadGraphics();
+        }
+
+        private void LoadGraphics()
+        {
+            _introTexture = new Texture("../GFX/sequence_intro.png");
+            _introSprite = new Sprite(_introTexture);
+            _introSprite.Scale = new Vector2f(2.0f, 2.0f);
+            _introSprite.Position = new Vector2f(0.0f, 0.0f);
+
         }
 
         public void GetInput()
         {
-            _player.GetInput();
-
-            foreach (var h in _houseList)
+            if (!IsInSequence())
             {
-                h.GetInput();
+                _player.GetInput();
+
+                foreach (var h in _houseList)
+                {
+                    h.GetInput();
+                }
+            }
+            else
+            {
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+                {
+                    _showIntroTimer = -1.0f;
+                }
             }
         }
 
         public void Update(float deltaT)
         {
-            foreach (var e in _enemyList)
+            if (_showIntroTimer >= 0.0f)
+                _showIntroTimer -= deltaT;
+
+
+            if (!IsInSequence())
             {
-                if (!e.IsDead)
+                foreach (var e in _enemyList)
                 {
-                    e.Update(deltaT);
-                }
-            }
-
-            _player.Update(deltaT);
-
-            foreach (var h in _houseList)
-            {
-                if (h.IsActive)
-                {
-                    h.Update(deltaT);
-
-
-                    Vector2i housePos = h.PositionInTiles;
-                    Vector2i playerPos = _player.ActorPosition;
-                    Vector2i difference = housePos - playerPos;
-
-                    if (Math.Abs(difference.X) + Math.Abs(difference.Y) >= 1)
+                    if (!e.IsDead)
                     {
-                        h.IsActive = false;
+                        e.Update(deltaT);
                     }
                 }
+
+                _player.Update(deltaT);
+
+                foreach (var h in _houseList)
+                {
+                    if (h.IsActive)
+                    {
+                        h.Update(deltaT);
+
+
+                        Vector2i housePos = h.PositionInTiles;
+                        Vector2i playerPos = _player.ActorPosition;
+                        Vector2i difference = housePos - playerPos;
+
+                        if (Math.Abs(difference.X) + Math.Abs(difference.Y) >= 1)
+                        {
+                            h.IsActive = false;
+                        }
+                    }
+                }
+
+
+                DoCameraMovement();
             }
-
-
-            DoCameraMovement();
 
         }
 
@@ -102,32 +134,45 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw)
         {
-            foreach (var t in _tileList)
-            {
-                t.Draw(rw, CameraPosition);
-            }
-            foreach (var i in _itemList)
-            {
-                i.Draw(rw, CameraPosition);
-            }
 
 
-            _player.Draw(rw, CameraPosition);
-
-            foreach (var h in _houseList)
+            if (!IsInSequence())
             {
-                h.Draw(rw, CameraPosition);
-            }
-
-            foreach (var e in _enemyList)
-            {
-                if (!e.IsDead)
+                foreach (var t in _tileList)
                 {
-                    e.Draw(rw, CameraPosition);
+                    t.Draw(rw, CameraPosition);
+                }
+                foreach (var i in _itemList)
+                {
+                    i.Draw(rw, CameraPosition);
+                }
+
+                foreach (var e in _enemyList)
+                {
+                    if (!e.IsDead)
+                    {
+                        e.Draw(rw, CameraPosition);
+                    }
+                }
+
+                _player.Draw(rw, CameraPosition);
+
+                foreach (var h in _houseList)
+                {
+                    h.Draw(rw, CameraPosition);
+                }
+
+
+
+                _sidebar.Draw(rw);
+            }
+            else
+            {
+                if (_showIntroTimer >= 0.0f)
+                {
+                    rw.Draw(_introSprite);
                 }
             }
-
-            _sidebar.Draw(rw);
         }
 
         private void InitGame()
@@ -137,6 +182,8 @@ namespace JamTemplate
             _itemList = new List<Item>();
             _enemyList = new List<Enemy>();
             _houseList = new List<NomadsHouse>();
+
+            _showIntroTimer = GameProperties.IntroDisplayTime;
 
             CreateWorld();
         }
@@ -254,6 +301,18 @@ namespace JamTemplate
         public Score EndThisRound()
         {
             return new Score();
+
+        }
+
+        private bool IsInSequence()
+        {
+            bool ret = false;
+            if (_showIntroTimer >= 0)
+            {
+                ret = true;
+            }
+
+            return ret;
 
         }
 

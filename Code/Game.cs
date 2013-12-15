@@ -91,12 +91,11 @@ namespace JamTemplate
                     ChangeGameState(State.Score);
                 }
             }
-
         }
 
         public void Draw(RenderWindow rw)
         {
-            rw.Clear();
+            rw.Clear(GameProperties.ColorBlack);
             if (_gameState == State.Menu)
             {
                 DrawMenu(rw);

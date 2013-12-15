@@ -13,6 +13,8 @@ namespace JamTemplate
         public int PlayerNumber { get; set; }
         public string PlayerName { get; private set; }
 
+        public QuestLog _log;
+        private float _timerLog;
 
 
         #region Inventory
@@ -41,6 +43,8 @@ namespace JamTemplate
             _actionMap = new Dictionary<Keyboard.Key, Action>();
             SetupActionMap();
             ActorAttributes = new Attributes();
+            _log = new QuestLog();
+            _timerLog = 0.0f;
 
             try
             {
@@ -51,9 +55,6 @@ namespace JamTemplate
                 Console.Out.WriteLine("Error loading player Graphics.");
                 Console.Out.WriteLine(e.ToString());
             }
-
-            //PickupItem(new Item(ItemType.HAND, "sword", +1, new Vector2i(0, 0)));
-
         }
 
         private void SetPlayerNumberDependendProperties()
@@ -63,8 +64,6 @@ namespace JamTemplate
 
         public void GetInput()
         {
-            //ResetMovementAction();
-
             if (_movementTimer <= 0.0f)
             {
                 MapInputToActions();
@@ -92,6 +91,11 @@ namespace JamTemplate
                 _battleTimer += GameProperties.PlayerBattleDeadZoneTimer;
                 DoBattleAction();
                 ResetBattleActions();
+            }
+
+            if (_timerLog >= 0.0f)
+            {
+                _timerLog -= deltaT;
             }
         }
 
@@ -200,6 +204,9 @@ namespace JamTemplate
             DrawBlockString(rw, CameraPosition);
 
             rw.Draw(this._actorSprite);
+
+            _log.Draw(rw);
+
         }
 
         private void DrawBlockString(RenderWindow rw, Vector2i CameraPosition)
@@ -236,6 +243,16 @@ namespace JamTemplate
 
         }
 
+        private void ToggleQuestlog()
+        {
+
+            if (_timerLog <= 0.0f)
+            {
+                _log.IsActive = !_log.IsActive;
+                _timerLog += 0.5f;
+            }
+
+        }
 
         private void SetupActionMap()
         {
@@ -256,6 +273,7 @@ namespace JamTemplate
             _actionMap.Add(Keyboard.Key.Space, AttackAction);
             _actionMap.Add(Keyboard.Key.LShift, MagicAction);
             _actionMap.Add(Keyboard.Key.LControl, BlockAction);
+            _actionMap.Add(Keyboard.Key.L, ToggleQuestlog);
 
 
         }

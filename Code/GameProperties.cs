@@ -65,5 +65,9 @@ namespace JamTemplate
         static private Font _gameFont;
         static public Font GameFont() { if (_gameFont == null) { _gameFont = new Font("../GFX/font.ttf"); } return _gameFont; }
 
+        #region Timers
+        static public float IntroDisplayTime { get { return 10.0f; } }
+        #endregion
+
     }
 }
