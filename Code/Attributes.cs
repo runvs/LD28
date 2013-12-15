@@ -41,6 +41,15 @@ namespace JamTemplate
             HealthCurrent = HealthMaximum = newHealthVal;
         }
 
+        public void RefillHealth()
+        {
+            HealthCurrent = HealthMaximum;
+        }
+        public void RefillStamina()
+        {
+            StaminaCurrent = StaminaMaximum;
+        }
+
         public void AddToCurrentHealth(int value)
         {
             HealthCurrent += value;

@@ -16,7 +16,8 @@ namespace JamTemplate
         public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.8f; } }
 
         public static int IncreaseAttributeExperienceCost { get { return 3; } }
-        public static int BuyItemGoldCost { get { return 2; } }
+        public static int BuyItemGoldCost { get { return 4; } }
+        public static int BuyHealGoldCost { get { return 2; } }
 
         public static int PlayerBaseHealth { get { return 20; } }
 
@@ -78,7 +79,7 @@ namespace JamTemplate
         static public Font GameFont() { if (_gameFont == null) { _gameFont = new Font("../GFX/font.ttf"); } return _gameFont; }
 
         #region Sequence Timers
-        static public float IntroDisplayTime { get { return 10.0f; } }
+        static public float IntroDisplayTime { get { return 25.0f; } }
         #endregion Sequence Timers
 
         public static int EnemyEasyGold { get { return 2; } }

@@ -36,7 +36,7 @@ namespace JamTemplate
 
         private void CreateQuestlogMessages()
         {
-            _logMessages.Add("You move out to seek the headless goblin's head. ");
+            _logMessages.Add("Move out to seek the goblin Tribe. Move North to find them!");
             _logMessages.Add("");
             _logMessages.Add("You move out to seek gold and glory. What will await you? (get 20 gold!)");
             _logMessages.Add("You move out to seek gold and glory. What will await you? (get 20 gold!)");

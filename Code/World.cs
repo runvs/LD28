@@ -224,9 +224,42 @@ namespace JamTemplate
             {
                 if (_showIntroTimer >= 0.0f)
                 {
-                    rw.Draw(_introSprite);
+                    DrawIntro(rw);
+
                 }
             }
+        }
+
+        private void DrawIntro(RenderWindow rw)
+        {
+            rw.Draw(_introSprite);
+
+            DrawText("As you come home from", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText(" a Trip to the city...", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+
+
+            DrawText("A horde of goblins has", new Vector2f(20, 100), GameProperties.ColorWhite, rw);
+            DrawText("devastated your farm", new Vector2f(20, 125), GameProperties.ColorWhite, rw);
+
+            DrawText("and slaughtered your", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
+            DrawText("family and friends.", new Vector2f(20, 175), GameProperties.ColorWhite, rw); // friens
+
+            DrawText("Find them and take ", new Vector2f(20, 225), GameProperties.ColorWhite, rw);
+            DrawText("your revenge!", new Vector2f(20, 250), GameProperties.ColorWhite, rw);
+
+
+            DrawText("They went north", new Vector2f(20, 325), GameProperties.ColorLightRed, rw);
+            DrawText("you see scribbeld on a wall", new Vector2f(20, 350), GameProperties.ColorWhite, rw);
+            DrawText("with some humand blood.", new Vector2f(20, 375), GameProperties.ColorWhite, rw);
+
+        }
+
+        private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
+        {
+            Text text = new Text(s, GameProperties.GameFont());
+            text.Position = position;
+            text.Color = color;
+            window.Draw(text);
         }
 
         private void DrawItemToolTip(RenderWindow rw)

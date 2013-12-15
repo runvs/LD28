@@ -19,6 +19,8 @@ namespace JamTemplate
 
         private Sprite _spellSprite;
 
+        private float _speedInPixelsPerSecond;
+
         private World _world;
         private Actor _caster;
 
@@ -28,6 +30,9 @@ namespace JamTemplate
 
         public Spell(World world, Actor caster, Vector2i position, Direction dir)
         {
+
+            _speedInPixelsPerSecond = (float)GameProperties.TileSizeInPixel / GameProperties.SpellMoveMentTime;
+
             _spellFrameNumber = 0;
             _spellFrameTimer = 0.0f;
             _world = world;
@@ -55,6 +60,8 @@ namespace JamTemplate
             _spellSprite.Scale = new Vector2f(2.0f, 2.0f);
 
             _spellTexture2 = new Texture("../GFX/spell_bolt2.png");
+
+
         }
 
         private void SwitchSpellFrames()
@@ -84,9 +91,30 @@ namespace JamTemplate
                 _spellSprite.Scale = new Vector2f(2.0f, 2.0f);
             }
 
+
+            Vector2f subTilePosition = new Vector2f(GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).X, GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).Y) * _movementTimer; // kinda buggy, but it looks cool
+
+            _spellSprite.Origin = new Vector2f(0.0f, 0.0f);
+            if (Direction == JamTemplate.Direction.SOUTH)
+            {
+                _spellSprite.Rotation = 90.0f;
+                _spellSprite.Origin = new SFML.Window.Vector2f(0.0f, +_spellSprite.GetLocalBounds().Width);// rotate also rotates the coordinate system. Think about this crazy shit
+            }
+            else if (Direction == JamTemplate.Direction.NORTH)
+            {
+                _spellSprite.Rotation = -90.0f;
+                _spellSprite.Origin = new SFML.Window.Vector2f(+_spellSprite.GetLocalBounds().Width, 0);// rotate also rotates the coordinate system. Think about this crazy shit
+            }
+            else if (Direction == JamTemplate.Direction.WEST)
+            {
+                _spellSprite.Rotation = 180.0f;
+                _spellSprite.Origin = new SFML.Window.Vector2f(+_spellSprite.GetLocalBounds().Width, _spellSprite.GetLocalBounds().Width);// rotate also rotates the coordinate system. Think about this crazy shit
+            }
+
+
             _spellSprite.Position = new Vector2f(
-               GameProperties.TileSizeInPixel * (PositionInTiles.X - CameraPosition.X),
-               GameProperties.TileSizeInPixel * (PositionInTiles.Y - CameraPosition.Y)
+               GameProperties.TileSizeInPixel * (PositionInTiles.X - CameraPosition.X) + subTilePosition.X,
+               GameProperties.TileSizeInPixel * (PositionInTiles.Y - CameraPosition.Y) + subTilePosition.Y
            );
             rw.Draw(_spellSprite);
         }

@@ -39,7 +39,8 @@ namespace JamTemplate
             _buttonTimer = 0.0f;
             PositionInTiles = new Vector2i(posX, posY);
             IsActive = false;
-            if (GameProperties.RandomGenerator.NextDouble() >= 0.5)
+            double ran = GameProperties.RandomGenerator.NextDouble();
+            if (ran <= 0.33)
             {
                 _type = HouseType.MERCHANT;
 
@@ -50,9 +51,13 @@ namespace JamTemplate
 
 
             }
-            else
+            else if (ran <= 0.66)
             {
                 _type = HouseType.TEACHER;
+            }
+            else
+            {
+                _type = HouseType.HEALER;
             }
             try
             {
@@ -111,6 +116,20 @@ namespace JamTemplate
                 DrawText("Experience " + _world._player.ActorAttributes.Experience, new Vector2f(210, 365), GameProperties.ColorBeige, rw);
 
             }
+
+            else if (_type == HouseType.HEALER)
+            {
+                DrawText("What would you like", new Vector2f(210, 200), GameProperties.ColorWhite, rw);
+                DrawText("to do?", new Vector2f(210, 216), GameProperties.ColorWhite, rw);
+
+                DrawText("Heal [U]", new Vector2f(240, 250), GameProperties.ColorWhite, rw);
+                DrawText("Rest [I]", new Vector2f(240, 280), GameProperties.ColorWhite, rw);
+                DrawText("Heal and Rest[O]", new Vector2f(240, 310), GameProperties.ColorWhite, rw);
+
+                DrawText("Gold " + _world._player.Gold, new Vector2f(210, 365), GameProperties.ColorBeige, rw);
+
+            }
+
         }
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
@@ -189,6 +208,35 @@ namespace JamTemplate
                         }
 
                     }
+                    else if (_type == HouseType.HEALER)
+                    {
+                        if (_world._player.Gold >= GameProperties.BuyHealGoldCost)
+                        {
+                            if (Keyboard.IsKeyPressed(Keyboard.Key.U))
+                            {
+                                _world._player.Gold -= GameProperties.BuyHealGoldCost;
+                                _buttonTimer += 0.5f;
+                                _world._player.ActorAttributes.RefillHealth();
+                            }
+                            if (Keyboard.IsKeyPressed(Keyboard.Key.I))
+                            {
+                                _world._player.Gold -= GameProperties.BuyHealGoldCost;
+                                _buttonTimer += 0.5f;
+                                _world._player.ActorAttributes.RefillStamina();
+                            }
+                            if (Keyboard.IsKeyPressed(Keyboard.Key.O))
+                            {
+                                if (_world._player.Gold >= Math.Ceiling(GameProperties.BuyHealGoldCost * 1.5f))
+                                {
+                                    _world._player.Gold -= (int)Math.Ceiling(1.5f * GameProperties.BuyHealGoldCost);
+                                    _buttonTimer += 0.5f;
+                                    _world._player.ActorAttributes.RefillStamina();
+                                    _world._player.ActorAttributes.RefillHealth();
+                                }
+                            }
+                        }
+
+                    }
 
                 }
             }
@@ -222,7 +270,8 @@ namespace JamTemplate
     enum HouseType
     {
         MERCHANT,
-        TEACHER
+        TEACHER,
+        HEALER
     }
 
 }

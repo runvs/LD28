@@ -43,6 +43,8 @@ namespace JamTemplate
             _world = world;
             PlayerNumber = number;
 
+            ActorPosition = new Vector2i(30, 30);
+
             _actionMap = new Dictionary<Keyboard.Key, Action>();
             SetupActionMap();
             ActorAttributes = new Attributes();

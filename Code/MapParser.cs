@@ -49,11 +49,11 @@ namespace JamTemplate
 
                 TerrainLayer.Add(new Tile(xPos, yPos, type));
 
-                if (xPos != 0 && (xPos + 1) % 50 == 0)
+                if (xPos != 0 && (xPos + 1) % GameProperties.WorldSizeInTiles == 0)
                 {
                     yPos++;
                 }
-                xPos = (xPos + 1) % 50;
+                xPos = (xPos + 1) % GameProperties.WorldSizeInTiles;
             }
 
             xPos = 0;
@@ -71,11 +71,11 @@ namespace JamTemplate
                         break;
                 }
 
-                if (xPos != 0 && (xPos + 1) % 50 == 0)
+                if (xPos != 0 && (xPos + 1) % GameProperties.WorldSizeInTiles == 0)
                 {
                     yPos++;
                 }
-                xPos = (xPos + 1) % 50;
+                xPos = (xPos + 1) % GameProperties.WorldSizeInTiles;
             }
 
         }
