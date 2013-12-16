@@ -22,8 +22,17 @@ namespace JamTemplate
         IList<QuestItem> _questItemList;
 
         private float _showIntroTimer;
+        private float _showSequence1Timer;
+        private float _showSequence2Timer;
+        private float _showSequence3Timer;
+        private float _showSequence4Timer;
+        private float _showSequence5Timer;
+        private float _showSequence6Timer;
+
         Texture _introTexture;
         Sprite _introSprite;
+
+
 
         Texture _itemTooltipTexture;
         Sprite _itemTooltipSprite;
@@ -92,14 +101,19 @@ namespace JamTemplate
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
                 {
                     _showIntroTimer = -1.0f;
+                    _showSequence1Timer = -1.0f;
+                    _showSequence2Timer = -1.0f;
+                    _showSequence3Timer = -1.0f;
+                    _showSequence4Timer = -1.0f;
+                    _showSequence5Timer = -1.0f;
+                    _showSequence6Timer = -1.0f;
                 }
             }
         }
 
         public void Update(float deltaT)
         {
-            if (_showIntroTimer >= 0.0f)
-                _showIntroTimer -= deltaT;
+            UpdateSequenceTimers(deltaT);
 
 
             if (!IsInSequence())
@@ -159,6 +173,66 @@ namespace JamTemplate
                 DoCameraMovement();
             }
 
+        }
+
+        public void StartSequence(int questItemType)
+        {
+            if (questItemType == 0)
+            {
+                _showSequence1Timer = GameProperties.IntroDisplayTime;
+            }
+            else if (questItemType == 1)
+            {
+                _showSequence2Timer = GameProperties.IntroDisplayTime;
+            }
+            else if (questItemType == 2)
+            {
+                _showSequence3Timer = GameProperties.IntroDisplayTime;
+            }
+            else if (questItemType == 3)
+            {
+                _showSequence4Timer = GameProperties.IntroDisplayTime;
+            }
+            else if (questItemType == 4)
+            {
+                _showSequence5Timer = GameProperties.IntroDisplayTime;
+            }
+            else if (questItemType == 5)
+            {
+                _showSequence6Timer = GameProperties.IntroDisplayTime;
+            }
+        }
+
+        private void UpdateSequenceTimers(float deltaT)
+        {
+            if (_showIntroTimer >= 0.0f)
+            {
+                _showIntroTimer -= deltaT;
+            }
+            if (_showSequence1Timer >= 0)
+            {
+                _showSequence1Timer -= deltaT;
+            }
+            if (_showSequence2Timer >= 0)
+            {
+                _showSequence2Timer -= deltaT;
+            }
+            if (_showSequence3Timer >= 0)
+            {
+                _showSequence3Timer -= deltaT;
+            }
+            if (_showSequence4Timer >= 0)
+            {
+                _showSequence4Timer -= deltaT;
+            }
+            if (_showSequence5Timer >= 0)
+            {
+                _showSequence5Timer -= deltaT;
+            }
+            if (_showSequence6Timer >= 0)
+            {
+                _showSequence6Timer -= deltaT;
+            }
         }
 
         private void DoCameraMovement()
@@ -245,9 +319,33 @@ namespace JamTemplate
             {
                 if (_showIntroTimer >= 0.0f)
                 {
-                    DrawSequence6(rw);
-
+                    DrawIntro(rw);
                 }
+                if (_showSequence1Timer >= 0)
+                {
+                    DrawSequence1(rw);
+                }
+                if (_showSequence2Timer >= 0)
+                {
+                    DrawSequence2(rw);
+                }
+                if (_showSequence3Timer >= 0)
+                {
+                    DrawSequence3(rw);
+                }
+                if (_showSequence4Timer >= 0)
+                {
+                    DrawSequence4(rw);
+                }
+                if (_showSequence5Timer >= 0)
+                {
+                    DrawSequence5(rw);
+                }
+                if (_showSequence6Timer >= 0)
+                {
+                    DrawSequence6(rw);
+                }
+
             }
         }
 
@@ -437,6 +535,14 @@ namespace JamTemplate
 
             _showIntroTimer = GameProperties.IntroDisplayTime;
 
+            _showSequence1Timer = 0.0f;
+            _showSequence2Timer = 0.0f;
+            _showSequence3Timer = 0.0f;
+            _showSequence4Timer = 0.0f;
+            _showSequence5Timer = 0.0f;
+            _showSequence6Timer = 0.0f;
+
+
             CreateWorld();
         }
 
@@ -544,6 +650,31 @@ namespace JamTemplate
             {
                 ret = true;
             }
+            if (_showSequence1Timer >= 0)
+            {
+                ret = true;
+            }
+            if (_showSequence2Timer >= 0)
+            {
+                ret = true;
+            }
+            if (_showSequence3Timer >= 0)
+            {
+                ret = true;
+            }
+            if (_showSequence4Timer >= 0)
+            {
+                ret = true;
+            }
+            if (_showSequence5Timer >= 0)
+            {
+                ret = true;
+            }
+            if (_showSequence6Timer >= 0)
+            {
+                ret = true;
+            }
+
 
             return ret;
 

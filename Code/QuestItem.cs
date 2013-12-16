@@ -40,6 +40,7 @@ namespace JamTemplate
         {
             Picked = true;
             PositionInTiles = new Vector2i(-500, -500);
+            _world.StartSequence(QuestItemType);
         }
 
         public void Draw(RenderWindow rw, Vector2i CameraPosition)
@@ -84,7 +85,7 @@ namespace JamTemplate
             }
             else if (QuestItemType == 4)
             {
-                _itemTexture = new Texture("../GFX/enemy_goblin_1.png");
+                _itemTexture = new Texture("../GFX/quest_smithy.png");
             }
 
             _itemSprite = new Sprite(_itemTexture);

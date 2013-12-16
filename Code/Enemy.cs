@@ -227,6 +227,12 @@ namespace JamTemplate
                 _world.AddItem(DropItem);
             }
 
+            // special case for the final boss
+            if (_type == EnemyType.HEADLESS_GOBLIN)
+            {
+                _world.StartSequence(5);    // not quite clean code but it should work
+            }
+
             ActorPosition = new Vector2i(-500, -500);
         }
 
