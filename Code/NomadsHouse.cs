@@ -61,6 +61,7 @@ namespace JamTemplate
             try
             {
                 LoadGraphics();
+                text = new Text("", GameProperties.GameFont());
             }
             catch (SFML.LoadingFailedException e)
             {
@@ -82,8 +83,6 @@ namespace JamTemplate
 
             if (IsActive)
             {
-
-
                 DrawText(rw);
 
             }
@@ -147,10 +146,10 @@ namespace JamTemplate
             intCost = _world._player.ActorAttributes.BaseIntelligence - GameProperties.IncreaseAttributeExperienceCost;
             endCost = _world._player.ActorAttributes.BaseEndurance - GameProperties.IncreaseAttributeExperienceCost;
         }
-
+        Text text;
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
-            Text text = new Text(s, GameProperties.GameFont());
+            text.DisplayedString = s;
             text.Position = position;
             text.Scale = new Vector2f(0.7f, 0.7f);
             text.Color = color;

@@ -38,8 +38,6 @@ namespace JamTemplate
 
             Game myGame = new Game();
 
-
-
             int startTime = Environment.TickCount;
             int endTime = startTime;
             float time = 16.7f; // 60 fps -> 16.7 ms per frame
@@ -69,6 +67,7 @@ namespace JamTemplate
 
                 myGame.Draw(applicationWindow);
 
+                //Console.WriteLine(time * 1000.0f);
                 applicationWindow.Display();
                 endTime = Environment.TickCount;
             }

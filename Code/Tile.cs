@@ -50,6 +50,7 @@ namespace JamTemplate
                GameProperties.TileSizeInPixel * (TilePosition.X - CameraPosition.X),
                GameProperties.TileSizeInPixel * (TilePosition.Y - CameraPosition.Y)
            );
+
             rw.Draw(TileSprite);
         }
 

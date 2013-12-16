@@ -86,6 +86,10 @@ namespace JamTemplate
                 MapInputToActions();
             }
         }
+        protected override void ReactOnDamage()
+        {
+            // do nothing
+        }
 
         public override float GetMovementTimerDeadZone()
         {
@@ -195,9 +199,14 @@ namespace JamTemplate
             {
 
                 ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
-                Vector2i attackTile = this.ActorPosition + Actor.GetVectorFromDirection(this.Direction);
+                Enemy actor2 = _world.GetEnemyOnTile(ActorPosition);
 
-                Enemy actor2 = _world.GetEnemyOnTile(attackTile);
+                if (actor2 == null)
+                {
+                    Vector2i attackTile = this.ActorPosition + Actor.GetVectorFromDirection(this.Direction);
+                    actor2 = _world.GetEnemyOnTile(attackTile);
+                }
+
 
 
 

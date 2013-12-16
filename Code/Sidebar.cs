@@ -47,6 +47,8 @@ namespace JamTemplate
             _staminaBar.Origin = new Vector2f(0, 150);
             _staminaBar.Position = new Vector2f(704, 598);
             _staminaBar.FillColor = GameProperties.ColorBlue;
+
+            text = new Text("", GameProperties.GameFont());
         }
 
         public Sidebar(Player p)
@@ -103,9 +105,11 @@ namespace JamTemplate
 
         }
 
+        private Text text;
+
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
-            Text text = new Text(s, GameProperties.GameFont());
+            text.DisplayedString = s;
             text.Position = position;
             text.Color = color;
             window.Draw(text);

@@ -20,6 +20,7 @@ namespace JamTemplate
 
         public QuestLog()
         {
+            _text = new Text("", GameProperties.GameFont());
             _logMessages = new List<String>();
 
             CreateQuestlogMessages();
@@ -70,6 +71,8 @@ namespace JamTemplate
             }
         }
 
+        Text _text;
+
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
             if (s.Length >= 18)
@@ -79,21 +82,17 @@ namespace JamTemplate
                 {
                     spacePos = 17;
                 }
-                String s1 = s.Substring(0, spacePos);
-                String s2 = s.Substring(spacePos);
-                s1 = s1.TrimEnd();
-                s2 = s2.TrimStart();
-                DrawText(s1, position, color, window);
+                DrawText(s.Substring(0, spacePos).TrimEnd(), position, color, window);
                 position.Y += 20;
-                DrawText(s2, position, color, window);
+                DrawText(s.Substring(spacePos).TrimStart(), position, color, window);
                 return;
             }
 
-            Text text = new Text(s, GameProperties.GameFont());
-            text.Position = position;
-            text.Scale = new Vector2f(0.7f, 0.7f);
-            text.Color = color;
-            window.Draw(text);
+            _text.DisplayedString = s;
+            _text.Position = position;
+            _text.Scale = new Vector2f(0.7f, 0.7f);
+            _text.Color = color;
+            window.Draw(_text);
 
         }
 

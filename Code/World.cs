@@ -32,6 +32,8 @@ namespace JamTemplate
         Texture _introTexture;
         Sprite _introSprite;
 
+        Text text;
+
 
 
         Texture _itemTooltipTexture;
@@ -50,6 +52,7 @@ namespace JamTemplate
         public World()
         {
             _displayItemToolTip = false;
+            text = new Text("", GameProperties.GameFont());
             InitGame();
             LoadGraphics();
         }
@@ -93,7 +96,10 @@ namespace JamTemplate
 
                 foreach (var h in _houseList)
                 {
-                    h.GetInput();
+                    if (h.IsActive)
+                    {
+                        h.GetInput();
+                    }
                 }
             }
             else
@@ -132,6 +138,7 @@ namespace JamTemplate
 
                 _player.Update(deltaT);
 
+
                 foreach (var h in _houseList)
                 {
                     if (h.IsActive)
@@ -151,11 +158,14 @@ namespace JamTemplate
                 _tooltipItem = null;
                 foreach (var i in _itemList)
                 {
-                    if (_player.ActorPosition.Equals(i.ItemPositionInTiles))
+                    if (!i.Picked)
                     {
-                        _displayItemToolTip = true;
-                        _tooltipItem = i;
-                        break;
+                        if (_player.ActorPosition.Equals(i.ItemPositionInTiles))
+                        {
+                            _displayItemToolTip = true;
+                            _tooltipItem = i;
+                            break;
+                        }
                     }
 
                 }
@@ -163,7 +173,10 @@ namespace JamTemplate
                 var questItemsToAdd = new List<QuestItem>();
                 foreach (var i in _questItemList)
                 {
-                    i.Update(deltaT, questItemsToAdd);
+                    if (!i.Picked)
+                    {
+                        i.Update(deltaT, questItemsToAdd);
+                    }
                 }
                 _questItemList.AddRange(questItemsToAdd);
 
@@ -275,11 +288,17 @@ namespace JamTemplate
                 }
                 foreach (var i in _itemList)
                 {
-                    i.Draw(rw, CameraPosition);
+                    if (!i.Picked)
+                    {
+                        i.Draw(rw, CameraPosition);
+                    }
                 }
                 foreach (var i in _questItemList)
                 {
-                    i.Draw(rw, CameraPosition);
+                    if (!i.Picked)
+                    {
+                        i.Draw(rw, CameraPosition);
+                    }
                 }
 
                 foreach (var e in _enemyList)
@@ -360,7 +379,7 @@ namespace JamTemplate
             rw.Draw(_introSprite);
 
             DrawText("As you come home from", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
-            DrawText(" a Trip to the city...", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("a trip to the city...", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
 
 
             DrawText("A horde of goblins has", new Vector2f(20, 100), GameProperties.ColorWhite, rw);
@@ -373,9 +392,9 @@ namespace JamTemplate
             DrawText("your revenge!", new Vector2f(20, 250), GameProperties.ColorWhite, rw);
 
 
-            DrawText("'They went north'", new Vector2f(20, 325), GameProperties.ColorLightRed, rw);
-            DrawText("you see scribbeld on a wall", new Vector2f(20, 350), GameProperties.ColorWhite, rw);
-            DrawText("with some humand blood.", new Vector2f(20, 375), GameProperties.ColorWhite, rw);
+            DrawText("You see", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("'They went north'", new Vector2f(20, 350), GameProperties.ColorLightRed, rw);
+            DrawText("scribbled on a wall in blood.", new Vector2f(20, 375), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -385,22 +404,21 @@ namespace JamTemplate
         {
             rw.Clear(GameProperties.ColorBlack);
 
-            DrawText("You slaughter the goblin pack", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("You slaughtered the goblin pack", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
             DrawText("with the warm feeling of revenge.", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
 
-            DrawText("But ...", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
+            DrawText("But...", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
 
 
-            DrawText("'Headless Master! help us in this Misery!'", new Vector2f(20, 125), GameProperties.ColorLightRed, rw);
-            DrawText("a goblin cries out", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
+            DrawText("A goblin cries out", new Vector2f(20, 125), GameProperties.ColorWhite, rw);
+            DrawText("'Headless master! Help us in this misery!'", new Vector2f(20, 150), GameProperties.ColorLightRed, rw);
 
             DrawText("The goblin leader was not with them.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
-            //DrawText("family and friends.", new Vector2f(20, 175), GameProperties.ColorWhite, rw); // friens
 
             DrawText("'Good for you'", new Vector2f(20, 225), GameProperties.ColorLightRed, rw);
             DrawText("he whispers", new Vector2f(20, 250), GameProperties.ColorWhite, rw);
-            DrawText("'He can only be slain by an adamantium Sword.'", new Vector2f(20, 275), GameProperties.ColorLightRed, rw);
-            DrawText("So head West and look for the forge!'", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("'He can only be slain by an adamantium sword.'", new Vector2f(20, 275), GameProperties.ColorLightRed, rw);
+            DrawText("So head west and look for the forge!'", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -411,16 +429,16 @@ namespace JamTemplate
 
             // draw Forge Texture
 
-            DrawText("You found the Forge,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
-            DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("You found the forge,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("but the blacksmith is not there.", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
 
 
-            DrawText("'Looking for some Potatoes ", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("'Looking for some potatoes ", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
             DrawText("in the western mountains.'", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
 
-            DrawText("a Note says.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
+            DrawText("a note says.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
 
-            DrawText("So head West and look for the Blacksmith!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("So head west and look for the blacksmith!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -431,16 +449,15 @@ namespace JamTemplate
 
             // draw BlackSmitz picture
 
-            DrawText("You found the Blacksmith,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
-            //DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("You found the blacksmith,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
 
-            DrawText("'I will forge your adamantium Sword.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("'I will forge your adamantium sword.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
             DrawText("Bring the adamantium ore to my forge.", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
-            DrawText("You can find some in the Mountains in the South.", new Vector2f(20, 175), GameProperties.ColorLightBlue, rw);
+            DrawText("You can find some in the mountains in the south.", new Vector2f(20, 175), GameProperties.ColorLightBlue, rw);
             DrawText("When you have some, come back to my forge!.", new Vector2f(20, 200), GameProperties.ColorLightBlue, rw);
 
 
-            DrawText("So head South and look for some adamantium ore!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("So head south and look for some adamantium ore!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -451,10 +468,9 @@ namespace JamTemplate
 
             // draw Adamantium Picture
 
-            DrawText("You found the adamantium Ore.", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
-            //DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("You found the adamantium ore.", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
 
-            DrawText("So head head back to the forge!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("Head back to the forge!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -465,16 +481,16 @@ namespace JamTemplate
 
             // draw Forge Texture with Blacksmiz
 
-            DrawText("You bring the Blacksmith the ore.", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("You bring the ore to the blacksmith.", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
             DrawText("All you hear for the next hours is", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
-            DrawText("the sound of metal hitting metal.", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
+            DrawText("the sound of true metal hitting black metal.", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
 
 
             DrawText("'Here is your sword!", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
             DrawText("Use it with great responsibility.'", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
 
             DrawText("You take the sword and embark on your journey.", new Vector2f(20, 300), GameProperties.ColorWhite, rw);
-            DrawText("So head South to look for the headless goblin!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("Head south to look for the headless goblin!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -489,15 +505,16 @@ namespace JamTemplate
             DrawText("split his head with your adamantium sword", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
             DrawText("bruising some muscles and breaking some bones.", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
 
-            DrawText("Your Quest for revenge is over.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("Your quest for revenge is over.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
             //DrawText("You take a deep breath and release all the anger.", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
 
             DrawText("[Space] To Main Menu", new Vector2f(470, 555), GameProperties.ColorWhite, rw);
         }
 
+
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
-            Text text = new Text(s, GameProperties.GameFont());
+            text.DisplayedString = s;
             text.Position = position;
             text.Color = color;
             window.Draw(text);
@@ -529,7 +546,7 @@ namespace JamTemplate
 
         }
 
-        private void InitGame()
+        public void InitGame()
         {
             _player = new Player(this, 0);
             _sidebar = new Sidebar(_player);

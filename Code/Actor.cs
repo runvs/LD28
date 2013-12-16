@@ -147,7 +147,9 @@ namespace JamTemplate
             ActorAttributes.HealthCurrent -= damage;
             PlaySoundHit();
             CheckIfActorDead();
+            ReactOnDamage();
         }
+        protected abstract void ReactOnDamage();
 
         private void CheckIfActorDead()
         {

@@ -129,13 +129,11 @@ namespace JamTemplate
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 150 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
-            text = new Text();
             text.DisplayedString = "Start [Return]";
             text.Font = GameProperties.GameFont();
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 250 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
-            text = new Text();
             text.Font = GameProperties.GameFont();
             text.DisplayedString = "Movement: W A S D ";
             text.Color = GameProperties.ColorWhite;
@@ -143,7 +141,6 @@ namespace JamTemplate
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 330 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
-            text = new Text();
             text.Font = GameProperties.GameFont();
             text.DisplayedString = "Attack: Space";
             text.Color = GameProperties.ColorWhite;
@@ -151,7 +148,6 @@ namespace JamTemplate
             text.Position = new Vector2f(300 - text.GetGlobalBounds().Width / 2.0f, 360 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
-            text = new Text();
             text.Font = GameProperties.GameFont();
             text.DisplayedString = "Block: LCtrl";
             text.Color = GameProperties.ColorWhite;
@@ -159,7 +155,6 @@ namespace JamTemplate
             text.Position = new Vector2f(500 - text.GetGlobalBounds().Width / 2.0f, 360 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
-            text = new Text();
             text.Font = GameProperties.GameFont();
             text.DisplayedString = "Spell: LShift";
             text.Color = GameProperties.ColorWhite;
@@ -167,7 +162,6 @@ namespace JamTemplate
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 390 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
-            text = new Text();
             text.Font = GameProperties.GameFont();
             text.DisplayedString = "Interact: E";
             text.Color = GameProperties.ColorWhite;
@@ -183,7 +177,6 @@ namespace JamTemplate
             rw.Draw(text);
 
 
-            text = new Text();
             text.DisplayedString = "[C]redits";
             text.Font = GameProperties.GameFont();
             text.Scale = new Vector2f(0.75f, 0.75f);
@@ -262,7 +255,11 @@ namespace JamTemplate
 
         private void StartGame()
         {
-            _myWorld = new World();
+            if (_myWorld == null)
+            {
+                _myWorld = new World();
+            }
+            _myWorld.InitGame();
             ChangeGameState(State.Game, 0.1f);
         }
 

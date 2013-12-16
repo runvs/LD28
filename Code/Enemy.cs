@@ -18,6 +18,7 @@ namespace JamTemplate
         private bool _hasSeenPlayer = false;
         private EnemyStrength _strength;
         private EnemyType _type;
+        private float _standstillTimer;
 
         #endregion Fields
 
@@ -100,6 +101,12 @@ namespace JamTemplate
             _actorSprite.Scale = new Vector2f(2.0f, 2.0f);
         }
 
+        protected override void ReactOnDamage()
+        {
+            _hasSeenPlayer = true;
+            _standstillTimer += GameProperties.EnemyStandStillTime;
+        }
+
         public void Draw(RenderWindow rw, Vector2i CameraPosition)
         {
             _actorSprite.Position = new Vector2f(
@@ -146,7 +153,7 @@ namespace JamTemplate
         public void Update(float deltaT)
         {
 
-            DoAIOperations();
+            DoAIOperations(deltaT);
 
             if (_movementTimer > 0.0f)
             {
@@ -164,7 +171,7 @@ namespace JamTemplate
             }
         }
 
-        private void DoAIOperations()
+        private void DoAIOperations(float deltaT)
         {
             if (!_hasSeenPlayer)
             {
@@ -191,29 +198,37 @@ namespace JamTemplate
                     }
                     else
                     {
-                        // do nothing here
+
                     }
+                }
+            }
+            else
+            {
+                Console.WriteLine(_standstillTimer);
+                _standstillTimer -= deltaT;
+                if (_standstillTimer <= 0.0f)
+                {
+                    _hasSeenPlayer = false;
                 }
             }
         }
 
         protected override void DoBattleAction()
         {
-            if (_battleAttack && !_battleBlock && !_battleMagic)
-            {
-
-            }
         }
 
         private void EnemyAttack()
         {
             Vector2i playerPos = _world._player.ActorPosition;
-            //System.Console.Out.WriteLine(playerPos.ToString() + "\t" + ActorPosition.ToString());
             Vector2i difference = playerPos - ActorPosition;
 
             if (Math.Abs(difference.X) + Math.Abs(difference.Y) <= 1)
             {
-                _hasSeenPlayer = true;
+                if (_hasSeenPlayer == false)
+                {
+                    _hasSeenPlayer = true;
+                    _standstillTimer += GameProperties.EnemyStandStillTime;
+                }
                 BattleManager.DoBattleAction(this, _world._player, BattleAction.Attack);
             }
         }

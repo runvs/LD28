@@ -83,11 +83,13 @@ namespace JamTemplate
         static public float IntroDisplayTime { get { return 25.0f; } }
         #endregion Sequence Timers
 
-        public static int EnemyEasyGold { get { return 2; } }
-        public static int EnemyEasyExperience { get { return 5; } }
-        public static int EnemyNormalGold { get { return 4; } }
-        public static int EnemyNormalExperience { get { return 10; } }
-        public static int EnemyHardGold { get { return 8; } }
-        public static int EnemyHardExperience { get { return 15; } }
+        public static int EnemyEasyGold { get { return 1 + RandomGenerator.Next(2); } }
+        public static int EnemyEasyExperience { get { return 4; } }
+        public static int EnemyNormalGold { get { return 3 + RandomGenerator.Next(3); } }
+        public static int EnemyNormalExperience { get { return 6; } }
+        public static int EnemyHardGold { get { return 5 + RandomGenerator.Next(4); } }
+        public static int EnemyHardExperience { get { return 9; } }
+
+        public static float EnemyStandStillTime { get { return 2.5f; } }
     }
 }
