@@ -20,8 +20,6 @@ namespace JamTemplate
         public bool Picked { get; private set; }
 
         private string _texturePath;
-        private string p1;
-        private int p2;
 
         #endregion Fields
 

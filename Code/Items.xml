@@ -26,17 +26,17 @@
     </suffixes>
   </affixes>
   <baseTypes>
-    <baseType itemType="HAND" file="../GFX/item_axe.png">Axe</baseType>
-    <baseType itemType="HAND" file="../GFX/item_sword.png">Sword</baseType>
-    <baseType itemType="HAND" file="../GFX/item_hammer.png">Hammer</baseType>
-    <baseType itemType="TORSO" file="../GFX/item_breastplate.png">Breast Plate</baseType>
-    <baseType itemType="TORSO" file="../GFX/item_generic.png">Robe</baseType>
-    <baseType itemType="TORSO" file="../GFX/item_generic.png">Leather Armor</baseType>
-    <baseType itemType="FEET" file="../GFX/item_generic.png">Chain Boots</baseType>
-    <baseType itemType="FEET" file="../GFX/item_boots.png">Boots</baseType>
-    <baseType itemType="FEET" file="../GFX/item_greaves.png">Greaves</baseType>
-    <baseType itemType="HEAD" file="../GFX/item_generic.png">Shako</baseType>
-    <baseType itemType="HEAD" file="../GFX/item_helmet.png">Helmet</baseType>
-    <baseType itemType="HEAD" file="../GFX/item_generic.png">Armet</baseType>
+    <baseType itemType="HAND" file="../GFX/item_axe.png" attribute="STR" modifier="+1">Axe</baseType>
+    <baseType itemType="HAND" file="../GFX/item_sword.png" attribute="STR" modifier="+1">Sword</baseType>
+    <baseType itemType="HAND" file="../GFX/item_hammer.png" attribute="STR" modifier="+1">Hammer</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_breastplate.png" attribute="END" modifier="+1">Breast Plate</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_generic.png" attribute="INT" modifier="+1">Robe</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_generic.png" attribute="AGI" modifier="+1">Leather Armor</baseType>
+    <baseType itemType="FEET" file="../GFX/item_generic.png" attribute="AGI" modifier="+1">Chain Boots</baseType>
+    <baseType itemType="FEET" file="../GFX/item_boots.png" attribute="AGI" modifier="+1">Boots</baseType>
+    <baseType itemType="FEET" file="../GFX/item_greaves.png" attribute="AGI" modifier="+1">Greaves</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_generic.png" attribute="INT" modifier="+1">Shako</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_helmet.png" attribute="END" modifier="+1">Helmet</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_generic.png" attribute="END" modifier="+1">Armet</baseType>
   </baseTypes>
 </items>

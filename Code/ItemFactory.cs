@@ -113,6 +113,15 @@ namespace JamTemplate
                 }
             }
 
+            if (modifiers.ContainsKey(baseType.AttributeType))
+            {
+                modifiers[baseType.AttributeType] += baseType.Modifier;
+            }
+            else
+            {
+                modifiers.Add(baseType.AttributeType, baseType.Modifier);
+            }
+
             var itemName = string.Format(
                 "{0} {1} {2}",
                 prefixDesc,
@@ -157,9 +166,29 @@ namespace JamTemplate
                         break;
                 }
 
+                AttributeType attributeType;
+                switch (attributes.Where(x => x.Name == "attribute").First().Value)
+                {
+                    default:
+                    case "STR":
+                        attributeType = AttributeType.STRENGTH;
+                        break;
+                    case "AGI":
+                        attributeType = AttributeType.AGILITY;
+                        break;
+                    case "INT":
+                        attributeType = AttributeType.INTELLIGENCE;
+                        break;
+                    case "END":
+                        attributeType = AttributeType.ENDURANCE;
+                        break;
+                }
+
+                int modifier = int.Parse(attributes.Where(x => x.Name == "modifier").First().Value);
+
                 var filePath = attributes.Where(x => x.Name == "file").First().Value;
 
-                _baseTypeList.Add(new BaseType(baseType.Value, itemType, filePath));
+                _baseTypeList.Add(new BaseType(baseType.Value, itemType, filePath, attributeType, modifier));
             }
         }
 
@@ -217,12 +246,16 @@ namespace JamTemplate
             public string Name { get; set; }
             public string FilePath { get; set; }
             public ItemType ItemType { get; set; }
+            public AttributeType AttributeType { get; set; }
+            public int Modifier { get; set; }
 
-            public BaseType(string name, ItemType itemType, string filePath)
+            public BaseType(string name, ItemType itemType, string filePath, AttributeType attributeType, int modifier)
             {
                 Name = name;
                 ItemType = itemType;
                 FilePath = filePath;
+                AttributeType = attributeType;
+                Modifier = modifier;
             }
         }
     }
