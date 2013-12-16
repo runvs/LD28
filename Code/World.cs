@@ -106,7 +106,11 @@ namespace JamTemplate
                     _showSequence3Timer = -1.0f;
                     _showSequence4Timer = -1.0f;
                     _showSequence5Timer = -1.0f;
-                    _showSequence6Timer = -1.0f;
+
+                    if (_showSequence6Timer >= 0.0f)
+                    {
+                        _player.Die();
+                    }
                 }
             }
         }
@@ -484,7 +488,7 @@ namespace JamTemplate
             DrawText("bruising some muscles and breaking some bones.", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
 
             DrawText("Your Quest for revenge is over.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
-            DrawText("You take a deep breath and release all the anger.", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
+            //DrawText("You take a deep breath and release all the anger.", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
 
             DrawText("[Space] To Main Menu", new Vector2f(470, 555), GameProperties.ColorWhite, rw);
         }
@@ -639,7 +643,7 @@ namespace JamTemplate
 
         public Score EndThisRound()
         {
-            return new Score();
+            return new Score(_player);
 
         }
 

@@ -135,7 +135,7 @@ namespace JamTemplate
 
         private void CheckIfActorDead()
         {
-            System.Console.Out.WriteLine("Remaining Health " + ActorAttributes.HealthCurrent);
+            //System.Console.Out.WriteLine("Remaining Health " + ActorAttributes.HealthCurrent);
             if (ActorAttributes.HealthCurrent <= 0)
             {
 

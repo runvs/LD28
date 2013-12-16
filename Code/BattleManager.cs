@@ -95,7 +95,7 @@ namespace JamTemplate
         static private int CalculateDamageWithArmor(int baseDamage, int Strength)
         {
             int modifier = RollTheDie.AttributeProbe(Strength);
-            System.Console.Out.WriteLine("reduction " + modifier);
+            //System.Console.Out.WriteLine("reduction " + modifier);
             int finalDamage = baseDamage - modifier;
             if (finalDamage <= 0)
             {

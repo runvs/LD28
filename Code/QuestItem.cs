@@ -85,7 +85,7 @@ namespace JamTemplate
             }
             else if (QuestItemType == 4)
             {
-                _itemTexture = new Texture("../GFX/quest_smithy.png");
+                _itemTexture = new Texture("../GFX/enemy_goblin_1.png");
             }
 
             _itemSprite = new Sprite(_itemTexture);
