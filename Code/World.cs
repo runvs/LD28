@@ -19,6 +19,7 @@ namespace JamTemplate
         IList<Enemy> _enemyList; // currently active enemies
         IList<NomadsHouse> _houseList;
         IList<Spell> _spellList;
+        IList<QuestItem> _questItemList;
 
         private float _showIntroTimer;
         Texture _introTexture;
@@ -141,6 +142,11 @@ namespace JamTemplate
 
                 }
 
+                foreach (var i in _questItemList)
+                {
+                    i.Update(deltaT);
+                }
+
                 foreach (var s in _spellList)
                 {
                     if (!s.IsSpellOver)
@@ -191,6 +197,10 @@ namespace JamTemplate
                 {
                     i.Draw(rw, CameraPosition);
                 }
+                foreach (var i in _questItemList)
+                {
+                    i.Draw(rw, CameraPosition);
+                }
 
                 foreach (var e in _enemyList)
                 {
@@ -235,7 +245,7 @@ namespace JamTemplate
             {
                 if (_showIntroTimer >= 0.0f)
                 {
-                    DrawIntro(rw);
+                    DrawSequence1(rw);
 
                 }
             }
@@ -264,8 +274,69 @@ namespace JamTemplate
             DrawText("with some humand blood.", new Vector2f(20, 375), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
-
         }
+
+
+        private void DrawSequence1(RenderWindow rw)
+        {
+            rw.Clear(GameProperties.ColorBlack);
+
+            DrawText("You slaughter the goblin pack", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("with the warm feeling of revenge.", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+
+            DrawText("But ...", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
+
+
+            DrawText("'Headless Master! help us in this Misery!'", new Vector2f(20, 125), GameProperties.ColorLightRed, rw);
+            DrawText("a goblin cries out", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
+
+            DrawText("The goblins' leader was not with them.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
+            //DrawText("family and friends.", new Vector2f(20, 175), GameProperties.ColorWhite, rw); // friens
+
+            DrawText("'Good for you'", new Vector2f(20, 225), GameProperties.ColorLightRed, rw);
+            DrawText("he whispers", new Vector2f(20, 250), GameProperties.ColorWhite, rw);
+            DrawText("'He can only be slain by an adamantium Sword.'", new Vector2f(20, 275), GameProperties.ColorLightRed, rw);
+            DrawText("So head West and look for the forge!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+
+            DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
+        }
+
+        private void DrawSequence2(RenderWindow rw)
+        {
+            rw.Clear(GameProperties.ColorBlack);
+
+            // draw Forge Texture
+
+            DrawText("You found the Forge,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+
+
+            DrawText("'Looking for some Potatoes in the western mountains.'", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("a Note says.", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
+
+            DrawText("So head West and look for the Blacksmith!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+
+            DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
+        }
+
+        private void DrawSequence3(RenderWindow rw)
+        {
+            rw.Clear(GameProperties.ColorBlack);
+
+            // draw Forge Texture
+
+            DrawText("You found the Forge,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+
+
+            DrawText("'Looking for some Potatoes in the western mountains.'", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("a Note says.", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
+
+            DrawText("So head West and look for the Blacksmith!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+
+            DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
+        }
+
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
@@ -309,6 +380,7 @@ namespace JamTemplate
             _enemyList = new List<Enemy>();
             _houseList = new List<NomadsHouse>();
             _spellList = new List<Spell>();
+            _questItemList = new List<QuestItem>();
 
             _showIntroTimer = GameProperties.IntroDisplayTime;
 

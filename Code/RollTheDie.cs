@@ -36,6 +36,5 @@ namespace JamTemplate
                 return (attribute - roll + 1);
             }
         }
-
     }
 }

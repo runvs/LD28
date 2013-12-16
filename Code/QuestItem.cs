@@ -55,6 +55,18 @@ namespace JamTemplate
             rw.Draw(_itemSprite);
         }
 
+        public void Update(float deltaT)
+        {
+            Vector2i playerPosition = _world._player.ActorPosition;
+            if (playerPosition.Equals(PositionInTiles))
+            {
+                _world._player._log.CompleteCurrentQuest();
+                PickUpItem();
+
+            }
+        }
+
+
         public void LoadGraphics()
         {
             if (QuestItemType == 0)
