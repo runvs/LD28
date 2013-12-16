@@ -181,8 +181,6 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw)
         {
-
-
             if (!IsInSequence())
             {
                 foreach (var t in _tileList)
@@ -202,12 +200,12 @@ namespace JamTemplate
                     }
                 }
 
-                _player.Draw(rw, CameraPosition);
-
                 foreach (var h in _houseList)
                 {
                     h.Draw(rw, CameraPosition);
                 }
+
+                _player.Draw(rw, CameraPosition);
 
                 foreach (var s in _spellList)
                 {
