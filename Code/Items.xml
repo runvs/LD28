@@ -35,7 +35,7 @@
     <baseType itemType="FEET" file="../GFX/item_chain_boots.png" attribute="AGI" modifier="+1">Chain Boots</baseType>
     <baseType itemType="FEET" file="../GFX/item_boots.png" attribute="AGI" modifier="+1">Boots</baseType>
     <baseType itemType="FEET" file="../GFX/item_greaves.png" attribute="AGI" modifier="+1">Greaves</baseType>
-    <baseType itemType="HEAD" file="../GFX/item_generic.png" attribute="INT" modifier="+1">Shako</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_shako.png" attribute="INT" modifier="+1">Shako</baseType>
     <baseType itemType="HEAD" file="../GFX/item_helmet.png" attribute="END" modifier="+1">Helmet</baseType>
     <baseType itemType="HEAD" file="../GFX/item_armet.png" attribute="END" modifier="+1">Armet</baseType>
   </baseTypes>
