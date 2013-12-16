@@ -19,7 +19,8 @@ namespace JamTemplate
         public static int BuyItemGoldCost { get { return 4; } }
         public static int BuyHealGoldCost { get { return 2; } }
 
-        public static int PlayerBaseHealth { get { return 20; } }
+        public static int PlayerBaseHealth { get { return 11; } }
+        public static int PlayerBaseStamina { get { return 25; } }
 
         public static float PlayerBaseStaminaRegenFrequency { get { return 0.8f; } }
         public static float PlayerBaseHealthRegenFrequency { get { return 5.5f; } }

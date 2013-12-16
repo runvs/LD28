@@ -41,6 +41,11 @@ namespace JamTemplate
             HealthCurrent = HealthMaximum = newHealthVal;
         }
 
+        public void ResetStamina(int newStaminaVal)
+        {
+            StaminaCurrent = StaminaMaximum = newStaminaVal;
+        }
+
         public void RefillHealth()
         {
             HealthCurrent = HealthMaximum;
@@ -80,13 +85,12 @@ namespace JamTemplate
             ModifierStrength = 0;
             ModifierIntelligence = 0;
 
-            HealthCurrent = 17;
-            HealthMaximum = 20;
+            ReCalculateHealth();
+            ResetHealth(HealthMaximum);
+            ResetStamina(StaminaMaximum);
 
-            StaminaCurrent = 17;
-            StaminaMaximum = 40;
             HealthRegenfreuency = 0.0f;
-            StaminaRegenfreuency = 0.0f;
+            StaminaRegenfreuency = 1.0f;
         }
 
         public void ResetModifiers()
@@ -131,6 +135,7 @@ namespace JamTemplate
                     else if (kvp.Key == AttributeType.ENDURANCE)
                     {
                         ModifierEndurance += kvp.Value;
+                        ReCalculateHealth();
                     }
                     else if (kvp.Key == AttributeType.INTELLIGENCE)
                     {
@@ -142,6 +147,15 @@ namespace JamTemplate
                     }
                 }
             }
+        }
+
+        public void ReCalculateHealth()
+        {
+            int newHealth = GameProperties.PlayerBaseHealth + 3 * Endurance;
+            int newStamina = GameProperties.PlayerBaseStamina + 5 * Endurance;
+
+            HealthMaximum = newHealth;
+            StaminaMaximum = newStamina;
         }
 
     }

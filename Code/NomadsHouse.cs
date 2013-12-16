@@ -181,6 +181,7 @@ namespace JamTemplate
                                 _world._player.ActorAttributes.Experience -= GameProperties.IncreaseAttributeExperienceCost;
                                 _buttonTimer += 0.5f;
                                 _world._player.ActorAttributes.BaseEndurance++;
+                                _world._player.ActorAttributes.ReCalculateHealth();
                             }
                         }
                     }
