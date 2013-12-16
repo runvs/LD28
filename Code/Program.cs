@@ -19,7 +19,6 @@ namespace JamTemplate
         {
             if (e.Code == SFML.Window.Keyboard.Key.Escape)
             {
-
                 //SFML.Graphics.RenderWindow window = (SFML.Graphics.RenderWindow)sender;
                 //window.Close();
             }
@@ -29,7 +28,7 @@ namespace JamTemplate
 
         static void Main(string[] args)
         {
-            var applicationWindow = new RenderWindow(new VideoMode(800, 600, 32), "$WindowTitle$");
+            var applicationWindow = new RenderWindow(new VideoMode(800, 600, 32), "SchrotBeton");
 
             applicationWindow.SetFramerateLimit(60);
 

@@ -200,9 +200,22 @@ namespace JamTemplate
                     }
                 }
 
+                bool drawHouses = true;
                 foreach (var h in _houseList)
                 {
-                    h.Draw(rw, CameraPosition);
+                    if (h.IsActive)
+                    {
+                        drawHouses = !h.IsActive;
+                        h.DrawText(rw);
+                        break;
+                    }
+                }
+                if (drawHouses)
+                {
+                    foreach (var h in _houseList)
+                    {
+                        h.Draw(rw, CameraPosition);
+                    }
                 }
 
                 _player.Draw(rw, CameraPosition);

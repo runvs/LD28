@@ -82,15 +82,16 @@ namespace JamTemplate
 
             if (IsActive)
             {
-                rw.Draw(_overlaySprite);
+
 
                 DrawText(rw);
 
             }
         }
 
-        private void DrawText(RenderWindow rw)
+        public void DrawText(RenderWindow rw)
         {
+            rw.Draw(_overlaySprite);
             if (_type == HouseType.MERCHANT)
             {
                 DrawText("What would you like to buy?", new Vector2f(200, 200), GameProperties.ColorWhite, rw);

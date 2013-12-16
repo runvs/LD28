@@ -82,6 +82,8 @@ namespace JamTemplate
                 }
                 String s1 = s.Substring(0, spacePos);
                 String s2 = s.Substring(spacePos);
+                s1 = s1.TrimEnd();
+                s2 = s2.TrimStart();
                 DrawText(s1, position, color, window);
                 position.Y += 20;
                 DrawText(s2, position, color, window);
