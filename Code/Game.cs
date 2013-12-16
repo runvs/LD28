@@ -71,7 +71,7 @@ namespace JamTemplate
 
         private void GetInputCreditsScore()
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.C) || Keyboard.IsKeyPressed(Keyboard.Key.Space) || Keyboard.IsKeyPressed(Keyboard.Key.Return))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.C) || Keyboard.IsKeyPressed(Keyboard.Key.Space) || Keyboard.IsKeyPressed(Keyboard.Key.Return) || Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 ChangeGameState(State.Menu, 1.0f);
             }

@@ -91,11 +91,11 @@ namespace JamTemplate
 
         private void DrawBars(RenderWindow window)
         {
-            var percentage = _player.ActorAttributes.HealthCurrent / (float)_player.ActorAttributes.HealthMaximum;
+            var percentage = (_player.ActorAttributes.HealthCurrent - 1.0f) / (float)_player.ActorAttributes.HealthMaximum;
             _healthBar.Scale = new Vector2f(1, percentage);
             window.Draw(_healthBar);
 
-            percentage = _player.ActorAttributes.StaminaCurrent / (float)_player.ActorAttributes.StaminaMaximum;
+            percentage = (_player.ActorAttributes.StaminaCurrent - 1.0f) / (float)_player.ActorAttributes.StaminaMaximum;
             _staminaBar.Scale = new Vector2f(1, percentage);
             window.Draw(_staminaBar);
 

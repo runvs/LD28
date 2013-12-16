@@ -154,10 +154,10 @@ namespace JamTemplate
 
         public void ReCalculateHealth()
         {
-            int newHealth = GameProperties.PlayerBaseHealth + 3 * Endurance;
-            int newStamina = GameProperties.PlayerBaseStamina + 5 * Endurance;
+            int newHealth = GameProperties.PlayerBaseHealth + 2 * Endurance;
+            int newStamina = GameProperties.PlayerBaseStamina + 3 * Endurance;
 
-            float newHealthRegen = 7.0f / Endurance;
+            float newHealthRegen = 14.0f / Endurance;
             float newStaminaRegen = 5.0f / Endurance;
 
             HealthRegenfreuency = newHealthRegen;

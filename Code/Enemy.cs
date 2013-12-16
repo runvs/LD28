@@ -53,10 +53,10 @@ namespace JamTemplate
             }
             else if (_strength == EnemyStrength.HARD)
             {
-                ActorAttributes.BaseStrength = 4 + GameProperties.RandomGenerator.Next(-1, +4);
-                ActorAttributes.BaseAgility = 4 + GameProperties.RandomGenerator.Next(-1, +4);
-                ActorAttributes.BaseEndurance = 4 + GameProperties.RandomGenerator.Next(-1, +4);
-                ActorAttributes.BaseIntelligence = 4 + GameProperties.RandomGenerator.Next(-1, +4);
+                ActorAttributes.BaseStrength = 6 + GameProperties.RandomGenerator.Next(-1, +6);
+                ActorAttributes.BaseAgility = 6 + GameProperties.RandomGenerator.Next(-1, +6);
+                ActorAttributes.BaseEndurance = 6 + GameProperties.RandomGenerator.Next(-1, +6);
+                ActorAttributes.BaseIntelligence = 6 + GameProperties.RandomGenerator.Next(-1, +4);
                 DropGold = GameProperties.EnemyHardGold;
                 DropExperience = GameProperties.EnemyHardExperience;
             }
@@ -204,7 +204,7 @@ namespace JamTemplate
             }
             else
             {
-                Console.WriteLine(_standstillTimer);
+                //Console.WriteLine(_standstillTimer);
                 _standstillTimer -= deltaT;
                 if (_standstillTimer <= 0.0f)
                 {

@@ -576,10 +576,10 @@ namespace JamTemplate
             _tileList = parser.TerrainLayer;
             CameraPosition = new Vector2i(0, 0);
 
-            _itemList.Add(ItemFactory.GetHeadItem(new Vector2i(2, 4)));
-            _itemList.Add(ItemFactory.GetTorsoItem(new Vector2i(3, 4)));
-            _itemList.Add(ItemFactory.GetFeetItem(new Vector2i(4, 4)));
-            _itemList.Add(ItemFactory.GetHandItem(new Vector2i(5, 4)));
+            //_itemList.Add(ItemFactory.GetHeadItem(new Vector2i(2, 4)));
+            //_itemList.Add(ItemFactory.GetTorsoItem(new Vector2i(3, 4)));
+            //_itemList.Add(ItemFactory.GetFeetItem(new Vector2i(4, 4)));
+            //_itemList.Add(ItemFactory.GetHandItem(new Vector2i(5, 4)));
 
             _enemyList = parser.EnemyLayer;
             _player.MovePlayer(parser.PlayerPosition);

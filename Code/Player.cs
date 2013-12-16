@@ -18,6 +18,7 @@ namespace JamTemplate
 
         private float _HealthRegenTimer;
         private float _StaminaRegenTimer;
+        public IList<String> _ownedItems;
 
 
 
@@ -56,6 +57,7 @@ namespace JamTemplate
             _timerLog = 0.0f;
             _HealthRegenTimer = 0.0f;
             _StaminaRegenTimer = 0.0f;
+            _ownedItems = new List<String>();
 
             ActorAttributes.StaminaRegenfreuency = GameProperties.PlayerBaseStaminaRegenFrequency;
             ActorAttributes.HealthRegenfreuency = GameProperties.PlayerBaseHealthRegenFrequency;
@@ -259,6 +261,7 @@ namespace JamTemplate
                     this.TorsoItem = item;
                     break;
             }
+            _ownedItems.Add(item.Name);
             item.PickUp();
             ReCalculateModifiers();
             PlaySoundPickup();
