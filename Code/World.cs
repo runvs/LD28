@@ -563,6 +563,7 @@ namespace JamTemplate
             _itemList.Add(ItemFactory.GetHandItem(new Vector2i(5, 4)));
 
             _enemyList = parser.EnemyLayer;
+            _player.MovePlayer(parser.PlayerPosition);
 
             foreach (var item in parser.ObjectLayer)
             {

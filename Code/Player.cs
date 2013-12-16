@@ -69,6 +69,11 @@ namespace JamTemplate
             }
         }
 
+        public void MovePlayer(Vector2i position)
+        {
+            ActorPosition = position;
+        }
+
         private void SetPlayerNumberDependendProperties()
         {
             PlayerName = "Player" + PlayerNumber;

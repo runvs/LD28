@@ -9,6 +9,7 @@ namespace JamTemplate
         public List<Tile> TerrainLayer { get; private set; }
         public List<IGameObject> ObjectLayer { get; private set; }
         public List<Enemy> EnemyLayer { get; private set; }
+        public Vector2i PlayerPosition { get; private set; }
 
         public MapParser(string fileName, World world)
         {
@@ -82,8 +83,11 @@ namespace JamTemplate
                     case 4:
                         ObjectLayer.Add(new QuestItem(world, 3, new Vector2i(xPos, yPos)));
                         break;
-                    case 5:
+                    case 6:
                         ObjectLayer.Add(new QuestItem(world, 4, new Vector2i(xPos, yPos)));
+                        break;
+                    case 7:
+                        PlayerPosition = new Vector2i(xPos, yPos);
                         break;
                 }
 
