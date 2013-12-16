@@ -19,8 +19,9 @@ namespace JamTemplate
         {
             if (e.Code == SFML.Window.Keyboard.Key.Escape)
             {
-                SFML.Graphics.RenderWindow window = (SFML.Graphics.RenderWindow)sender;
-                window.Close();
+
+                //SFML.Graphics.RenderWindow window = (SFML.Graphics.RenderWindow)sender;
+                //window.Close();
             }
         }
 
@@ -55,6 +56,15 @@ namespace JamTemplate
                 applicationWindow.DispatchEvents();
 
                 myGame.GetInput();
+
+                if (myGame._gameState == JamTemplate.Game.State.Menu)
+                {
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.Escape) && myGame._timeTilNextInput <= 0.0f)
+                    {
+                        applicationWindow.Close();
+                        break;
+                    }
+                }
 
                 myGame.Update(time);
 

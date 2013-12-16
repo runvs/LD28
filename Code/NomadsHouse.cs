@@ -49,7 +49,6 @@ namespace JamTemplate
                 item3 = ItemFactory.GetHandItem(new Vector2i(0, 0));
                 item4 = ItemFactory.GetFeetItem(new Vector2i(0, 0));
 
-
             }
             else if (ran <= 0.66)
             {

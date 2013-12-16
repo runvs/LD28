@@ -4,16 +4,17 @@ using SFML.Window;
 
 namespace JamTemplate
 {
-    class Game
+    public class Game
     {
 
         #region Fields
 
-        private State _gameState;
+        public State _gameState;
+
 
         World _myWorld;
         Score _gameScore;
-        float _timeTilNextInput = 0.0f;
+        public float _timeTilNextInput = 0.0f;
         Music _mainTheme;
 
         #endregion Fields
@@ -40,6 +41,10 @@ namespace JamTemplate
                 else if (_gameState == State.Game)
                 {
                     _myWorld.GetInput();
+                    if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+                    {
+                        ChangeGameState(State.Menu);
+                    }
                 }
                 else if (_gameState == State.Credits || _gameState == State.Score)
                 {
@@ -60,17 +65,14 @@ namespace JamTemplate
                 ChangeGameState(State.Credits);
             }
 
+
         }
 
         private void GetInputCreditsScore()
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.C) || Keyboard.IsKeyPressed(Keyboard.Key.Space) || Keyboard.IsKeyPressed(Keyboard.Key.Return))
             {
                 ChangeGameState(State.Menu, 1.0f);
-            }
-            else
-            {
-                ChangeGameState(State.Menu, 0.5f);
             }
         }
 
@@ -119,9 +121,9 @@ namespace JamTemplate
         {
 
             Text text = new Text();
-            text.DisplayedString = "$GameTitle$";
-
+            text.DisplayedString = "SchrotBeton";
             text.Font = GameProperties.GameFont();
+            text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(2, 2);
             text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 150 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
@@ -134,18 +136,49 @@ namespace JamTemplate
 
             text = new Text();
             text.Font = GameProperties.GameFont();
-            text.DisplayedString = "W A S D & LShift";
+            text.DisplayedString = "Movement: W A S D ";
             text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(0.75f, 0.75f);
-            text.Position = new Vector2f(530 - text.GetGlobalBounds().Width / 2.0f, 340 - text.GetGlobalBounds().Height / 2.0f);
+            text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 330 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
             text = new Text();
             text.Font = GameProperties.GameFont();
-            text.DisplayedString = "Arrows & RCtrl";
+            text.DisplayedString = "Attack: Space";
             text.Color = GameProperties.ColorWhite;
             text.Scale = new Vector2f(0.75f, 0.75f);
-            text.Position = new Vector2f(180 - text.GetGlobalBounds().Width / 2.0f, 340 - text.GetGlobalBounds().Height / 2.0f);
+            text.Position = new Vector2f(300 - text.GetGlobalBounds().Width / 2.0f, 360 - text.GetGlobalBounds().Height / 2.0f);
+            rw.Draw(text);
+
+            text = new Text();
+            text.Font = GameProperties.GameFont();
+            text.DisplayedString = "Block: LCtrl";
+            text.Color = GameProperties.ColorWhite;
+            text.Scale = new Vector2f(0.75f, 0.75f);
+            text.Position = new Vector2f(500 - text.GetGlobalBounds().Width / 2.0f, 360 - text.GetGlobalBounds().Height / 2.0f);
+            rw.Draw(text);
+
+            text = new Text();
+            text.Font = GameProperties.GameFont();
+            text.DisplayedString = "Spell: LShift";
+            text.Color = GameProperties.ColorWhite;
+            text.Scale = new Vector2f(0.75f, 0.75f);
+            text.Position = new Vector2f(400 - text.GetGlobalBounds().Width / 2.0f, 390 - text.GetGlobalBounds().Height / 2.0f);
+            rw.Draw(text);
+
+            text = new Text();
+            text.Font = GameProperties.GameFont();
+            text.DisplayedString = "Interact: E";
+            text.Color = GameProperties.ColorWhite;
+            text.Scale = new Vector2f(0.75f, 0.75f);
+            text.Position = new Vector2f(300 - text.GetGlobalBounds().Width / 2.0f, 430 - text.GetGlobalBounds().Height / 2.0f);
+            rw.Draw(text);
+            text = new Text();
+            text.Font = GameProperties.GameFont();
+            text.DisplayedString = "Questlog: L";
+            text.Color = GameProperties.ColorWhite;
+            text.Scale = new Vector2f(0.75f, 0.75f);
+            text.Position = new Vector2f(500 - text.GetGlobalBounds().Width / 2.0f, 430 - text.GetGlobalBounds().Height / 2.0f);
             rw.Draw(text);
 
 
@@ -162,7 +195,8 @@ namespace JamTemplate
         {
 
 
-            Text CreditsText = new Text("$GameTitle$", GameProperties.GameFont());
+            Text CreditsText = new Text("SchrotBeton", GameProperties.GameFont());
+            CreditsText.Color = GameProperties.ColorWhite;
             CreditsText.Scale = new Vector2f(1.5f, 1.5f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 20);
             rw.Draw(CreditsText);
@@ -172,20 +206,33 @@ namespace JamTemplate
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 100);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("$DeveloperNames$", GameProperties.GameFont());
+            CreditsText = new Text("Julian Dinges & Simon Weis", GameProperties.GameFont());
+            CreditsText.Color = GameProperties.ColorWhite;
             CreditsText.Scale = new Vector2f(1, 1);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 135);
             rw.Draw(CreditsText);
 
             CreditsText = new Text("Visual Studio 2012 \t C#", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
-            CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 170);
-            rw.Draw(CreditsText);
-
-            CreditsText = new Text("aseprite \t SFML.NET 2.1", GameProperties.GameFont());
-            CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 200);
             rw.Draw(CreditsText);
+
+            CreditsText = new Text("aseprite \t SFXR", GameProperties.GameFont());
+            CreditsText.Scale = new Vector2f(0.75f, 0.75f);
+            CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 230);
+            rw.Draw(CreditsText);
+
+            CreditsText = new Text("Cubase 5 \t SFML.NET", GameProperties.GameFont());
+            CreditsText.Scale = new Vector2f(0.75f, 0.75f);
+            CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 260);
+            rw.Draw(CreditsText);
+
+            CreditsText = new Text("Chronolapse \t SVN", GameProperties.GameFont());
+            CreditsText.Scale = new Vector2f(0.75f, 0.75f);
+            CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 290);
+            rw.Draw(CreditsText);
+
+
 
             CreditsText = new Text("Thanks to", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
@@ -197,7 +244,7 @@ namespace JamTemplate
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 375);
             rw.Draw(CreditsText);
 
-            CreditsText = new Text("Created $Date$", GameProperties.GameFont());
+            CreditsText = new Text("Created Dez 2013 for LD28", GameProperties.GameFont());
             CreditsText.Scale = new Vector2f(0.75f, 0.75f);
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 500);
             rw.Draw(CreditsText);
@@ -223,7 +270,7 @@ namespace JamTemplate
 
         #region Subclasses/Enums
 
-        private enum State
+        public enum State
         {
             Menu,
             Game,

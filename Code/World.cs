@@ -246,9 +246,11 @@ namespace JamTemplate
             DrawText("your revenge!", new Vector2f(20, 250), GameProperties.ColorWhite, rw);
 
 
-            DrawText("They went north", new Vector2f(20, 325), GameProperties.ColorLightRed, rw);
+            DrawText("'They went north'", new Vector2f(20, 325), GameProperties.ColorLightRed, rw);
             DrawText("you see scribbeld on a wall", new Vector2f(20, 350), GameProperties.ColorWhite, rw);
             DrawText("with some humand blood.", new Vector2f(20, 375), GameProperties.ColorWhite, rw);
+
+            DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
 
         }
 
