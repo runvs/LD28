@@ -154,6 +154,12 @@ namespace JamTemplate
             int newHealth = GameProperties.PlayerBaseHealth + 3 * Endurance;
             int newStamina = GameProperties.PlayerBaseStamina + 5 * Endurance;
 
+            float newHealthRegen = 7.0f / Endurance;
+            float newStaminaRegen = 3.0f / Endurance;
+
+            HealthRegenfreuency = newHealthRegen;
+            StaminaRegenfreuency = newStaminaRegen;
+
             HealthMaximum = newHealth;
             StaminaMaximum = newStamina;
         }
