@@ -12,8 +12,8 @@ namespace JamTemplate
 
         public static float SidebarWidth { get { return 200.0f; } }
 
-        public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.15f; } }
-        public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.8f; } }
+        public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.125f; } }
+        public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.9f; } }
 
         public static int IncreaseAttributeExperienceCost { get { return 3; } }
         public static int BuyItemGoldCost { get { return 4; } }
@@ -29,8 +29,8 @@ namespace JamTemplate
         public static int AttackStaminaCost { get { return 3; } }
         public static int MagicStaminaCost { get { return 7; } }
 
-        public static float PlayerBattleDeadZoneTimer { get { return 0.3f; } }
-        public static float EnemyBattleDeadZoneTimer { get { return 0.75f; } }
+        public static float PlayerBattleDeadZoneTimer { get { return 0.35f; } }
+        public static float EnemyBattleDeadZoneTimer { get { return 0.55f; } }
 
         public static int BasePlayerHealth { get { return 25; } }
 
@@ -38,9 +38,9 @@ namespace JamTemplate
         public static int PlayerBaseDamage { get { return 5; } }
         public static int EnemyBaseDamage { get { return 3; } }
 
-        public static int PlayerMagicBaseDamage { get { return 6; } }
+        public static int PlayerMagicBaseDamage { get { return 4; } }
 
-        public static int AttackerEvadeBonus { get { return 1; } }
+        public static int AttackerEvadeBonus { get { return 2; } }
         public static int BlockEvadeBonus { get { return 3; } }
 
         public static float SpellMoveMentTime { get { return 0.1f; } }

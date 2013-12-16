@@ -57,14 +57,30 @@ namespace JamTemplate
             rw.Draw(CreditsText);
 
             int i = 0;
+            bool andManyMore = false;
+
+            while (_player._ownedItems.Count >= 11)
+            {
+                andManyMore = true;
+                _player._ownedItems.RemoveAt(0);
+            }
 
             foreach (string s in _player._ownedItems)
             {
                 CreditsText.Scale = new Vector2f(1.0f, 1.0f);
                 CreditsText.DisplayedString = s;
+                CreditsText.Color = GameProperties.ColorBeige;
                 CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 275 + 25.0f * i);
                 rw.Draw(CreditsText);
                 i++;
+            }
+            if (andManyMore)
+            {
+                CreditsText.Scale = new Vector2f(1.0f, 1.0f);
+                CreditsText.DisplayedString = "... and many more";
+                CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 275 + 25.0f * 12);
+                CreditsText.Color = GameProperties.ColorBeige;
+                rw.Draw(CreditsText);
             }
 
         }

@@ -171,28 +171,28 @@ namespace JamTemplate
                         {
                             _world._player.ActorAttributes.Experience -= strCost;
                             _world._player.ExperienceSpent += strCost;
-                            _buttonTimer += 0.5f;
+                            _buttonTimer += 0.2f;
                             _world._player.ActorAttributes.BaseStrength++;
                         }
                         if (Keyboard.IsKeyPressed(Keyboard.Key.I) && _world._player.ActorAttributes.Experience >= agiCost)
                         {
                             _world._player.ActorAttributes.Experience -= agiCost;
                             _world._player.ExperienceSpent += agiCost;
-                            _buttonTimer += 0.5f;
+                            _buttonTimer += 0.2f;
                             _world._player.ActorAttributes.BaseAgility++;
                         }
                         if (Keyboard.IsKeyPressed(Keyboard.Key.O) && _world._player.ActorAttributes.Experience >= intCost)
                         {
                             _world._player.ActorAttributes.Experience -= intCost;
                             _world._player.ExperienceSpent += intCost;
-                            _buttonTimer += 0.5f;
+                            _buttonTimer += 0.2f;
                             _world._player.ActorAttributes.BaseIntelligence++;
                         }
                         if (Keyboard.IsKeyPressed(Keyboard.Key.P) && _world._player.ActorAttributes.Experience >= endCost)
                         {
                             _world._player.ActorAttributes.Experience -= endCost;
                             _world._player.ExperienceSpent += endCost;
-                            _buttonTimer += 0.5f;
+                            _buttonTimer += 0.2f;
                             _world._player.ActorAttributes.BaseEndurance++;
                             _world._player.ActorAttributes.ReCalculateHealth();
                         }
@@ -205,7 +205,7 @@ namespace JamTemplate
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _world._player.GoldSpent += GameProperties.BuyItemGoldCost;
-                                _buttonTimer += 0.5f;
+                                _buttonTimer += 0.2f;
                                 _world._player.PickupItem(item1);
                                 _world._player.ActorAttributes.ReCalculateHealth();
                             }
@@ -213,7 +213,7 @@ namespace JamTemplate
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _world._player.GoldSpent += GameProperties.BuyItemGoldCost;
-                                _buttonTimer += 0.5f;
+                                _buttonTimer += 0.2f;
                                 _world._player.PickupItem(item2);
                                 _world._player.ActorAttributes.ReCalculateHealth();
                             }
@@ -221,7 +221,7 @@ namespace JamTemplate
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _world._player.GoldSpent += GameProperties.BuyItemGoldCost;
-                                _buttonTimer += 0.5f;
+                                _buttonTimer += 0.2f;
                                 _world._player.PickupItem(item3);
                                 _world._player.ActorAttributes.ReCalculateHealth();
                             }
@@ -229,7 +229,7 @@ namespace JamTemplate
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _world._player.GoldSpent += GameProperties.BuyItemGoldCost;
-                                _buttonTimer += 0.5f;
+                                _buttonTimer += 0.2f;
                                 _world._player.PickupItem(item4);
                                 _world._player.ActorAttributes.ReCalculateHealth();
                             }
@@ -244,14 +244,14 @@ namespace JamTemplate
                             {
                                 _world._player.Gold -= GameProperties.BuyHealGoldCost;
                                 _world._player.GoldSpent += GameProperties.BuyHealGoldCost;
-                                _buttonTimer += 0.5f;
+                                _buttonTimer += 0.2f;
                                 _world._player.ActorAttributes.RefillHealth();
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.I))
                             {
                                 _world._player.Gold -= GameProperties.BuyHealGoldCost;
                                 _world._player.GoldSpent += GameProperties.BuyHealGoldCost;
-                                _buttonTimer += 0.5f;
+                                _buttonTimer += 0.2f;
                                 _world._player.ActorAttributes.RefillStamina();
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
@@ -260,7 +260,7 @@ namespace JamTemplate
                                 {
                                     _world._player.Gold -= (int)Math.Ceiling(1.5f * GameProperties.BuyHealGoldCost);
                                     _world._player.GoldSpent += (int)Math.Ceiling(1.5f * GameProperties.BuyHealGoldCost);
-                                    _buttonTimer += 0.5f;
+                                    _buttonTimer += 0.2f;
                                     _world._player.ActorAttributes.RefillStamina();
                                     _world._player.ActorAttributes.RefillHealth();
                                 }

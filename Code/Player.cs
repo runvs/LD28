@@ -204,7 +204,7 @@ namespace JamTemplate
             if (ActorAttributes.StaminaCurrent >= GameProperties.AttackStaminaCost)
             {
 
-                ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
+
                 Enemy actor2 = _world.GetEnemyOnTile(ActorPosition);
 
                 if (actor2 == null)
@@ -212,11 +212,11 @@ namespace JamTemplate
                     Vector2i attackTile = this.ActorPosition + Actor.GetVectorFromDirection(this.Direction);
                     actor2 = _world.GetEnemyOnTile(attackTile);
                 }
-
-
-
-
-                BattleManager.DoBattleAction(this, actor2, BattleAction.Attack);
+                if (actor2 != null)
+                {
+                    ActorAttributes.StaminaCurrent -= GameProperties.AttackStaminaCost;
+                    BattleManager.DoBattleAction(this, actor2, BattleAction.Attack);
+                }
             }
 
 

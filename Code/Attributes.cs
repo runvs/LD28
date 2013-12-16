@@ -158,6 +158,10 @@ namespace JamTemplate
             int newStamina = GameProperties.PlayerBaseStamina + 3 * Endurance;
 
             float newHealthRegen = 14.0f / Endurance;
+            if (newHealthRegen <= 1.0f)
+            {
+                newHealthRegen = 1.0f;
+            }
             float newStaminaRegen = 5.0f / Endurance;
 
             HealthRegenfreuency = newHealthRegen;
