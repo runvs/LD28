@@ -17,12 +17,13 @@ namespace JamTemplate
 
         private bool _hasSeenPlayer = false;
         private EnemyStrength _strength;
+        private EnemyType _type;
 
         #endregion Fields
 
         #region Methods
 
-        public Enemy(World world, Vector2i initPosition, EnemyStrength strength)
+        public Enemy(World world, Vector2i initPosition, EnemyStrength strength, EnemyType type)
         {
             _world = world;
             ActorPosition = initPosition;
@@ -30,6 +31,7 @@ namespace JamTemplate
             ActorAttributes = new Attributes();
             ActorAttributes.ResetHealth(8);
             _strength = strength;
+            _type = type;
 
             if (_strength == EnemyStrength.EASY)
             {
@@ -63,7 +65,22 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            _actorTexture = new SFML.Graphics.Texture("../gfx/enemy.png");
+            switch (_type)
+            {
+                case EnemyType.GOBLIN:
+                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy_goblin_2.png");
+                    break;
+                case EnemyType.HEADLESS_GOBLIN:
+                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy_goblin_1.png");
+                    break;
+                case EnemyType.RAT:
+                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy_rat.png");
+                    break;
+                default:
+                case EnemyType.ENEMY:
+                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy.png");
+                    break;
+            }
 
             _actorSprite = new Sprite(_actorTexture);
             _actorSprite.Scale = new Vector2f(2.0f, 2.0f);
@@ -131,10 +148,6 @@ namespace JamTemplate
                 EnemyAttack();
                 ResetBattleActions();
             }
-
-
-
-
         }
 
         private void DoAIOperations()
@@ -223,5 +236,10 @@ namespace JamTemplate
     public enum EnemyStrength
     {
         EASY, NORMAL, HARD
+    }
+
+    public enum EnemyType
+    {
+        ENEMY, HEADLESS_GOBLIN, GOBLIN, RAT
     }
 }

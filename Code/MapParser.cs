@@ -94,6 +94,39 @@ namespace JamTemplate
                 xPos = (xPos + 1) % GameProperties.WorldSizeInTiles;
             }
 
+            xPos = 0;
+            yPos = 0;
+
+            // Get the enemy layer tiles
+            foreach (XmlNode layerNode in doc.SelectNodes("/map/layer[@name='EnemyLayer']/data/tile"))
+            {
+                int gid = int.Parse(layerNode.Attributes["gid"].Value) - enemyOffset;
+
+                EnemyStrength[] enemyStrengths = {
+                    EnemyStrength.NORMAL,
+                    EnemyStrength.HARD,
+                    EnemyStrength.NORMAL,
+                    EnemyStrength.EASY
+                };
+
+                EnemyType[] enemyTypes = {
+                    EnemyType.ENEMY,
+                    EnemyType.HEADLESS_GOBLIN,
+                    EnemyType.GOBLIN,
+                    EnemyType.RAT
+                };
+
+                if (gid >= 0 && gid <= 3)
+                {
+                    EnemyLayer.Add(new Enemy(world, new Vector2i(xPos, yPos), enemyStrengths[gid], enemyTypes[gid]));
+                }
+
+                if (xPos != 0 && (xPos + 1) % GameProperties.WorldSizeInTiles == 0)
+                {
+                    yPos++;
+                }
+                xPos = (xPos + 1) % GameProperties.WorldSizeInTiles;
+            }
         }
     }
 }
