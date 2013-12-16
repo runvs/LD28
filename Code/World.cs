@@ -19,7 +19,7 @@ namespace JamTemplate
         IList<Enemy> _enemyList; // currently active enemies
         IList<NomadsHouse> _houseList;
         IList<Spell> _spellList;
-        IList<QuestItem> _questItemList;
+        public List<QuestItem> _questItemList;
 
         private float _showIntroTimer;
         private float _showSequence1Timer;
@@ -165,6 +165,7 @@ namespace JamTemplate
                 {
                     i.Update(deltaT, questItemsToAdd);
                 }
+                _questItemList.AddRange(questItemsToAdd);
 
                 foreach (var s in _spellList)
                 {

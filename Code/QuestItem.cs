@@ -14,6 +14,8 @@ namespace JamTemplate
         public Vector2i PositionInTiles { get; private set; }
         public bool Picked { get; private set; }
 
+        private static Vector2i ForgePosition { get; set; }
+
         private Texture _itemTexture;
         private Sprite _itemSprite;
 
@@ -39,9 +41,22 @@ namespace JamTemplate
 
         public void PickUpItem(List<QuestItem> itemsToAdd)
         {
+            if (QuestItemType == 1)
+            {
+                ForgePosition = this.PositionInTiles;
+            }
+            if (QuestItemType == 2)
+            {
+
+                itemsToAdd.Add(new QuestItem(_world, 4, ForgePosition));
+            }
+
             Picked = true;
             PositionInTiles = new Vector2i(-500, -500);
             _world.StartSequence(QuestItemType);
+
+
+
         }
 
         public void Draw(RenderWindow rw, Vector2i CameraPosition)
