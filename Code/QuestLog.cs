@@ -38,8 +38,7 @@ namespace JamTemplate
         {
             _logMessages.Add("Move out to seek the goblin tribe. Move North to find them!");
             //_logMessages.Add("You took revenge, but the headless goblin, their Leader, was not there.");
-            _logMessages.Add("Go to the city to discover the headless' goblins residence.");
-            _logMessages.Add("Search the Blacksmith to ask him for an adamantium sword.");
+            _logMessages.Add("Search the Blacksmith to ask him to forge an adamantium sword.");
             _logMessages.Add("The blacksmith is not there. Look for him in the West.");
             _logMessages.Add("You found the Blacksmith but still need the adamantium Ore.");
             _logMessages.Add("The blacksmith forged your adamantium Sword. Kill the headless goblin. (Go South!)");

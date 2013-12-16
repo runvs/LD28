@@ -245,7 +245,7 @@ namespace JamTemplate
             {
                 if (_showIntroTimer >= 0.0f)
                 {
-                    DrawSequence1(rw);
+                    DrawSequence6(rw);
 
                 }
             }
@@ -290,13 +290,13 @@ namespace JamTemplate
             DrawText("'Headless Master! help us in this Misery!'", new Vector2f(20, 125), GameProperties.ColorLightRed, rw);
             DrawText("a goblin cries out", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
 
-            DrawText("The goblins' leader was not with them.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
+            DrawText("The goblin leader was not with them.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
             //DrawText("family and friends.", new Vector2f(20, 175), GameProperties.ColorWhite, rw); // friens
 
             DrawText("'Good for you'", new Vector2f(20, 225), GameProperties.ColorLightRed, rw);
             DrawText("he whispers", new Vector2f(20, 250), GameProperties.ColorWhite, rw);
             DrawText("'He can only be slain by an adamantium Sword.'", new Vector2f(20, 275), GameProperties.ColorLightRed, rw);
-            DrawText("So head West and look for the forge!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("So head West and look for the forge!'", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
@@ -311,8 +311,10 @@ namespace JamTemplate
             DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
 
 
-            DrawText("'Looking for some Potatoes in the western mountains.'", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
-            DrawText("a Note says.", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
+            DrawText("'Looking for some Potatoes ", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("in the western mountains.'", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
+
+            DrawText("a Note says.", new Vector2f(20, 175), GameProperties.ColorWhite, rw);
 
             DrawText("So head West and look for the Blacksmith!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
@@ -323,20 +325,71 @@ namespace JamTemplate
         {
             rw.Clear(GameProperties.ColorBlack);
 
-            // draw Forge Texture
+            // draw BlackSmitz picture
 
-            DrawText("You found the Forge,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
-            DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("You found the Blacksmith,", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            //DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+
+            DrawText("'I will forge your adamantium Sword.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("Bring the adamantium ore to my forge.", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
+            DrawText("You can find some in the Mountains in the South.", new Vector2f(20, 175), GameProperties.ColorLightBlue, rw);
+            DrawText("When you have some, come back to my forge!.", new Vector2f(20, 200), GameProperties.ColorLightBlue, rw);
 
 
-            DrawText("'Looking for some Potatoes in the western mountains.'", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
-            DrawText("a Note says.", new Vector2f(20, 150), GameProperties.ColorWhite, rw);
-
-            DrawText("So head West and look for the Blacksmith!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+            DrawText("So head South and look for some adamantium ore!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
 
             DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
         }
 
+        private void DrawSequence4(RenderWindow rw)
+        {
+            rw.Clear(GameProperties.ColorBlack);
+
+            // draw Adamantium Picture
+
+            DrawText("You found the adamantium Ore.", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            //DrawText("but the Blacksmith is not there .", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+
+            DrawText("So head head back to the forge!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+
+            DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
+        }
+
+        private void DrawSequence5(RenderWindow rw)
+        {
+            rw.Clear(GameProperties.ColorBlack);
+
+            // draw Forge Texture with Blacksmiz
+
+            DrawText("You bring the Blacksmith the ore.", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("All you hear for the next hours is", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("the sound of metal hitting metal.", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
+
+
+            DrawText("'Here is your sword!", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("Use it with great responsibility.'", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
+
+            DrawText("You take the sword and embark on your journey.", new Vector2f(20, 300), GameProperties.ColorWhite, rw);
+            DrawText("So head South to look for the headless goblin!", new Vector2f(20, 325), GameProperties.ColorWhite, rw);
+
+            DrawText("[Space] Continue", new Vector2f(560, 555), GameProperties.ColorWhite, rw);
+        }
+
+        private void DrawSequence6(RenderWindow rw)
+        {
+            rw.Clear(GameProperties.ColorBlack);
+
+            // draw headless goblin
+
+            DrawText("You found the headless goblin and ", new Vector2f(20, 25), GameProperties.ColorWhite, rw);
+            DrawText("split his head with your adamantium sword", new Vector2f(20, 50), GameProperties.ColorWhite, rw);
+            DrawText("bruising some muscles and breaking some bones.", new Vector2f(20, 75), GameProperties.ColorWhite, rw);
+
+            DrawText("Your Quest for revenge is over.", new Vector2f(20, 125), GameProperties.ColorLightBlue, rw);
+            DrawText("You take a deep breath and release all the anger.", new Vector2f(20, 150), GameProperties.ColorLightBlue, rw);
+
+            DrawText("[Space] To Main Menu", new Vector2f(470, 555), GameProperties.ColorWhite, rw);
+        }
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
