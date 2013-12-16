@@ -30,13 +30,13 @@
     <baseType itemType="HAND" file="../GFX/item_sword.png" attribute="STR" modifier="+1">Sword</baseType>
     <baseType itemType="HAND" file="../GFX/item_hammer.png" attribute="STR" modifier="+1">Hammer</baseType>
     <baseType itemType="TORSO" file="../GFX/item_breastplate.png" attribute="END" modifier="+1">Breast Plate</baseType>
-    <baseType itemType="TORSO" file="../GFX/item_generic.png" attribute="INT" modifier="+1">Robe</baseType>
-    <baseType itemType="TORSO" file="../GFX/item_generic.png" attribute="AGI" modifier="+1">Leather Armor</baseType>
-    <baseType itemType="FEET" file="../GFX/item_generic.png" attribute="AGI" modifier="+1">Chain Boots</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_robe.png" attribute="INT" modifier="+1">Robe</baseType>
+    <baseType itemType="TORSO" file="../GFX/item_leather_armor.png" attribute="AGI" modifier="+1">Leather Armor</baseType>
+    <baseType itemType="FEET" file="../GFX/item_chain_boots.png" attribute="AGI" modifier="+1">Chain Boots</baseType>
     <baseType itemType="FEET" file="../GFX/item_boots.png" attribute="AGI" modifier="+1">Boots</baseType>
     <baseType itemType="FEET" file="../GFX/item_greaves.png" attribute="AGI" modifier="+1">Greaves</baseType>
     <baseType itemType="HEAD" file="../GFX/item_generic.png" attribute="INT" modifier="+1">Shako</baseType>
     <baseType itemType="HEAD" file="../GFX/item_helmet.png" attribute="END" modifier="+1">Helmet</baseType>
-    <baseType itemType="HEAD" file="../GFX/item_generic.png" attribute="END" modifier="+1">Armet</baseType>
+    <baseType itemType="HEAD" file="../GFX/item_armet.png" attribute="END" modifier="+1">Armet</baseType>
   </baseTypes>
 </items>
