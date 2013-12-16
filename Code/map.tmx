@@ -4,9 +4,9 @@
   <image source="../Build/GFX/tileset.png" width="100" height="25"/>
  </tileset>
  <tileset firstgid="5" name="Objects" tilewidth="25" tileheight="25">
-  <image source="../Build/GFX/house.png" width="25" height="25"/>
+  <image source="../Build/GFX/tileset_objects.png" width="150" height="25"/>
  </tileset>
- <tileset firstgid="6" name="Enemies" tilewidth="25" tileheight="25">
+ <tileset firstgid="11" name="Enemies" tilewidth="25" tileheight="25">
   <image source="../Build/GFX/enemy.png" width="25" height="25"/>
  </tileset>
  <layer name="TerrainLayer" width="70" height="70">
@@ -9993,7 +9993,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="6"/>
+   <tile gid="11"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -10134,7 +10134,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="6"/>
+   <tile gid="11"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -10202,7 +10202,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="6"/>
+   <tile gid="11"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -10548,7 +10548,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="6"/>
+   <tile gid="11"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -11390,7 +11390,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="6"/>
+   <tile gid="11"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -11740,7 +11740,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="6"/>
+   <tile gid="11"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
