@@ -29,22 +29,33 @@ namespace JamTemplate
             ActorPosition = initPosition;
 
             ActorAttributes = new Attributes();
-            ActorAttributes.ResetHealth(8);
             _strength = strength;
             _type = type;
 
             if (_strength == EnemyStrength.EASY)
             {
+                ActorAttributes.BaseStrength = 1;
+                ActorAttributes.BaseAgility = 1;
+                ActorAttributes.BaseEndurance = 1;
+                ActorAttributes.BaseIntelligence = 1;
                 DropGold = GameProperties.EnemyEasyGold;
                 DropExperience = GameProperties.EnemyEasyExperience;
             }
             else if (_strength == EnemyStrength.NORMAL)
             {
+                ActorAttributes.BaseStrength = 2;
+                ActorAttributes.BaseAgility = 2;
+                ActorAttributes.BaseEndurance = 2;
+                ActorAttributes.BaseIntelligence = 2;
                 DropGold = GameProperties.EnemyNormalGold;
                 DropExperience = GameProperties.EnemyNormalExperience;
             }
             else if (_strength == EnemyStrength.HARD)
             {
+                ActorAttributes.BaseStrength = 4;
+                ActorAttributes.BaseAgility = 4;
+                ActorAttributes.BaseEndurance = 4;
+                ActorAttributes.BaseIntelligence = 4;
                 DropGold = GameProperties.EnemyHardGold;
                 DropExperience = GameProperties.EnemyHardExperience;
             }

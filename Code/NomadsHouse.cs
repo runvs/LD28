@@ -101,7 +101,7 @@ namespace JamTemplate
                 DrawText(item3.Name + " [O]", new Vector2f(240, 310), GameProperties.ColorWhite, rw);
                 DrawText(item4.Name + " [P]", new Vector2f(240, 340), GameProperties.ColorWhite, rw);
 
-                DrawText("Gold " + _world._player.Gold, new Vector2f(210, 365), GameProperties.ColorBeige, rw);
+                DrawText(string.Format("Cost per item: {0}; Current Gold {1}", GameProperties.BuyItemGoldCost, _world._player.Gold), new Vector2f(210, 365), GameProperties.ColorBeige, rw);
             }
             else if (_type == HouseType.TEACHER)
             {
@@ -191,6 +191,7 @@ namespace JamTemplate
                             _world._player.ActorAttributes.Experience -= endCost;
                             _buttonTimer += 0.5f;
                             _world._player.ActorAttributes.BaseEndurance++;
+                            _world._player.ActorAttributes.ReCalculateHealth();
                         }
                     }
                     else if (_type == HouseType.MERCHANT)
@@ -202,24 +203,28 @@ namespace JamTemplate
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
                                 _world._player.PickupItem(item1);
+                                _world._player.ActorAttributes.ReCalculateHealth();
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.I))
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
                                 _world._player.PickupItem(item2);
+                                _world._player.ActorAttributes.ReCalculateHealth();
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.O))
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
                                 _world._player.PickupItem(item3);
+                                _world._player.ActorAttributes.ReCalculateHealth();
                             }
                             if (Keyboard.IsKeyPressed(Keyboard.Key.P))
                             {
                                 _world._player.Gold -= GameProperties.BuyItemGoldCost;
                                 _buttonTimer += 0.5f;
                                 _world._player.PickupItem(item4);
+                                _world._player.ActorAttributes.ReCalculateHealth();
                             }
                         }
 
