@@ -36,27 +36,27 @@ namespace JamTemplate
             if (_strength == EnemyStrength.EASY)
             {
                 ActorAttributes.BaseStrength = 1;
-                ActorAttributes.BaseAgility = 1;
-                ActorAttributes.BaseEndurance = 1;
-                ActorAttributes.BaseIntelligence = 1;
+                ActorAttributes.BaseAgility = 2 + GameProperties.RandomGenerator.Next(-1, +2);
+                ActorAttributes.BaseEndurance = 1 + GameProperties.RandomGenerator.Next(0, +2);
+                ActorAttributes.BaseIntelligence = 1 + GameProperties.RandomGenerator.Next(0, +2);
                 DropGold = GameProperties.EnemyEasyGold;
                 DropExperience = GameProperties.EnemyEasyExperience;
             }
             else if (_strength == EnemyStrength.NORMAL)
             {
-                ActorAttributes.BaseStrength = 2;
-                ActorAttributes.BaseAgility = 2;
-                ActorAttributes.BaseEndurance = 2;
-                ActorAttributes.BaseIntelligence = 2;
+                ActorAttributes.BaseStrength = 3 + GameProperties.RandomGenerator.Next(-2, +3);
+                ActorAttributes.BaseAgility = 2 + GameProperties.RandomGenerator.Next(-1, +4);
+                ActorAttributes.BaseEndurance = 2 + GameProperties.RandomGenerator.Next(-1, +3);
+                ActorAttributes.BaseIntelligence = 2 + GameProperties.RandomGenerator.Next(-1, +3);
                 DropGold = GameProperties.EnemyNormalGold;
                 DropExperience = GameProperties.EnemyNormalExperience;
             }
             else if (_strength == EnemyStrength.HARD)
             {
-                ActorAttributes.BaseStrength = 4;
-                ActorAttributes.BaseAgility = 4;
-                ActorAttributes.BaseEndurance = 4;
-                ActorAttributes.BaseIntelligence = 4;
+                ActorAttributes.BaseStrength = 4 + GameProperties.RandomGenerator.Next(-1, +4);
+                ActorAttributes.BaseAgility = 4 + GameProperties.RandomGenerator.Next(-1, +4);
+                ActorAttributes.BaseEndurance = 4 + GameProperties.RandomGenerator.Next(-1, +4);
+                ActorAttributes.BaseIntelligence = 4 + GameProperties.RandomGenerator.Next(-1, +4);
                 DropGold = GameProperties.EnemyHardGold;
                 DropExperience = GameProperties.EnemyHardExperience;
             }
@@ -247,8 +247,12 @@ namespace JamTemplate
         {
             IsDead = true;
             PlaySoundDie();
+
             _world._player.Gold += this.DropGold;
+            _world._player.TotalGold += this.DropGold;
+
             _world._player.ActorAttributes.Experience += this.DropExperience;
+            _world._player.ActorAttributes.TotalExperience += this.DropExperience;
 
             if (DropItem != null)
             {

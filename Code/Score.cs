@@ -8,8 +8,6 @@ namespace JamTemplate
 
         #region Fields
 
-        private Font font;
-
         private Player _player;
 
         #endregion Fields
@@ -30,6 +28,32 @@ namespace JamTemplate
             rw.Draw(CreditsText);
 
             // TODO Gold and Experience
+
+            CreditsText.Scale = new Vector2f(1.0f, 1.0f);
+            CreditsText.DisplayedString = "Gained Experience: " + _player.ActorAttributes.TotalExperience;
+            CreditsText.Position = new Vector2f(300 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 100);
+            rw.Draw(CreditsText);
+
+            CreditsText.Scale = new Vector2f(1.0f, 1.0f);
+            CreditsText.DisplayedString = "Spent Experience: " + _player.ExperienceSpent;
+            CreditsText.Position = new Vector2f(300 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 125);
+            rw.Draw(CreditsText);
+
+
+
+            CreditsText.Scale = new Vector2f(1.0f, 1.0f);
+            CreditsText.DisplayedString = "Collected Gold: " + _player.TotalGold;
+            CreditsText.Position = new Vector2f(300 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 175);
+            rw.Draw(CreditsText);
+
+            CreditsText.Scale = new Vector2f(1.0f, 1.0f);
+            CreditsText.DisplayedString = "Spent Gold: " + _player.GoldSpent;
+            CreditsText.Position = new Vector2f(300 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 200);
+            rw.Draw(CreditsText);
+
+
+
+
         }
 
         #endregion Methods

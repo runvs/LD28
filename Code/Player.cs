@@ -20,6 +20,7 @@ namespace JamTemplate
         private float _StaminaRegenTimer;
 
 
+
         #region Inventory
 
         public Item HeadItem { get; private set; }
@@ -28,6 +29,9 @@ namespace JamTemplate
         public Item FeetItem { get; private set; }
 
         public int Gold { get; set; }
+        public int TotalGold { get; set; }
+        public int GoldSpent { get; set; }
+        public int ExperienceSpent { get; set; }
 
 
         #endregion Inventory

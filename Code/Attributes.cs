@@ -34,6 +34,7 @@ namespace JamTemplate
         public float StaminaRegenfreuency { get; set; }
 
         public int Experience { get; set; }
+        public int TotalExperience { get; set; }
 
 
         public void ResetHealth(int newHealthVal)
@@ -91,6 +92,8 @@ namespace JamTemplate
 
             HealthRegenfreuency = 0.0f;
             StaminaRegenfreuency = 1.0f;
+
+            TotalExperience = Experience = 0;
         }
 
         public void ResetModifiers()
