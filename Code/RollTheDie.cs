@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// This Program is provided as is with absolutely no warranty.
+/// This File is published under the LGPL 3. See lgpl.txt
+/// Published by Julian Dinges and Simon Weis, 2013
+/// Contact laguna_1989@gmx.net
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
