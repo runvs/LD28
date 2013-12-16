@@ -122,7 +122,7 @@ namespace JamTemplate
                     EnemyType.GOBLIN_RED
                 };
 
-                if (gid >= 0 && gid <= 3)
+                if (gid >= 0)
                 {
                     EnemyLayer.Add(new Enemy(world, new Vector2i(xPos, yPos), enemyStrengths[gid], enemyTypes[gid]));
                 }
