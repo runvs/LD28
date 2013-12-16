@@ -75,7 +75,7 @@ namespace JamTemplate
         {
             if (s.Length >= 18)
             {
-                int spacePos = s.IndexOf(" ", 12, s.Length - 12);
+                int spacePos = s.IndexOf(" ", 9, s.Length - 9);
                 if (spacePos == -1)
                 {
                     spacePos = 17;

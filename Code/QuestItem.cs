@@ -1,13 +1,10 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace JamTemplate
 {
-    public class QuestItem
+    public class QuestItem : IGameObject
     {
 
         #region Fields
@@ -89,6 +86,9 @@ namespace JamTemplate
             {
                 _itemTexture = new Texture("../GFX/enemy_goblin_1.png");
             }
+
+            _itemSprite = new Sprite(_itemTexture);
+            _itemSprite.Scale = new Vector2f(2.0f, 2.0f);
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SFML.Window;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace JamTemplate
@@ -68,6 +69,21 @@ namespace JamTemplate
                 {
                     case 0:
                         ObjectLayer.Add(new NomadsHouse(xPos, yPos, world));
+                        break;
+                    case 1:
+                        ObjectLayer.Add(new QuestItem(world, 2, new Vector2i(xPos, yPos)));
+                        break;
+                    case 2:
+                        ObjectLayer.Add(new QuestItem(world, 0, new Vector2i(xPos, yPos)));
+                        break;
+                    case 3:
+                        ObjectLayer.Add(new QuestItem(world, 1, new Vector2i(xPos, yPos)));
+                        break;
+                    case 4:
+                        ObjectLayer.Add(new QuestItem(world, 3, new Vector2i(xPos, yPos)));
+                        break;
+                    case 5:
+                        ObjectLayer.Add(new QuestItem(world, 4, new Vector2i(xPos, yPos)));
                         break;
                 }
 

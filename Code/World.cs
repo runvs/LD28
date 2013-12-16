@@ -408,6 +408,10 @@ namespace JamTemplate
                 {
                     _houseList.Add(item as NomadsHouse);
                 }
+                else if (item is QuestItem)
+                {
+                    _questItemList.Add(item as QuestItem);
+                }
             }
 
         }
