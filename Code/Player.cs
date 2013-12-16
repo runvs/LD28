@@ -177,6 +177,7 @@ namespace JamTemplate
                     Spell newSpell = new Spell(_world, this, SpellStartTile, this.Direction);
                     _world.AddSpell(newSpell);
                 }
+                PlaySoundSpell();
             }
 
 
@@ -192,6 +193,8 @@ namespace JamTemplate
                 Vector2i attackTile = this.ActorPosition + Actor.GetVectorFromDirection(this.Direction);
 
                 Enemy actor2 = _world.GetEnemyOnTile(attackTile);
+
+
 
                 BattleManager.DoBattleAction(this, actor2, BattleAction.Attack);
             }
@@ -212,6 +215,7 @@ namespace JamTemplate
 
         public override void Die()
         {
+            PlaySoundDie();
             IsDead = true;
         }
 
@@ -239,6 +243,7 @@ namespace JamTemplate
             }
             item.PickUp();
             ReCalculateModifiers();
+            PlaySoundPickup();
 
         }
 

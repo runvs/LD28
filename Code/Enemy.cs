@@ -217,7 +217,7 @@ namespace JamTemplate
         public override void Die()
         {
             IsDead = true;
-
+            PlaySoundDie();
             _world._player.Gold += this.DropGold;
             _world._player.ActorAttributes.Experience += this.DropExperience;
 

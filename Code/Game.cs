@@ -26,6 +26,7 @@ namespace JamTemplate
             // Predefine game state to menu
             _gameState = State.Menu;
             _mainTheme = new Music("../SFX/LD28_Theme.ogg");
+            _mainTheme.Volume = 35.0f;
             _mainTheme.Loop = true;
             _mainTheme.Play();
         }

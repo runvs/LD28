@@ -27,6 +27,16 @@ namespace JamTemplate
         protected Texture _actorTexture;
         protected Sprite _actorSprite;
 
+        private SFML.Audio.SoundBuffer soundBufferPickUp;
+        private SFML.Audio.Sound soundPickUp;
+
+        private SFML.Audio.SoundBuffer soundBufferSpell;
+        private SFML.Audio.Sound soundSpell;
+        private SFML.Audio.SoundBuffer soundBufferHit;
+        private SFML.Audio.Sound soundHit;
+        private SFML.Audio.SoundBuffer soundBufferDie;
+        private SFML.Audio.Sound soundDie;
+
         public Attributes ActorAttributes { get; protected set; }
         public Vector2i ActorPosition { get; protected set; }
         public Direction Direction { get; protected set; }
@@ -126,10 +136,16 @@ namespace JamTemplate
         public abstract float GetMovementTimerDeadZone();
         public abstract int GetMagicBaseDamage();
 
+        public Actor()
+        {
+            LoadSounds();
+        }
+
 
         public void TakeDamage(int damage)
         {
             ActorAttributes.HealthCurrent -= damage;
+            PlaySoundHit();
             CheckIfActorDead();
         }
 
@@ -167,6 +183,52 @@ namespace JamTemplate
             return ret;
         }
 
+
+        private void LoadSounds()
+        {
+            try
+            {
+                soundBufferPickUp = new SFML.Audio.SoundBuffer("../SFX/pickup.wav");
+                soundPickUp = new SFML.Audio.Sound(soundBufferPickUp);
+                soundPickUp.Volume = 50.0f;
+
+                soundBufferSpell = new SFML.Audio.SoundBuffer("../sfx/spell.wav");
+                soundSpell = new SFML.Audio.Sound(soundBufferSpell);
+                soundSpell.Volume = 20.0f;
+
+                soundBufferHit = new SFML.Audio.SoundBuffer("../sfx/hit.wav");
+                soundHit = new SFML.Audio.Sound(soundBufferHit);
+                soundHit.Volume = 20.0f;
+
+                soundBufferDie = new SFML.Audio.SoundBuffer("../sfx/die.wav");
+                soundDie = new SFML.Audio.Sound(soundBufferDie);
+                soundDie.Volume = 40.0f;
+
+            }
+            catch (SFML.LoadingFailedException ex)
+            {
+                System.Console.Out.WriteLine("error loading the world sounds");
+                System.Console.Out.WriteLine(ex.Message);
+            }
+        }
+
+        protected void PlaySoundPickup()
+        {
+            soundPickUp.Play();
+        }
+
+        protected void PlaySoundHit()
+        {
+            soundHit.Play();
+        }
+        protected void PlaySoundSpell()
+        {
+            soundSpell.Play();
+        }
+        protected void PlaySoundDie()
+        {
+            soundDie.Play();
+        }
 
     }
 
