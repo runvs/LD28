@@ -36,11 +36,13 @@ namespace JamTemplate
 
         private void CreateQuestlogMessages()
         {
-            _logMessages.Add("Move out to seek the goblin Tribe. Move North to find them!");
-            _logMessages.Add("");
-            _logMessages.Add("You move out to seek gold and glory. What will await you? (get 20 gold!)");
-            _logMessages.Add("You move out to seek gold and glory. What will await you? (get 20 gold!)");
-
+            _logMessages.Add("Move out to seek the goblin tribe. Move North to find them!");
+            //_logMessages.Add("You took revenge, but the headless goblin, their Leader, was not there.");
+            _logMessages.Add("Go to the city to discover the headless' goblins residence.");
+            _logMessages.Add("Search the Blacksmith to ask him for an adamantium sword.");
+            _logMessages.Add("The blacksmith is not there. Look for him in the West.");
+            _logMessages.Add("You found the Blacksmith but still need the adamantium Ore.");
+            _logMessages.Add("The blacksmith forged your adamantium Sword. Kill the headless goblin. (Go South!)");
         }
 
         public void CompleteCurrentQuest()
@@ -73,8 +75,13 @@ namespace JamTemplate
         {
             if (s.Length >= 18)
             {
-                String s1 = s.Substring(0, 17);
-                String s2 = s.Substring(17);
+                int spacePos = s.IndexOf(" ", 12, s.Length - 12);
+                if (spacePos == -1)
+                {
+                    spacePos = 17;
+                }
+                String s1 = s.Substring(0, spacePos);
+                String s2 = s.Substring(spacePos);
                 DrawText(s1, position, color, window);
                 position.Y += 20;
                 DrawText(s2, position, color, window);
