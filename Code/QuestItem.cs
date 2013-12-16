@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using System;
+using System.Collections.Generic;
 
 namespace JamTemplate
 {
@@ -36,7 +37,7 @@ namespace JamTemplate
             }
         }
 
-        public void PickUpItem()
+        public void PickUpItem(List<QuestItem> itemsToAdd)
         {
             Picked = true;
             PositionInTiles = new Vector2i(-500, -500);
@@ -53,13 +54,13 @@ namespace JamTemplate
             rw.Draw(_itemSprite);
         }
 
-        public void Update(float deltaT)
+        public void Update(float deltaT, List<QuestItem> itemsToAdd)
         {
             Vector2i playerPosition = _world._player.ActorPosition;
             if (playerPosition.Equals(PositionInTiles))
             {
                 _world._player._log.CompleteCurrentQuest();
-                PickUpItem();
+                PickUpItem(itemsToAdd);
 
             }
         }

@@ -113,7 +113,14 @@ namespace JamTemplate
                 DrawText("Intelligence [O]", new Vector2f(240, 310), GameProperties.ColorWhite, rw);
                 DrawText("Endurance [P]", new Vector2f(240, 340), GameProperties.ColorWhite, rw);
 
-                DrawText("Experience " + _world._player.ActorAttributes.Experience, new Vector2f(210, 365), GameProperties.ColorBeige, rw);
+                DrawText(
+                    string.Format(
+                        "Current Experience {0}", _world._player.ActorAttributes.Experience
+                    ),
+                    new Vector2f(210, 365),
+                    GameProperties.ColorLightGreen,
+                    rw
+                );
 
             }
 

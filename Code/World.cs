@@ -160,9 +160,10 @@ namespace JamTemplate
 
                 }
 
+                var questItemsToAdd = new List<QuestItem>();
                 foreach (var i in _questItemList)
                 {
-                    i.Update(deltaT);
+                    i.Update(deltaT, questItemsToAdd);
                 }
 
                 foreach (var s in _spellList)
