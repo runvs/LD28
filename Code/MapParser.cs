@@ -110,14 +110,16 @@ namespace JamTemplate
                     EnemyStrength.NORMAL,
                     EnemyStrength.HARD,
                     EnemyStrength.NORMAL,
-                    EnemyStrength.EASY
+                    EnemyStrength.EASY,
+                    EnemyStrength.HARD
                 };
 
                 EnemyType[] enemyTypes = {
                     EnemyType.ENEMY,
                     EnemyType.HEADLESS_GOBLIN,
                     EnemyType.GOBLIN,
-                    EnemyType.RAT
+                    EnemyType.RAT,
+                    EnemyType.GOBLIN_RED
                 };
 
                 if (gid >= 0 && gid <= 3)

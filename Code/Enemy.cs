@@ -68,13 +68,16 @@ namespace JamTemplate
             switch (_type)
             {
                 case EnemyType.GOBLIN:
-                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy_goblin_2.png");
+                    _actorTexture = new Texture("../gfx/enemy_goblin_2.png");
                     break;
                 case EnemyType.HEADLESS_GOBLIN:
-                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy_goblin_1.png");
+                    _actorTexture = new Texture("../gfx/enemy_goblin_1.png");
                     break;
                 case EnemyType.RAT:
-                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy_rat.png");
+                    _actorTexture = new Texture("../gfx/enemy_rat.png");
+                    break;
+                case EnemyType.GOBLIN_RED:
+                    _actorTexture = new Texture("../GFX/enemy_goblin_3.png");
                     break;
                 default:
                 case EnemyType.ENEMY:
@@ -246,6 +249,6 @@ namespace JamTemplate
 
     public enum EnemyType
     {
-        ENEMY, HEADLESS_GOBLIN, GOBLIN, RAT
+        ENEMY, HEADLESS_GOBLIN, GOBLIN, RAT, GOBLIN_RED
     }
 }
