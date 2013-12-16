@@ -108,15 +108,16 @@ namespace JamTemplate
                 DrawText("What would you like", new Vector2f(210, 200), GameProperties.ColorWhite, rw);
                 DrawText("to learn?", new Vector2f(210, 216), GameProperties.ColorWhite, rw);
 
-                DrawText("Strength [U]", new Vector2f(240, 250), GameProperties.ColorWhite, rw);
-                DrawText("Agility [I]", new Vector2f(240, 280), GameProperties.ColorWhite, rw);
-                DrawText("Intelligence [O]", new Vector2f(240, 310), GameProperties.ColorWhite, rw);
-                DrawText("Endurance [P]", new Vector2f(240, 340), GameProperties.ColorWhite, rw);
+                int strCost, agiCost, intCost, endCost;
+                CalculateCosts(out strCost, out agiCost, out intCost, out endCost);
+
+                DrawText(string.Format("Strength [U] Cost: {0}", strCost), new Vector2f(240, 250), GameProperties.ColorWhite, rw);
+                DrawText(string.Format("Agility [I] Cost: {0}", agiCost), new Vector2f(240, 280), GameProperties.ColorWhite, rw);
+                DrawText(string.Format("Intelligence [O] Cost: {0}", intCost), new Vector2f(240, 310), GameProperties.ColorWhite, rw);
+                DrawText(string.Format("Endurance [P] Cost: {0}", endCost), new Vector2f(240, 340), GameProperties.ColorWhite, rw);
 
                 DrawText(
-                    string.Format(
-                        "Current Experience {0}", _world._player.ActorAttributes.Experience
-                    ),
+                    string.Format("Experience {0}", _world._player.ActorAttributes.Experience),
                     new Vector2f(210, 365),
                     GameProperties.ColorLightGreen,
                     rw
@@ -129,14 +130,22 @@ namespace JamTemplate
                 DrawText("What would you like", new Vector2f(210, 200), GameProperties.ColorWhite, rw);
                 DrawText("to do?", new Vector2f(210, 216), GameProperties.ColorWhite, rw);
 
-                DrawText("Heal [U]", new Vector2f(240, 250), GameProperties.ColorWhite, rw);
-                DrawText("Rest [I]", new Vector2f(240, 280), GameProperties.ColorWhite, rw);
-                DrawText("Heal and Rest[O]", new Vector2f(240, 310), GameProperties.ColorWhite, rw);
+                DrawText(string.Format("Heal [U] Cost: {0}", GameProperties.BuyHealGoldCost), new Vector2f(240, 250), GameProperties.ColorWhite, rw);
+                DrawText(string.Format("Rest [I] Cost: {0}", GameProperties.BuyHealGoldCost), new Vector2f(240, 280), GameProperties.ColorWhite, rw);
+                DrawText(string.Format("Heal and Rest[O] Cost: {0}", Math.Ceiling(GameProperties.BuyHealGoldCost * 1.5f)), new Vector2f(240, 310), GameProperties.ColorWhite, rw);
 
                 DrawText("Gold " + _world._player.Gold, new Vector2f(210, 365), GameProperties.ColorBeige, rw);
 
             }
 
+        }
+
+        private void CalculateCosts(out int strCost, out int agiCost, out int intCost, out int endCost)
+        {
+            strCost = _world._player.ActorAttributes.BaseStrength - GameProperties.IncreaseAttributeExperienceCost;
+            agiCost = _world._player.ActorAttributes.BaseAgility - GameProperties.IncreaseAttributeExperienceCost;
+            intCost = _world._player.ActorAttributes.BaseIntelligence - GameProperties.IncreaseAttributeExperienceCost;
+            endCost = _world._player.ActorAttributes.BaseEndurance - GameProperties.IncreaseAttributeExperienceCost;
         }
 
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
@@ -156,33 +165,32 @@ namespace JamTemplate
                 {
                     if (_type == HouseType.TEACHER)
                     {
-                        if (_world._player.ActorAttributes.Experience >= GameProperties.IncreaseAttributeExperienceCost)
+                        int strCost, agiCost, intCost, endCost;
+                        CalculateCosts(out strCost, out agiCost, out intCost, out endCost);
+
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.U) && _world._player.ActorAttributes.Experience >= strCost)
                         {
-                            if (Keyboard.IsKeyPressed(Keyboard.Key.U))
-                            {
-                                _world._player.ActorAttributes.Experience -= GameProperties.IncreaseAttributeExperienceCost;
-                                _buttonTimer += 0.5f;
-                                _world._player.ActorAttributes.BaseStrength++;
-                            }
-                            if (Keyboard.IsKeyPressed(Keyboard.Key.I))
-                            {
-                                _world._player.ActorAttributes.Experience -= GameProperties.IncreaseAttributeExperienceCost;
-                                _buttonTimer += 0.5f;
-                                _world._player.ActorAttributes.BaseAgility++;
-                            }
-                            if (Keyboard.IsKeyPressed(Keyboard.Key.O))
-                            {
-                                _world._player.ActorAttributes.Experience -= GameProperties.IncreaseAttributeExperienceCost;
-                                _buttonTimer += 0.5f;
-                                _world._player.ActorAttributes.BaseIntelligence++;
-                            }
-                            if (Keyboard.IsKeyPressed(Keyboard.Key.P))
-                            {
-                                _world._player.ActorAttributes.Experience -= GameProperties.IncreaseAttributeExperienceCost;
-                                _buttonTimer += 0.5f;
-                                _world._player.ActorAttributes.BaseEndurance++;
-                                _world._player.ActorAttributes.ReCalculateHealth();
-                            }
+                            _world._player.ActorAttributes.Experience -= strCost;
+                            _buttonTimer += 0.5f;
+                            _world._player.ActorAttributes.BaseStrength++;
+                        }
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.I) && _world._player.ActorAttributes.Experience >= agiCost)
+                        {
+                            _world._player.ActorAttributes.Experience -= agiCost;
+                            _buttonTimer += 0.5f;
+                            _world._player.ActorAttributes.BaseAgility++;
+                        }
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.O) && _world._player.ActorAttributes.Experience >= intCost)
+                        {
+                            _world._player.ActorAttributes.Experience -= intCost;
+                            _buttonTimer += 0.5f;
+                            _world._player.ActorAttributes.BaseIntelligence++;
+                        }
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.P) && _world._player.ActorAttributes.Experience >= endCost)
+                        {
+                            _world._player.ActorAttributes.Experience -= endCost;
+                            _buttonTimer += 0.5f;
+                            _world._player.ActorAttributes.BaseEndurance++;
                         }
                     }
                     else if (_type == HouseType.MERCHANT)
