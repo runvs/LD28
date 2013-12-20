@@ -7,6 +7,7 @@ using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using JamUtilities;
 
 namespace JamTemplate
 {
@@ -111,6 +112,7 @@ namespace JamTemplate
 
         public void Update(float deltaT)
         {
+            _sprite.Update(deltaT);
             if (_movementTimer > 0.0f)
             {
                 _movementTimer -= deltaT;
@@ -285,14 +287,14 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw, Vector2i CameraPosition)
         {
-            _actorSprite.Position = new Vector2f(
+            _sprite.Position = new Vector2f(
                 GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
                 GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
             );
 
             DrawBlockString(rw, CameraPosition);
 
-            rw.Draw(this._actorSprite);
+            rw.Draw(this._sprite.Sprite);
 
             _log.Draw(rw);
 
@@ -381,10 +383,7 @@ namespace JamTemplate
 
         private void LoadGraphics()
         {
-            _actorTexture = new SFML.Graphics.Texture("../gfx/player.png");
-
-            _actorSprite = new Sprite(_actorTexture);
-            _actorSprite.Scale = new Vector2f(2.0f, 2.0f);
+            _sprite = new SmartSprite("../gfx/player.png");
 
         }
 

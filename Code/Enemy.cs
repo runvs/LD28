@@ -6,6 +6,7 @@
 using SFML.Graphics;
 using SFML.Window;
 using System;
+using JamUtilities;
 
 namespace JamTemplate
 {
@@ -38,6 +39,24 @@ namespace JamTemplate
             _strength = strength;
             _type = type;
 
+            SetStrength();
+
+            DropItem = ItemFactory.GetRandomItem(initPosition, _strength);
+
+            try
+            {
+                LoadGraphics();
+            }
+            catch (SFML.LoadingFailedException e)
+            {
+                Console.Out.WriteLine("Error loading player Graphics.");
+                Console.Out.WriteLine(e.ToString());
+            }
+
+        }
+
+        private void SetStrength()
+        {
             if (_strength == EnemyStrength.EASY)
             {
                 ActorAttributes.BaseStrength = 1;
@@ -65,19 +84,6 @@ namespace JamTemplate
                 DropGold = GameProperties.EnemyHardGold;
                 DropExperience = GameProperties.EnemyHardExperience;
             }
-
-            DropItem = ItemFactory.GetRandomItem(initPosition, _strength);
-
-            try
-            {
-                LoadGraphics();
-            }
-            catch (SFML.LoadingFailedException e)
-            {
-                Console.Out.WriteLine("Error loading player Graphics.");
-                Console.Out.WriteLine(e.ToString());
-            }
-
         }
 
         private void LoadGraphics()
@@ -85,25 +91,22 @@ namespace JamTemplate
             switch (_type)
             {
                 case EnemyType.GOBLIN:
-                    _actorTexture = new Texture("../gfx/enemy_goblin_2.png");
+                    _sprite = new SmartSprite("../gfx/enemy_goblin_2.png");
                     break;
                 case EnemyType.HEADLESS_GOBLIN:
-                    _actorTexture = new Texture("../gfx/enemy_goblin_1.png");
+                    _sprite = new SmartSprite("../gfx/enemy_goblin_1.png");
                     break;
                 case EnemyType.RAT:
-                    _actorTexture = new Texture("../gfx/enemy_rat.png");
+                    _sprite = new SmartSprite("../gfx/enemy_rat.png");
                     break;
                 case EnemyType.GOBLIN_RED:
-                    _actorTexture = new Texture("../GFX/enemy_goblin_3.png");
+                    _sprite = new SmartSprite("../GFX/enemy_goblin_3.png");
                     break;
                 default:
                 case EnemyType.ENEMY:
-                    _actorTexture = new SFML.Graphics.Texture("../gfx/enemy.png");
+                    _sprite = new SmartSprite("../gfx/enemy.png");
                     break;
             }
-
-            _actorSprite = new Sprite(_actorTexture);
-            _actorSprite.Scale = new Vector2f(2.0f, 2.0f);
         }
 
         protected override void ReactOnDamage()
@@ -114,14 +117,14 @@ namespace JamTemplate
 
         public void Draw(RenderWindow rw, Vector2i CameraPosition)
         {
-            _actorSprite.Position = new Vector2f(
+            _sprite.Position = new Vector2f(
                 GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
                 GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
             );
 
             DrawHealthBar(rw, CameraPosition);
 
-            rw.Draw(this._actorSprite);
+            rw.Draw(this._sprite.Sprite);
         }
 
         private void DrawHealthBar(RenderWindow rw, Vector2i CameraPosition)
@@ -158,6 +161,7 @@ namespace JamTemplate
         public void Update(float deltaT)
         {
 
+            _sprite.Update(deltaT);
             DoAIOperations(deltaT);
 
             if (_movementTimer > 0.0f)

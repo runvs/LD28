@@ -85,6 +85,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\JamUtilities\JamUtilities\JamUtilities.csproj">
+      <Project>{fc7a5984-9b7d-494c-a49d-059dcabfb253}</Project>
+      <Name>JamUtilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(SolutionDir)Lib\SFML.Net\extlibs\*.dll" "$(SolutionDir)Build\$(Configuration)</PostBuildEvent>

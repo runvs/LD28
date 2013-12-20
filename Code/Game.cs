@@ -3,6 +3,7 @@
 /// Published by Julian Dinges and Simon Weis, 2013
 /// Contact laguna_1989@gmx.net
 
+using JamUtilities;
 using SFML.Audio;
 using SFML.Graphics;
 using SFML.Window;
@@ -28,6 +29,7 @@ namespace JamTemplate
 
         public Game()
         {
+            SmartSprite._scaleVector = new Vector2f(2.0f,2.0f);
             // Predefine game state to menu
             _gameState = State.Menu;
             _mainTheme = new Music("../SFX/LD28_Theme.ogg");

@@ -29,8 +29,9 @@ namespace JamTemplate
 
         public abstract void Die();
 
-        protected Texture _actorTexture;
-        protected Sprite _actorSprite;
+        //protected Texture _actorTexture;
+        //protected Sprite _actorSprite;
+        protected JamUtilities.SmartSprite _sprite;
 
         private SFML.Audio.SoundBuffer soundBufferPickUp;
         private SFML.Audio.Sound soundPickUp;
@@ -151,6 +152,7 @@ namespace JamTemplate
         {
             ActorAttributes.HealthCurrent -= damage;
             PlaySoundHit();
+            _sprite.Flash(Color.Red, 0.15f);
             CheckIfActorDead();
             ReactOnDamage();
         }
