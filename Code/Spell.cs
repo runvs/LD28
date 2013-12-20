@@ -97,7 +97,7 @@ namespace JamTemplate
             }
 
 
-            Vector2f subTilePosition = new Vector2f(GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).X, GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).Y) * _movementTimer; // kinda buggy, but it looks cool
+            Vector2f subTilePosition = - new Vector2f(GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).X, GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).Y) * _movementTimer; // kinda buggy, but it looks cool
 
             _spellSprite.Origin = new Vector2f(0.0f, 0.0f);
             if (Direction == JamTemplate.Direction.SOUTH)
