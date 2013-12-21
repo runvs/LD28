@@ -138,6 +138,14 @@ namespace JamTemplate
                 _spellFrameTimer += GameProperties.SpellFrameTime;
                 SwitchSpellFrames();
             }
+
+            Enemy myNemesis = _world.GetEnemyOnTile(PositionInTiles);
+            if (myNemesis != null)
+            {
+                BattleManager.DoBattleAction(_caster, myNemesis, BattleAction.Magic);
+                EndSpell();
+            }
+
         }
 
         private void ProceedSpellPosition()

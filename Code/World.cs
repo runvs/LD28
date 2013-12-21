@@ -314,6 +314,7 @@ namespace JamTemplate
                     }
                 }
 
+                _player.Draw(rw, CameraPosition);
                 bool drawHouses = true;
                 foreach (var h in _houseList)
                 {
@@ -332,7 +333,7 @@ namespace JamTemplate
                     }
                 }
 
-                _player.Draw(rw, CameraPosition);
+                
 
                 foreach (var s in _spellList)
                 {
@@ -529,6 +530,7 @@ namespace JamTemplate
         {
             if (_displayItemToolTip && _tooltipItem != null)
             {
+                _itemTooltipSprite.Position = new Vector2f(300.0f, 500.0f);
                 rw.Draw(_itemTooltipSprite);
 
                 Text _tooltipText = new Text(_tooltipItem.Name, GameProperties.GameFont());
@@ -544,11 +546,49 @@ namespace JamTemplate
                     _tooltipText.Scale = new Vector2f(0.6f, 0.6f);
                     rw.Draw(_tooltipText);
                     i++;
+                }
 
+                Item playersItem = null;
+                if (_tooltipItem.ItemType == ItemType.FEET)
+                {
+                    playersItem = _player.FeetItem;
+                }
+                else if (_tooltipItem.ItemType == ItemType.HAND)
+                {
+                    playersItem = _player.HandItem;
+                }
+                else if (_tooltipItem.ItemType == ItemType.HEAD)
+                {
+                    playersItem = _player.HeadItem;
+                }
+                else if (_tooltipItem.ItemType == ItemType.TORSO)
+                {
+                    playersItem = _player.TorsoItem;
+                }
+
+                if (playersItem != null)
+                {
+                    _itemTooltipSprite.Position = new Vector2f(300.0f, 400.0f);
+                    rw.Draw(_itemTooltipSprite);
+
+                    _tooltipText = new Text("You own: " + playersItem.Name, GameProperties.GameFont());
+                    _tooltipText.Position = new Vector2f(340, 410);
+                    _tooltipText.Scale = new Vector2f(0.5f, 0.55f);
+                    rw.Draw(_tooltipText);
+
+                    i = 0;
+                    foreach (var kvp in playersItem.Modifiers)
+                    {
+                        _tooltipText = new Text(Attributes.GetAttributeNameFromEnum(kvp.Key) + " " + kvp.Value.ToString(), GameProperties.GameFont());
+                        _tooltipText.Position = new Vector2f(340, 430 + i * 15);
+                        _tooltipText.Scale = new Vector2f(0.6f, 0.6f);
+                        rw.Draw(_tooltipText);
+                        i++;
+                    }
 
                 }
             }
-
+            
         }
 
         public void InitGame()
@@ -711,5 +751,25 @@ namespace JamTemplate
 
         #endregion Methods
 
+
+        internal int GetTotalGold()
+        {
+            int sum = 0;
+            foreach (var e in _enemyList)
+            {
+                sum += e.DropGold;
+            }
+            return sum;
+        }
+
+        internal int GetTotalExperience()
+        {
+            int sum = 0;
+            foreach (var e in _enemyList)
+            {
+                sum += e.DropExperience;
+            }
+            return sum;
+        }
     }
 }

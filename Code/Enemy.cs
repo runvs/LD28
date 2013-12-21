@@ -254,28 +254,33 @@ namespace JamTemplate
 
         public override void Die()
         {
-            IsDead = true;
-            PlaySoundDie();
-
-            _world._player.Gold += this.DropGold;
-            _world._player.TotalGold += this.DropGold;
-
-            _world._player.ActorAttributes.Experience += this.DropExperience;
-            _world._player.ActorAttributes.TotalExperience += this.DropExperience;
-
-            if (DropItem != null)
+            if (!IsDead)
             {
-                DropItem.ItemPositionInTiles = ActorPosition;
-                _world.AddItem(DropItem);
-            }
+                Console.WriteLine("Enemie dies");
 
-            // special case for the final boss
-            if (_type == EnemyType.HEADLESS_GOBLIN)
-            {
-                _world.StartSequence(5);    // not quite clean code but it should work
-            }
+                IsDead = true;
+                PlaySoundDie();
 
-            ActorPosition = new Vector2i(-500, -500);
+                _world._player.Gold += this.DropGold;
+                _world._player.TotalGold += this.DropGold;
+
+                _world._player.ActorAttributes.Experience += this.DropExperience;
+                _world._player.ActorAttributes.TotalExperience += this.DropExperience;
+
+                if (DropItem != null)
+                {
+                    DropItem.ItemPositionInTiles = ActorPosition;
+                    _world.AddItem(DropItem);
+                }
+
+                // special case for the final boss
+                if (_type == EnemyType.HEADLESS_GOBLIN)
+                {
+                    _world.StartSequence(5);    // not quite clean code but it should work
+                }
+
+                ActorPosition = new Vector2i(-500, -500);
+            }
         }
 
         #endregion Methods

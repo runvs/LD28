@@ -23,6 +23,7 @@ namespace JamTemplate
         {
             _player = player;
         }
+        bool andManyMore = false;
 
         public void Draw(RenderWindow rw)
         {
@@ -35,7 +36,7 @@ namespace JamTemplate
             // TODO Gold and Experience
 
             CreditsText.Scale = new Vector2f(1.0f, 1.0f);
-            CreditsText.DisplayedString = "Gained Experience: " + _player.ActorAttributes.TotalExperience;
+            CreditsText.DisplayedString = "Gained Experience: " + _player.ActorAttributes.TotalExperience + " / " + _player._world.GetTotalExperience();
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 100);
             rw.Draw(CreditsText);
 
@@ -47,7 +48,7 @@ namespace JamTemplate
 
 
             CreditsText.Scale = new Vector2f(1.0f, 1.0f);
-            CreditsText.DisplayedString = "Collected Gold: " + _player.TotalGold;
+            CreditsText.DisplayedString = "Collected Gold: " + _player.TotalGold + " / " + _player._world.GetTotalGold();
             CreditsText.Position = new Vector2f(400 - (float)(CreditsText.GetGlobalBounds().Width / 2.0), 175);
             rw.Draw(CreditsText);
 
@@ -62,7 +63,7 @@ namespace JamTemplate
             rw.Draw(CreditsText);
 
             int i = 0;
-            bool andManyMore = false;
+            
 
             while (_player._ownedItems.Count >= 11)
             {

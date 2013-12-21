@@ -13,7 +13,7 @@ namespace JamTemplate
         protected float _movementTimer = 0.0f; // time between two successive movement commands
         protected float _battleTimer = 0.0f;
 
-        protected World _world;
+        public World _world;
 
         protected bool _movingEast;
         protected bool _movingWest;
