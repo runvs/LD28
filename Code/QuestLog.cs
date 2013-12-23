@@ -9,12 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JamUtilities;
 
 namespace JamTemplate
 {
     public class QuestLog
     {
-
+        
 
         Texture _logBackgroundTexture;
         Sprite _logBackgroundSprite;
@@ -27,6 +28,9 @@ namespace JamTemplate
         {
             _text = new Text("", GameProperties.GameFont());
             _logMessages = new List<String>();
+            SmartText._lineLengthInChars = 18;
+            SmartText._lineSpread = 1.2f;
+            SmartText._font = GameProperties.GameFont();
 
             CreateQuestlogMessages();
             try
@@ -72,34 +76,34 @@ namespace JamTemplate
         {
             if (_logMessages.Count > 0)
             {
-                DrawText(_logMessages.ElementAt(0), new Vector2f(250, 220), GameProperties.ColorWhite, rw);
+                SmartText.DrawTextWithLineBreaks(_logMessages.ElementAt(0), TextAlignment.LEFT, new Vector2f(250, 220), new Vector2f(0.7f, 0.7f), GameProperties.ColorWhite, rw);
             }
         }
 
         Text _text;
 
-        private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
-        {
-            if (s.Length >= 18)
-            {
-                int spacePos = s.IndexOf(" ", 9, s.Length - 9);
-                if (spacePos == -1)
-                {
-                    spacePos = 17;
-                }
-                DrawText(s.Substring(0, spacePos).TrimEnd(), position, color, window);
-                position.Y += 20;
-                DrawText(s.Substring(spacePos).TrimStart(), position, color, window);
-                return;
-            }
+        //private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
+        //{
+        //    if (s.Length >= 18)
+        //    {
+        //        int spacePos = s.IndexOf(" ", 9, s.Length - 9);
+        //        if (spacePos == -1)
+        //        {
+        //            spacePos = 17;
+        //        }
+        //        DrawText(s.Substring(0, spacePos).TrimEnd(), position, color, window);
+        //        position.Y += 20;
+        //        DrawText(s.Substring(spacePos).TrimStart(), position, color, window);
+        //        return;
+        //    }
 
-            _text.DisplayedString = s;
-            _text.Position = position;
-            _text.Scale = new Vector2f(0.7f, 0.7f);
-            _text.Color = color;
-            window.Draw(_text);
+        //    _text.DisplayedString = s;
+        //    _text.Position = position;
+        //    _text.Scale = new Vector2f(0.7f, 0.7f);
+        //    _text.Color = color;
+        //    window.Draw(_text);
 
-        }
+        //}
 
 
         private void LoadGraphics()
