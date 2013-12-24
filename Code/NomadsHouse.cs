@@ -6,6 +6,7 @@
 using SFML.Graphics;
 using SFML.Window;
 using System;
+using JamUtilities;
 
 namespace JamTemplate
 {
@@ -152,13 +153,10 @@ namespace JamTemplate
             endCost = _world._player.ActorAttributes.BaseEndurance - GameProperties.IncreaseAttributeExperienceCost;
         }
         Text text;
+
         private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
         {
-            text.DisplayedString = s;
-            text.Position = position;
-            text.Scale = new Vector2f(0.7f, 0.7f);
-            text.Color = color;
-            window.Draw(text);
+            SmartText.DrawText(s, position, color, new Vector2f(0.7f, 0.7f), window);
         }
 
         public void GetInput()

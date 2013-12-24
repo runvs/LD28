@@ -153,6 +153,7 @@ namespace JamTemplate
             ActorAttributes.HealthCurrent -= damage;
             PlaySoundHit();
             _sprite.Flash(Color.Red, 0.15f);
+            _sprite.Shake(0.2f, 0.02f, 1.5f);
             CheckIfActorDead();
             ReactOnDamage();
         }

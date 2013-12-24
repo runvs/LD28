@@ -82,30 +82,6 @@ namespace JamTemplate
 
         Text _text;
 
-        //private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
-        //{
-        //    if (s.Length >= 18)
-        //    {
-        //        int spacePos = s.IndexOf(" ", 9, s.Length - 9);
-        //        if (spacePos == -1)
-        //        {
-        //            spacePos = 17;
-        //        }
-        //        DrawText(s.Substring(0, spacePos).TrimEnd(), position, color, window);
-        //        position.Y += 20;
-        //        DrawText(s.Substring(spacePos).TrimStart(), position, color, window);
-        //        return;
-        //    }
-
-        //    _text.DisplayedString = s;
-        //    _text.Position = position;
-        //    _text.Scale = new Vector2f(0.7f, 0.7f);
-        //    _text.Color = color;
-        //    window.Draw(_text);
-
-        //}
-
-
         private void LoadGraphics()
         {
             _logBackgroundTexture = new Texture("../GFX/overlay_log.png");

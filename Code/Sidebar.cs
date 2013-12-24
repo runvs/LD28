@@ -3,6 +3,7 @@
 /// Published by Julian Dinges and Simon Weis, 2013
 /// Contact laguna_1989@gmx.net
 
+using JamUtilities;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -112,63 +113,55 @@ namespace JamTemplate
 
         private Text text;
 
-        private void DrawText(string s, Vector2f position, Color color, RenderWindow window)
-        {
-            text.DisplayedString = s;
-            text.Position = position;
-            text.Color = color;
-            window.Draw(text);
-        }
-
         private void DrawGold(RenderWindow rw)
         {
-            DrawText("GOLD " + _player.Gold, new Vector2f(630, 217), GameProperties.ColorBeige, rw);
+            SmartText.DrawText("GOLD " + _player.Gold, new Vector2f(630, 217), GameProperties.ColorBeige, rw);
         }
 
         private void DrawAttributes(RenderWindow window)
         {
-            DrawText("STR " + _player.ActorAttributes.BaseStrength, new Vector2f(630.0f, 250), GameProperties.ColorWhite, window);
+            SmartText.DrawText("STR " + _player.ActorAttributes.BaseStrength, new Vector2f(630.0f, 250), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierStrength > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorDarkGreen, window);
+                SmartText.DrawText("+ " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorDarkGreen, window);
             }
             else if (_player.ActorAttributes.ModifierStrength < 0)
             {
-                DrawText(" " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorLightRed, window);
+                SmartText.DrawText(" " + _player.ActorAttributes.ModifierStrength, new Vector2f(730.0f, 250), GameProperties.ColorLightRed, window);
             }
 
-            DrawText("AGI " + _player.ActorAttributes.BaseAgility, new Vector2f(630.0f, 300), GameProperties.ColorWhite, window);
+            SmartText.DrawText("AGI " + _player.ActorAttributes.BaseAgility, new Vector2f(630.0f, 300), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierAgility > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorDarkGreen, window);
+                SmartText.DrawText("+ " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorDarkGreen, window);
             }
             else if (_player.ActorAttributes.ModifierAgility < 0)
             {
-                DrawText(" " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorLightRed, window);
+                SmartText.DrawText(" " + _player.ActorAttributes.ModifierAgility, new Vector2f(730.0f, 300), GameProperties.ColorLightRed, window);
             }
 
-            DrawText("INT " + _player.ActorAttributes.BaseIntelligence, new Vector2f(630.0f, 350), GameProperties.ColorWhite, window);
+            SmartText.DrawText("INT " + _player.ActorAttributes.BaseIntelligence, new Vector2f(630.0f, 350), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierIntelligence > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorDarkGreen, window);
+                SmartText.DrawText("+ " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorDarkGreen, window);
             }
             else if (_player.ActorAttributes.ModifierIntelligence < 0)
             {
-                DrawText(" " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorLightRed, window);
+                SmartText.DrawText(" " + _player.ActorAttributes.ModifierIntelligence, new Vector2f(730.0f, 350), GameProperties.ColorLightRed, window);
             }
 
-            DrawText("END " + _player.ActorAttributes.BaseEndurance, new Vector2f(630.0f, 400), GameProperties.ColorWhite, window);
+            SmartText.DrawText("END " + _player.ActorAttributes.BaseEndurance, new Vector2f(630.0f, 400), GameProperties.ColorWhite, window);
 
             if (_player.ActorAttributes.ModifierEndurance > 0)
             {
-                DrawText("+ " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorDarkGreen, window);
+                SmartText.DrawText("+ " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorDarkGreen, window);
             }
             else if (_player.ActorAttributes.ModifierEndurance < 0)
             {
-                DrawText(" " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorLightRed, window);
+                SmartText.DrawText(" " + _player.ActorAttributes.ModifierEndurance, new Vector2f(730.0f, 400), GameProperties.ColorLightRed, window);
             }
 
         }
