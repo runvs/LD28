@@ -122,9 +122,11 @@ namespace JamTemplate
                 GameProperties.TileSizeInPixel * ActorPosition.Y - CameraPosition.Y
             );
 
+            this._sprite.Draw(rw);
+
             DrawHealthBar(rw, CameraPosition);
 
-            rw.Draw(this._sprite.Sprite);
+           
         }
 
         private void DrawHealthBar(RenderWindow rw, Vector2f CameraPosition)

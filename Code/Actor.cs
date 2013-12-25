@@ -3,6 +3,7 @@
 /// Published by Julian Dinges and Simon Weis, 2013
 /// Contact laguna_1989@gmx.net
 
+using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.Window;
 
