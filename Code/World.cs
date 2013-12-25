@@ -48,7 +48,8 @@ namespace JamTemplate
         private Item _tooltipItem;
 
 
-        public SFML.Window.Vector2i CameraPosition { get; private set; }
+        public SFML.Window.Vector2f CameraPosition { get; private set; }
+        public SFML.Window.Vector2f CameraVelocity { get; private set; }
 
         #endregion Fields
 
@@ -195,7 +196,7 @@ namespace JamTemplate
                 }
 
 
-                DoCameraMovement();
+                DoCameraMovement(deltaT);
             }
 
         }
@@ -260,9 +261,35 @@ namespace JamTemplate
             }
         }
 
-        private void DoCameraMovement()
+        private void DoCameraMovement(float deltaT)
         {
-            Vector2i newCamPos = new Vector2i(_player.ActorPosition.X - 6, _player.ActorPosition.Y - 6);
+            //Vector2f newCamPos = new Vector2f((_player.ActorPosition.X - 6) * GameProperties.TileSizeInPixel, (_player.ActorPosition.Y - 6) * GameProperties.TileSizeInPixel);
+
+            Vector2f PlayerPosInPixels = new Vector2f((_player.ActorPosition.X - 6) * GameProperties.TileSizeInPixel, (_player.ActorPosition.Y - 6) * GameProperties.TileSizeInPixel);
+            float DistanceXSquared = (float)(Math.Sign(CameraPosition.X - PlayerPosInPixels.X)) * (CameraPosition.X - PlayerPosInPixels.X) *(CameraPosition.X - PlayerPosInPixels.X);
+            float DistanceYSquared = (float)(Math.Sign(CameraPosition.Y - PlayerPosInPixels.Y)) * (CameraPosition.Y - PlayerPosInPixels.Y) * (CameraPosition.Y - PlayerPosInPixels.Y);
+
+            Vector2f newCamVelocity = 0.125f * new Vector2f(-DistanceXSquared, -DistanceYSquared);
+            if (newCamVelocity.X >= GameProperties.CameraMaxVelocity)
+            {
+                newCamVelocity.X = GameProperties.CameraMaxVelocity;
+            }
+            else if (newCamVelocity.X <= -GameProperties.CameraMaxVelocity)
+            {
+                newCamVelocity.X = -GameProperties.CameraMaxVelocity;
+            }
+            if (newCamVelocity.Y >= GameProperties.CameraMaxVelocity)
+            {
+                newCamVelocity.Y = GameProperties.CameraMaxVelocity;
+            }
+            else if (newCamVelocity.Y <= -GameProperties.CameraMaxVelocity)
+            {
+                newCamVelocity.Y = -GameProperties.CameraMaxVelocity;
+            }
+
+            CameraVelocity = newCamVelocity;
+
+            Vector2f newCamPos = CameraPosition + CameraVelocity * deltaT;
             if (newCamPos.X <= 0)
             {
                 newCamPos.X = 0;
@@ -272,17 +299,20 @@ namespace JamTemplate
                 newCamPos.Y = 0;
             }
 
-            if (newCamPos.X >= GameProperties.WorldSizeInTiles - 12)
+            if (newCamPos.X >= (GameProperties.WorldSizeInTiles - 12) * GameProperties.TileSizeInPixel)
             {
-                newCamPos.X = GameProperties.WorldSizeInTiles - 12;
+                newCamPos.X = (float)(GameProperties.WorldSizeInTiles - 12) * GameProperties.TileSizeInPixel;
             }
 
-            if (newCamPos.Y >= GameProperties.WorldSizeInTiles - 12)
+            if (newCamPos.Y >= (GameProperties.WorldSizeInTiles - 12) * GameProperties.TileSizeInPixel)
             {
-                newCamPos.Y = GameProperties.WorldSizeInTiles - 12;
+                newCamPos.Y = (float)(GameProperties.WorldSizeInTiles - 12) * GameProperties.TileSizeInPixel;
             }
+
             CameraPosition = newCamPos;
         }
+
+
 
         public void Draw(RenderWindow rw)
         {
@@ -611,7 +641,7 @@ namespace JamTemplate
             var parser = new MapParser("map.tmx", this);
 
             _tileList = parser.TerrainLayer;
-            CameraPosition = new Vector2i(0, 0);
+            
 
             //_itemList.Add(ItemFactory.GetHeadItem(new Vector2i(2, 4)));
             //_itemList.Add(ItemFactory.GetTorsoItem(new Vector2i(3, 4)));
@@ -620,6 +650,7 @@ namespace JamTemplate
 
             _enemyList = parser.EnemyLayer;
             _player.MovePlayer(parser.PlayerPosition);
+            CameraPosition = new Vector2f((_player.ActorPosition.X - 6) * GameProperties.TileSizeInPixel, (_player.ActorPosition.Y - 6) * GameProperties.TileSizeInPixel);
 
             foreach (var item in parser.ObjectLayer)
             {

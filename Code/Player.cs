@@ -285,11 +285,11 @@ namespace JamTemplate
 
         }
 
-        public void Draw(RenderWindow rw, Vector2i CameraPosition)
+        public void Draw(RenderWindow rw, Vector2f CameraPosition)
         {
             _sprite.Position = new Vector2f(
-                GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
-                GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
+                GameProperties.TileSizeInPixel * ActorPosition.X - CameraPosition.X,
+                GameProperties.TileSizeInPixel * ActorPosition.Y - CameraPosition.Y
             );
 
             DrawBlockString(rw, CameraPosition);
@@ -300,15 +300,15 @@ namespace JamTemplate
 
         }
 
-        private void DrawBlockString(RenderWindow rw, Vector2i CameraPosition)
+        private void DrawBlockString(RenderWindow rw, Vector2f CameraPosition)
         {
             if (IsBlocking)
             {
                 Text text = new Text("Block!", GameProperties.GameFont());
                 text.Scale = new Vector2f(0.8f, 0.8f);
                 text.Position = new Vector2f(
-                    GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
-                    GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f
+                    GameProperties.TileSizeInPixel * ActorPosition.X - CameraPosition.X,
+                    GameProperties.TileSizeInPixel * ActorPosition.Y - CameraPosition.Y - 25.0f
                 );
                 text.Color = GameProperties.ColorWhite;
                 rw.Draw(text);

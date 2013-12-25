@@ -49,11 +49,11 @@ namespace JamTemplate
 
         }
 
-        public void Draw(RenderWindow rw, SFML.Window.Vector2i CameraPosition)
+        public void Draw(RenderWindow rw, SFML.Window.Vector2f CameraPosition)
         {
             TileSprite.Position = new SFML.Window.Vector2f(
-               GameProperties.TileSizeInPixel * (TilePosition.X - CameraPosition.X),
-               GameProperties.TileSizeInPixel * (TilePosition.Y - CameraPosition.Y)
+               GameProperties.TileSizeInPixel * TilePosition.X - CameraPosition.X,
+               GameProperties.TileSizeInPixel * TilePosition.Y - CameraPosition.Y
            );
 
             rw.Draw(TileSprite);

@@ -83,7 +83,7 @@ namespace JamTemplate
 
 
 
-        public void Draw(RenderWindow rw, Vector2i CameraPosition)
+        public void Draw(RenderWindow rw, Vector2f CameraPosition)
         {
             if (_spellFrameNumber == 0)
             {
@@ -97,7 +97,8 @@ namespace JamTemplate
             }
 
 
-            Vector2f subTilePosition = - new Vector2f(GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).X, GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).Y) * _movementTimer; // kinda buggy, but it looks cool
+            Vector2f subTilePosition = - new Vector2f(  GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).X, 
+                                                        GameProperties.TileSizeInPixel * Actor.GetVectorFromDirection(Direction).Y) * _movementTimer; // kinda buggy, but it looks cool
 
             _spellSprite.Origin = new Vector2f(0.0f, 0.0f);
             if (Direction == JamTemplate.Direction.SOUTH)
@@ -118,8 +119,8 @@ namespace JamTemplate
 
 
             _spellSprite.Position = new Vector2f(
-               GameProperties.TileSizeInPixel * (PositionInTiles.X - CameraPosition.X) + subTilePosition.X,
-               GameProperties.TileSizeInPixel * (PositionInTiles.Y - CameraPosition.Y) + subTilePosition.Y
+               GameProperties.TileSizeInPixel * PositionInTiles.X - CameraPosition.X + subTilePosition.X,
+               GameProperties.TileSizeInPixel * PositionInTiles.Y - CameraPosition.Y + subTilePosition.Y
            );
             rw.Draw(_spellSprite);
         }

@@ -77,19 +77,19 @@ namespace JamTemplate
             {
                 if (_player.HandItem != null)
                 {
-                    _player.HandItem.Draw(window, new Vector2i(0, 0));
+                    _player.HandItem.Draw(window, new Vector2f(0, 0));
                 }
                 if (_player.HeadItem != null)
                 {
-                    _player.HeadItem.Draw(window, new Vector2i(0, 0));
+                    _player.HeadItem.Draw(window, new Vector2f(0, 0));
                 }
                 if (_player.FeetItem != null)
                 {
-                    _player.FeetItem.Draw(window, new Vector2i(0, 0));
+                    _player.FeetItem.Draw(window, new Vector2f(0, 0));
                 }
                 if (_player.TorsoItem != null)
                 {
-                    _player.TorsoItem.Draw(window, new Vector2i(0, 0));
+                    _player.TorsoItem.Draw(window, new Vector2f(0, 0));
                 }
             }
 

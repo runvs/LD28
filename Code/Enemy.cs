@@ -115,11 +115,11 @@ namespace JamTemplate
             _standstillTimer += GameProperties.EnemyStandStillTime;
         }
 
-        public void Draw(RenderWindow rw, Vector2i CameraPosition)
+        public void Draw(RenderWindow rw, Vector2f CameraPosition)
         {
             _sprite.Position = new Vector2f(
-                GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
-                GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y)
+                GameProperties.TileSizeInPixel * ActorPosition.X - CameraPosition.X,
+                GameProperties.TileSizeInPixel * ActorPosition.Y - CameraPosition.Y
             );
 
             DrawHealthBar(rw, CameraPosition);
@@ -127,14 +127,14 @@ namespace JamTemplate
             rw.Draw(this._sprite.Sprite);
         }
 
-        private void DrawHealthBar(RenderWindow rw, Vector2i CameraPosition)
+        private void DrawHealthBar(RenderWindow rw, Vector2f CameraPosition)
         {
             if (_hasSeenPlayer)
             {
                 var outline = new RectangleShape(new Vector2f(GameProperties.TileSizeInPixel, 10));
                 outline.Position = new Vector2f(
-                    GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
-                    GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f
+                    GameProperties.TileSizeInPixel * ActorPosition.X - CameraPosition.X,
+                    GameProperties.TileSizeInPixel * ActorPosition.Y - CameraPosition.Y - 25.0f
                 );
                 outline.FillColor = Color.Transparent;
                 outline.OutlineColor = GameProperties.ColorDarkGrey;
@@ -144,8 +144,8 @@ namespace JamTemplate
                 var fill = new RectangleShape(new Vector2f(GameProperties.TileSizeInPixel, 10));
                 float percentage = (float)ActorAttributes.HealthCurrent / (float)ActorAttributes.HealthMaximum;
                 fill.Position = new Vector2f(
-                    GameProperties.TileSizeInPixel * (ActorPosition.X - CameraPosition.X),
-                    GameProperties.TileSizeInPixel * (ActorPosition.Y - CameraPosition.Y) - 25.0f
+                    GameProperties.TileSizeInPixel * ActorPosition.X - CameraPosition.X,
+                    GameProperties.TileSizeInPixel * ActorPosition.Y - CameraPosition.Y - 25.0f
                 );
                 fill.FillColor = GameProperties.ColorLightRed;
                 fill.Scale = new Vector2f(percentage, 1);

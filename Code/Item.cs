@@ -84,13 +84,13 @@ namespace JamTemplate
             ItemSprite.Scale = new Vector2f(2.0f, 2.0f);
         }
 
-        public void Draw(RenderWindow rw, Vector2i CameraPosition)
+        public void Draw(RenderWindow rw, Vector2f CameraPosition)
         {
             if (!Picked)
             {
                 ItemSprite.Position = new Vector2f(
-                    GameProperties.TileSizeInPixel * (ItemPositionInTiles.X - CameraPosition.X),
-                    GameProperties.TileSizeInPixel * (ItemPositionInTiles.Y - CameraPosition.Y)
+                    GameProperties.TileSizeInPixel * ItemPositionInTiles.X - CameraPosition.X,
+                    GameProperties.TileSizeInPixel * ItemPositionInTiles.Y - CameraPosition.Y
                     );
             }
             rw.Draw(ItemSprite);

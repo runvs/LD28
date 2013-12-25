@@ -17,7 +17,7 @@ namespace JamTemplate
 
         public static float SidebarWidth { get { return 200.0f; } }
 
-        public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.125f; } }
+        public static float PlayerMovementDeadZoneTimeInSeconds { get { return 0.175f; } }
         public static float EnemyMovementDeadZoneTimeInSeconds { get { return 0.9f; } }
 
         public static int IncreaseAttributeExperienceCost { get { return 2; } }
@@ -58,6 +58,9 @@ namespace JamTemplate
         public static Vector2f InventoryFeetItemPosition { get { return new Vector2f(672.0f, 166.0f); } }
 
         static public Random RandomGenerator = new Random();
+
+        static public float CameraMaxVelocity { get { return 200.0f; } }
+
 
         #region Palette colors
 

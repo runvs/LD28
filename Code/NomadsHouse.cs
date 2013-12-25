@@ -78,11 +78,11 @@ namespace JamTemplate
         }
 
 
-        public void Draw(RenderWindow rw, Vector2i CameraPosition)
+        public void Draw(RenderWindow rw, Vector2f CameraPosition)
         {
             _houseSprite.Position = new Vector2f(
-                GameProperties.TileSizeInPixel * (PositionInTiles.X - CameraPosition.X),
-                GameProperties.TileSizeInPixel * (PositionInTiles.Y - CameraPosition.Y)
+                GameProperties.TileSizeInPixel * PositionInTiles.X - CameraPosition.X,
+                GameProperties.TileSizeInPixel * PositionInTiles.Y - CameraPosition.Y
             );
 
             rw.Draw(_houseSprite);
