@@ -4,6 +4,7 @@
 /// Contact laguna_1989@gmx.net
 
 using System.Collections.Generic;
+using JamUtilities;
 using SFML.Graphics;
 using SFML.Window;
 
@@ -154,6 +155,8 @@ namespace JamTemplate
             ActorAttributes.HealthCurrent -= damage;
             PlaySoundHit();
             _sprite.Flash(Color.Red, 0.15f);
+
+            //_sprite.BreakPixels(0.5f, ColorList.GetColorListWithConstantAlpha(125, Color.Cyan, Color.Yellow, Color.Magenta), new Vector2f(1.0f, 0.0f), 8.0f);
             _sprite.Shake(0.2f, 0.02f, 1.5f);
             CheckIfActorDead();
             ReactOnDamage();
