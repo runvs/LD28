@@ -51,6 +51,9 @@ namespace JamTemplate
         public SFML.Window.Vector2f CameraPosition { get; private set; }
         public SFML.Window.Vector2f CameraVelocity { get; private set; }
 
+        public bool ESCKeyFree { get; private set; }
+        private float ESCKeyFreeTimer;
+
         #endregion Fields
 
 
@@ -106,6 +109,11 @@ namespace JamTemplate
                     if (h.IsActive)
                     {
                         h.GetInput();
+                        if(Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+                        {
+                            h.IsActive = false;
+                            ESCKeyFreeTimer += 0.25f;
+                        }
                     }
                 }
             }
@@ -145,12 +153,12 @@ namespace JamTemplate
 
                 _player.Update(deltaT);
 
-
                 foreach (var h in _houseList)
                 {
                     if (h.IsActive)
                     {
                         h.Update(deltaT);
+                        ESCKeyFree = false;
 
                         Vector2i housePos = h.PositionInTiles;
                         Vector2i playerPos = _player.ActorPosition;
@@ -159,6 +167,7 @@ namespace JamTemplate
                         if (Math.Abs(difference.X) + Math.Abs(difference.Y) >= 1)
                         {
                             h.IsActive = false;
+                            
                         }
                     }
                 }
@@ -195,8 +204,19 @@ namespace JamTemplate
                     }
                 }
 
+                if (ESCKeyFreeTimer >= 0.0f)
+                {
+                    ESCKeyFreeTimer -= deltaT;
+                    if (ESCKeyFreeTimer < 0.0f)
+                    {
+                        ESCKeyFree = true;
+                    }
+                }
+                
+
 
                 DoCameraMovement(deltaT);
+
             }
 
         }

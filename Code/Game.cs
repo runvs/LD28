@@ -48,11 +48,12 @@ namespace JamTemplate
                 }
                 else if (_gameState == State.Game)
                 {
-                    _myWorld.GetInput();
-                    if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+                    if (_myWorld.ESCKeyFree && Keyboard.IsKeyPressed(Keyboard.Key.Escape))
                     {
                         ChangeGameState(State.Menu);
                     }
+                    _myWorld.GetInput();
+                    
                 }
                 else if (_gameState == State.Credits || _gameState == State.Score)
                 {
